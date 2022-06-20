@@ -2,56 +2,8 @@
 
 void MyGameEngine::Initialize()
 {
-#pragma region WindowsAPI初期化
-
-	//windowsAPIの初期化
-	winApp = new WinApp();
-	winApp->Initialize();
-
-
-	MSG msg{};  // メッセージ
-#pragma endregion WindowsAPI初期化
-
-#pragma region DirectX初期化処理
-	//DirectXの初期化
-	dxCommon = new DirectXCommon();
-	dxCommon->Initialize(winApp);
-
-	// DirectX初期化処理　ここから
-
-	// スプライト共通部分の初期化
-	spriteCommon = new SpriteCommon();
-	spriteCommon->Initialize(dxCommon->GetDev(), dxCommon->GetCmdList(), winApp->windows_width, winApp->windows_height);
-
-	//デバッグテキスト
-	debugText = new DebugText();
-	// デバッグテキスト用のテクスチャ番号を指定
-	const int debugTextTexNumber = 0;
-	// デバッグテキスト用のテクスチャ読み込み
-	spriteCommon->LoadTexture(debugTextTexNumber, L"Resources/debugfont.png");
-	// デバッグテキスト初期化
-	debugText->Initialize(spriteCommon, debugTextTexNumber);
-
-
-	//入力の初期化
-	input = new Input();
-	input->Initialize(winApp);
-
-	//オーディオの初期化
-	audio = new Sound();
-	audio->Initialize();
-
-	// 音声読み込み
-	audio->LoadWave("Alarm01.wav");
-	// 音声再生
-	audio->PlayWave("Alarm01.wav");
-
-	//3Dオブジェクト静的初期化
-	Object3d::StaticInitialize(dxCommon->GetDev(), WinApp::windows_width, WinApp::windows_height);
-
-
-	// DirectX初期化処理　ここまで
-#pragma endregion DirectX初期化処理
+	//基底クラスの初期化処理
+	GameBase::Initialize();
 
 #pragma region 描画初期化処理
 
@@ -104,15 +56,11 @@ void MyGameEngine::Initialize()
 		sprites.push_back(sprite);
 	}
 #pragma endregion 描画初期化処理
-
-	int counter = 0; // アニメーションの経過時間カウンター
 }
 
 void MyGameEngine::Finalize()
 {
-	// デバッグテキスト解放
-	debugText->Finalize();
-	delete debugText;
+	
 
 	// スプライト解放
 	for (auto& sprite : sprites) {
@@ -120,8 +68,6 @@ void MyGameEngine::Finalize()
 	}
 	sprites.clear();
 
-	// スプライト共通部解放
-	delete spriteCommon;
 
 	// 3Dオブジェクト解放
 	delete model_1;
@@ -131,37 +77,19 @@ void MyGameEngine::Finalize()
 	delete object3d_1;
 	delete object3d_2;
 	delete object3d_3;
-	//オーディオ解放
-	audio->Finalize();
-	delete audio;
 
-	//windowsAPIの終了処理
-	winApp->Finalize();
-
-	//DirectX解放
-	delete dxCommon;
-
-	// 入力解放
-	delete input;
-
-	// WindowsAPI解放
-	delete winApp;
-	winApp = nullptr;
+	//基底クラスの初期化処理
+	GameBase::Finalize();
 }
 
 void MyGameEngine::Update()
 {
-	//windowsのメッセージ処理
-	if (winApp->ProcessMessage()) {
-		//ゲームループを抜ける
-		endRequst_ = true;
-		return;
-	}
+	
 
 #pragma region DirectX毎フレーム処理
 	// DirectX毎フレーム処理　ここから
 
-	input->Update();
+	
 
 	float clearColor[] = { 0.1f,0.25f, 0.5f,0.0f }; // 青っぽい色
 

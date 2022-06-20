@@ -148,6 +148,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameBase.cpp" />
     <ClCompile Include="MyGameEngine.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="DebugText.cpp" />
@@ -209,6 +210,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameBase.h" />
     <ClInclude Include="MyGameEngine.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="DebugText.h" />
