@@ -10,6 +10,7 @@
 #include "Sprite.h"
 #include "DebugText.h"
 #include "Sound.h"
+#include "fbxsdk.h"
 
 using namespace Microsoft::WRL;
 
@@ -22,6 +23,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	DirectXCommon* dxCommon = nullptr;
 	DebugText* debugText = nullptr;
 	Sound* audio = nullptr;
+	FbxManager* fbxManager = FbxManager::Create();
 
 #pragma region WindowsAPI初期化
 
