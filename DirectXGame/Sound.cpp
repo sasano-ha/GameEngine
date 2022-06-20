@@ -1,11 +1,11 @@
-#include "Audio.h"
+#include "Sound.h"
 
 #include <windows.h>
 #include <cassert>
 #include <fstream>
 #pragma comment(lib,"xaudio2.lib")
 
-void Audio::Initialize(const std::string& directoryPath)
+void Sound::Initialize(const std::string& directoryPath)
 {
 	directoryPath_ = directoryPath;
 
@@ -22,7 +22,7 @@ void Audio::Initialize(const std::string& directoryPath)
 	assert(SUCCEEDED(result));
 }
 
-void Audio::Finalize()
+void Sound::Finalize()
 {
 	// XAudio2解放
 	xAudio2_.Reset();
@@ -36,7 +36,7 @@ void Audio::Finalize()
 	soundDates_.clear();
 }
 
-void Audio::LoadWave(const std::string& filename)
+void Sound::LoadWave(const std::string& filename)
 {
 	if (soundDates_.find(filename) != soundDates_.end()) {
 		//重複読み込みなので、何もせず抜ける
@@ -109,7 +109,7 @@ void Audio::LoadWave(const std::string& filename)
 	soundDates_.insert(std::make_pair(filename, soundData));
 }
 
-void Audio::Unload(SoundData* soundData)
+void Sound::Unload(SoundData* soundData)
 {
 	// バッファのメモリを解放
 	delete[] soundData->pBuffer;
@@ -119,7 +119,7 @@ void Audio::Unload(SoundData* soundData)
 	soundData->wfex = {};
 }
 
-void Audio::PlayWave(const std::string& filename)
+void Sound::PlayWave(const std::string& filename)
 {
 
 	HRESULT result;

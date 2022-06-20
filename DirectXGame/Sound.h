@@ -11,7 +11,7 @@
 /// オーディオ
 /// </summary>
 
-class Audio
+class Sound
 {
 public:
 

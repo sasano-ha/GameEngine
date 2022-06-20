@@ -9,7 +9,7 @@
 #include "SpriteCommon.h"
 #include "Sprite.h"
 #include "DebugText.h"
-#include "Audio.h"
+#include "Sound.h"
 
 using namespace Microsoft::WRL;
 
@@ -21,7 +21,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	WinApp* winApp = nullptr;
 	DirectXCommon* dxCommon = nullptr;
 	DebugText* debugText = nullptr;
-	Audio* audio = nullptr;
+	Sound* audio = nullptr;
 
 #pragma region WindowsAPI初期化
 
@@ -68,7 +68,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	input->Initialize(winApp);
 
 	//オーディオの初期化
-	audio = new Audio();
+	audio = new Sound();
 	audio->Initialize();
 
 	// 音声読み込み
