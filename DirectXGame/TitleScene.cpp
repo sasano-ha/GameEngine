@@ -3,7 +3,7 @@
 #include "Sound.h"
 #include "input.h"
 #include "DebugText.h"
-#include "GameScene.h"
+#include "SceneFactory.h"
 
 void TitleScene::Initialize()
 {
@@ -33,7 +33,8 @@ void TitleScene::Update()
 	if (input->TriggerKey(DIK_RETURN))
 	{
 		// ƒV[ƒ“Ø‚è‘Ö‚¦
-		BaseScene* scene = new GameScene();
+		SceneFactory factory;
+		BaseScene* scene = factory.CreateScene("GAME");
 		SceneManager::GetInstance()->SetNextScene(scene);
 	}
 

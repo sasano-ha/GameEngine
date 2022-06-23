@@ -148,9 +148,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AbstractSceneFactory.cpp" />
     <ClCompile Include="GameBase.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="MyGameEngine.cpp" />
+    <ClCompile Include="SceneFactory.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="DebugText.cpp" />
@@ -213,10 +215,12 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractSceneFactory.h" />
     <ClInclude Include="GameBase.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="BaseScene.h" />
     <ClInclude Include="MyGameEngine.h" />
+    <ClInclude Include="SceneFactory.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="DebugText.h" />
