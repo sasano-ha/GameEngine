@@ -9,6 +9,7 @@
 #include "Sprite.h"
 #include "DebugText.h"
 #include "Sound.h"
+#include "SceneManager.h"
 
 /// <summary>
 /// フレームワーク
@@ -32,6 +33,11 @@ public:
 	/// </summary>
 	virtual void Update();
 
+	/// <summary>
+	/// 描画
+	/// </summary>
+	virtual void Draw();
+
 	bool IsGetEndRequst() { return endRequst_; }
 
 protected:
@@ -42,5 +48,6 @@ protected:
 	DebugText* debugText = nullptr;
 	Sound* audio = nullptr;
 	SpriteCommon* spriteCommon = nullptr;
+	SceneManager* sceneManager_ = nullptr;
 };
 

@@ -1,18 +1,15 @@
 #pragma once
 
-#include "GameBase.h"
-
-#include <vector>
-
-
+#include "BaseScene.h"
+#include "Sprite.h"
+#include "Object3d.h"
 
 /// <summary>
-/// ゲーム固有のクラス
+/// タイトルシーン
 /// </summary>
-class MyGameEngine : public GameBase
+class TitleScene : public BaseScene
 {
 public:
-
 	/// <summary>
 	/// 初期化
 	/// </summary>
@@ -31,10 +28,9 @@ public:
 	/// <summary>
 	/// 描画
 	/// </summary>
-	void Draw();
+	void Draw() override;
 
 private:
-
-	//GameScene* scene_ = nullptr;
+	Sprite* sprite = nullptr;
 };
 

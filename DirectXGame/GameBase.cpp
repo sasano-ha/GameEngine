@@ -46,10 +46,16 @@ void GameBase::Initialize()
 
 	//3Dオブジェクト静的初期化
 	Object3d::StaticInitialize(dxCommon->GetDev(), dxCommon->GetCmdList(), WinApp::windows_width, WinApp::windows_height);
+
+	// シーンマネージャーの生成
+	sceneManager_ = new SceneManager();
 }
 
 void GameBase::Finalize()
 {
+	// シーンマネージャー解放
+	delete sceneManager_;
+
 	// デバッグテキスト解放
 	debugText->Finalize();
 
@@ -75,4 +81,21 @@ void GameBase::Update()
 	}
 
 	input->Update();
+
+	// シーンの更新
+	sceneManager_->Update();
+}
+
+void GameBase::Draw()
+{
+	//描画前処理
+	dxCommon->PreDraw();
+
+	sceneManager_->Draw();
+
+	// デバッグテキスト描画
+	debugText->DrawAll();
+
+	//描画後処理
+	dxCommon->PostDraw();
 }
