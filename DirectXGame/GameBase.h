@@ -48,6 +48,5 @@ protected:
 	DebugText* debugText = nullptr;
 	Sound* audio = nullptr;
 	SpriteCommon* spriteCommon = nullptr;
-	SceneManager* sceneManager_ = nullptr;
 };
 

@@ -30,10 +30,4 @@ public:
 	/// 描画
 	/// </summary>
 	virtual void Draw() = 0;
-
-	virtual void SetSceneManager(SceneManager* sceneManager) { sceneManager_ = sceneManager; }
-
-protected:
-	//シーンマネージャー（借りてくる）
-	SceneManager* sceneManager_ = nullptr;
 };

@@ -34,7 +34,7 @@ void TitleScene::Update()
 	{
 		// シーン切り替え
 		BaseScene* scene = new GameScene();
-		sceneManager_->SetNextScene(scene);
+		SceneManager::GetInstance()->SetNextScene(scene);
 	}
 
 	//スプライト更新

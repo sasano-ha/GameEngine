@@ -8,7 +8,7 @@
 class SceneManager
 {
 public:
-	~SceneManager();
+	static SceneManager* GetInstance();
 
 	/// <summary>
 	/// 更新
@@ -26,5 +26,10 @@ private:
 	BaseScene* scene_ = nullptr;
 	// 次のシーン
 	BaseScene* nextScene_ = nullptr;
+
+	SceneManager() = default;
+	~SceneManager();
+	SceneManager(const SceneManager&) = delete;
+	void operator = (const SceneManager&) = delete;
 };
 

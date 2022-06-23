@@ -2,6 +2,8 @@
 #include "Sound.h"
 #include "input.h"
 #include "DebugText.h"
+#include "TitleScene.h"
+#include "SceneManager.h"
 
 void GameScene::Initialize()
 {
@@ -57,6 +59,13 @@ void GameScene::Update()
 {
 
 	Input* input = Input::GetInstance();
+
+	if (input->TriggerKey(DIK_SPACE))
+	{
+		// ƒV[ƒ“Ø‚è‘Ö‚¦
+		BaseScene* scene = new TitleScene();
+		SceneManager::GetInstance()->SetNextScene(scene);
+	}
 
 	// À•W‘€ì
 	if (input->PushKey(DIK_UP) || input->PushKey(DIK_DOWN) || input->PushKey(DIK_RIGHT) || input->PushKey(DIK_LEFT))

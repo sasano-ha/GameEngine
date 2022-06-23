@@ -11,7 +11,7 @@ void MyGameEngine::Initialize()
 	//scene_ = new GameScene();
 	BaseScene* scene = new TitleScene();
 	// シーンマネージャーに最初のシーンをセット
-	sceneManager_-> SetNextScene(scene);
+	SceneManager::GetInstance()-> SetNextScene(scene);
 
 #pragma endregion 描画初期化処理
 }
