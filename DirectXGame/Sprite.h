@@ -29,18 +29,17 @@ public:
 	/// <summary>
 	/// スプライト生成
 	/// </summary>
-	/// <param name="spriteCommon">スプライト共通</param>
 	/// <param name="texNumber">テクスチャ番号</param>
 	/// <param name="anchorpoint">アンカーポイント</param>
 	/// <param name="isFlipX">X反転するか</param>
 	/// <param name="isFlipY">Y反転するか</param>
 	/// <return>スプライト</return>
-	static Sprite* Create(SpriteCommon* spriteCommon, UINT texNumber, DirectX::XMFLOAT2 anchorpoint = { (0.5f),(0.5f) }, bool isFlipX = false, bool isFlipY = false);
+	static Sprite* Create(UINT texNumber, DirectX::XMFLOAT2 anchorpoint = { (0.5f),(0.5f) }, bool isFlipX = false, bool isFlipY = false);
 
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize(SpriteCommon* spriteCommon, UINT texNumber, DirectX::XMFLOAT2 anchorpoint, bool isFlipX, bool isFlipY);
+	void Initialize(UINT texNumber, DirectX::XMFLOAT2 anchorpoint, bool isFlipX, bool isFlipY);
 
 	/// <summary>
 	/// 頂点バッファの転送
@@ -61,8 +60,6 @@ public:
 	void SetTexSize(const::DirectX::XMFLOAT2& texSize) { texSize_ = texSize; }
 
 private:
-	//スプライト共通部分
-	SpriteCommon* spriteCommon_ = nullptr;
 	//頂点バッファ;
 	Microsoft::WRL::ComPtr<ID3D12Resource> vertBuff_;
 	//頂点バッファビュー;

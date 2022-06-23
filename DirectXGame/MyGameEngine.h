@@ -4,6 +4,8 @@
 
 #include <vector>
 
+class GameScene;
+
 /// <summary>
 /// ゲーム固有のクラス
 /// </summary>
@@ -31,15 +33,8 @@ public:
 	/// </summary>
 	void Draw();
 
-	
-
 private:
-	std::vector<Sprite*> sprites;
-	Model* model_1 = nullptr;
-	Model* model_2 = nullptr;
-
-	Object3d* object3d_1 = nullptr;
-	Object3d* object3d_2 = nullptr;
-	Object3d* object3d_3 = nullptr;
+	// シーン
+	GameScene* scene_ = nullptr;
 };
 

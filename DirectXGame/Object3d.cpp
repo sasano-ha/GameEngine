@@ -27,12 +27,13 @@ XMFLOAT3 Object3d::eye = { 0, 5, -50.0f };
 XMFLOAT3 Object3d::target = { 0, 0, 0 };
 XMFLOAT3 Object3d::up = { 0, 1, 0 };
 
-bool Object3d::StaticInitialize(ID3D12Device* device, int window_width, int window_height)
+bool Object3d::StaticInitialize(ID3D12Device* device, ID3D12GraphicsCommandList* cmdList, int window_width, int window_height)
 {
 	// nullptrチェック
 	assert(device);
 
 	Object3d::device = device;
+	Object3d::cmdList = cmdList;
 
 	Model::SetDevice(device);
 
@@ -51,13 +52,13 @@ bool Object3d::StaticInitialize(ID3D12Device* device, int window_width, int wind
 	return true;
 }
 
-void Object3d::PreDraw(ID3D12GraphicsCommandList* cmdList)
+void Object3d::PreDraw()
 {
-	// PreDrawとPostDrawがペアで呼ばれていなければエラー
-	assert(Object3d::cmdList == nullptr);
+	//// PreDrawとPostDrawがペアで呼ばれていなければエラー
+	//assert(Object3d::cmdList == nullptr);
 
-	// コマンドリストをセット
-	Object3d::cmdList = cmdList;
+	//// コマンドリストをセット
+	//Object3d::cmdList = cmdList;
 
 	// パイプラインステートの設定
 	cmdList->SetPipelineState(pipelinestate.Get());
@@ -69,8 +70,8 @@ void Object3d::PreDraw(ID3D12GraphicsCommandList* cmdList)
 
 void Object3d::PostDraw()
 {
-	// コマンドリストを解除
-	Object3d::cmdList = nullptr;
+	//// コマンドリストを解除
+	//Object3d::cmdList = nullptr;
 }
 
 Object3d* Object3d::Create()

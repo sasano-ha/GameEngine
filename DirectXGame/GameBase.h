@@ -42,6 +42,5 @@ protected:
 	DebugText* debugText = nullptr;
 	Sound* audio = nullptr;
 	SpriteCommon* spriteCommon = nullptr;
-
 };
 

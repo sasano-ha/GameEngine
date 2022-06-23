@@ -5,6 +5,13 @@
 #include <fstream>
 #pragma comment(lib,"xaudio2.lib")
 
+Sound* Sound::GetInstance()
+{
+	static Sound instance;
+
+	return &instance;
+}
+
 void Sound::Initialize(const std::string& directoryPath)
 {
 	directoryPath_ = directoryPath;

@@ -18,11 +18,11 @@ void GameBase::Initialize()
 	// DirectX初期化処理　ここから
 
 	// スプライト共通部分の初期化
-	spriteCommon = new SpriteCommon();
+	spriteCommon = SpriteCommon::GetInstance();
 	spriteCommon->Initialize(dxCommon->GetDev(), dxCommon->GetCmdList(), winApp->windows_width, winApp->windows_height);
 
 	//デバッグテキスト
-	debugText = new DebugText();
+	debugText = DebugText::GetInstance();
 	// デバッグテキスト用のテクスチャ番号を指定
 	const int debugTextTexNumber = 0;
 	// デバッグテキスト用のテクスチャ読み込み
@@ -32,40 +32,32 @@ void GameBase::Initialize()
 
 
 	//入力の初期化
-	input = new Input();
+	input = Input::GetInstance();
 	input->Initialize(winApp);
 
 	//オーディオの初期化
-	audio = new Sound();
+	audio = Sound::GetInstance();
 	audio->Initialize();
 
 	// 音声読み込み
 	audio->LoadWave("Alarm01.wav");
 	// 音声再生
-	audio->PlayWave("Alarm01.wav");
+	//audio->PlayWave("Alarm01.wav");
 
 	//3Dオブジェクト静的初期化
-	Object3d::StaticInitialize(dxCommon->GetDev(), WinApp::windows_width, WinApp::windows_height);
+	Object3d::StaticInitialize(dxCommon->GetDev(), dxCommon->GetCmdList(), WinApp::windows_width, WinApp::windows_height);
 }
 
 void GameBase::Finalize()
 {
 	// デバッグテキスト解放
 	debugText->Finalize();
-	delete debugText;
-
-	// スプライト共通部解放
-	delete spriteCommon;
 
 	//オーディオ解放
 	audio->Finalize();
-	delete audio;
 
 	//DirectX解放
 	delete dxCommon;
-
-	// 入力解放
-	delete input;
 
 	//windowsAPIの終了処理
 	winApp->Finalize();
@@ -75,8 +67,6 @@ void GameBase::Finalize()
 
 void GameBase::Update()
 {
-	GameBase::Update();
-
 	//windowsのメッセージ処理
 	if (winApp->ProcessMessage()) {
 		//ゲームループを抜ける

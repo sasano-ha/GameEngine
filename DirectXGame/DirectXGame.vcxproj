@@ -149,6 +149,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GameBase.cpp" />
+    <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="MyGameEngine.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="DebugText.cpp" />
@@ -211,6 +212,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameBase.h" />
+    <ClInclude Include="GameScene.h" />
     <ClInclude Include="MyGameEngine.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="DebugText.h" />

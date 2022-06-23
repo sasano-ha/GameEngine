@@ -48,6 +48,8 @@ public:
 		unsigned int bufferSize;
 	};
 
+	static Sound* GetInstance();
+
 	/// <summary>
 	/// ‰Šú‰»
 	/// </summary>
