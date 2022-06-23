@@ -3,7 +3,6 @@
 #include "Sound.h"
 #include "input.h"
 #include "DebugText.h"
-#include "SceneFactory.h"
 
 void TitleScene::Initialize()
 {
@@ -33,9 +32,7 @@ void TitleScene::Update()
 	if (input->TriggerKey(DIK_RETURN))
 	{
 		// シーン切り替え
-		SceneFactory factory;
-		BaseScene* scene = factory.CreateScene("GAME");
-		SceneManager::GetInstance()->SetNextScene(scene);
+		SceneManager::GetInstance()->ChangeScene("GAME");
 	}
 
 	//スプライト更新

@@ -1,6 +1,5 @@
 #include "MyGameEngine.h"
-#include "GameScene.h"
-#include "TitleScene.h"
+#include "SceneFactory.h"
 
 void MyGameEngine::Initialize()
 {
@@ -8,10 +7,12 @@ void MyGameEngine::Initialize()
 	GameBase::Initialize();
 
 #pragma region 描画初期化処理
-	//scene_ = new GameScene();
-	BaseScene* scene = new TitleScene();
+	// シーンファクトリ生成し、マネージャーにセット
+	sceneFactory_ = new SceneFactory();
+	SceneManager::GetInstance()->SetSceneFactory(sceneFactory_);
+
 	// シーンマネージャーに最初のシーンをセット
-	SceneManager::GetInstance()-> SetNextScene(scene);
+	SceneManager::GetInstance()-> ChangeScene("TITLE");
 
 #pragma endregion 描画初期化処理
 }

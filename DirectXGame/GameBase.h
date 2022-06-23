@@ -10,6 +10,7 @@
 #include "DebugText.h"
 #include "Sound.h"
 #include "SceneManager.h"
+#include "AbstractSceneFactory.h"
 
 /// <summary>
 /// フレームワーク
@@ -48,5 +49,6 @@ protected:
 	DebugText* debugText = nullptr;
 	Sound* audio = nullptr;
 	SpriteCommon* spriteCommon = nullptr;
+	AbstractSceneFactory* sceneFactory_ = nullptr;
 };
 

@@ -9,6 +9,8 @@
 class AbstractSceneFactory
 {
 public:
+	virtual ~AbstractSceneFactory() = default;
+
 	/// <summary>
 	/// ÉVÅ[Éìê∂ê¨
 	/// </summary>

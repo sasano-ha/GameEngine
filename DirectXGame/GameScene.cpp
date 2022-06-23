@@ -63,8 +63,7 @@ void GameScene::Update()
 	if (input->TriggerKey(DIK_SPACE))
 	{
 		// ƒV[ƒ“Ø‚è‘Ö‚¦
-		BaseScene* scene = new TitleScene();
-		SceneManager::GetInstance()->SetNextScene(scene);
+		SceneManager::GetInstance()->ChangeScene("TITLE");
 	}
 
 	// À•W‘€ì

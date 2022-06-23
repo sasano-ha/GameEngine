@@ -50,6 +50,8 @@ void GameBase::Initialize()
 
 void GameBase::Finalize()
 {
+	// シーンファクトリ解放
+	delete sceneFactory_;
 	// デバッグテキスト解放
 	debugText->Finalize();
 
