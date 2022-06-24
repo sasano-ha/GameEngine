@@ -11,6 +11,7 @@
 #include "Sound.h"
 #include "SceneManager.h"
 #include "AbstractSceneFactory.h"
+#include "FbxLoader.h"
 
 /// <summary>
 /// フレームワーク

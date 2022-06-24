@@ -4,6 +4,7 @@
 #include "DebugText.h"
 #include "TitleScene.h"
 #include "SceneManager.h"
+#include "FbxLoader.h"
 
 void GameScene::Initialize()
 {
@@ -38,6 +39,9 @@ void GameScene::Initialize()
 	Sound::GetInstance()->LoadWave("Alarm01.wav");
 	// 音声再生
 	//audio->PlayWave("Alarm01.wav");
+
+	// モデル名を指定してファイル読み込み
+	FbxLoader::GetInstance()->LoadModelFromFile("cube");
 }
 
 void GameScene::Finalize()
@@ -95,15 +99,15 @@ void GameScene::Draw()
 	SpriteCommon::GetInstance()->PreDraw();
 
 	// スプライト描画
-	sprite->Draw();
+	//sprite->Draw();
 
 	//3Dオブジェクト描画前処理
 	Object3d::PreDraw();
 
 	//3Dオブジェクトの描画
-	object3d_1->Draw();
+	/*object3d_1->Draw();
 	object3d_2->Draw();
-	object3d_3->Draw();
+	object3d_3->Draw();*/
 
 	//3Dオブジェクトの描画後処理
 	Object3d::PostDraw();

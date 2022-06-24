@@ -46,10 +46,14 @@ void GameBase::Initialize()
 
 	//3Dオブジェクト静的初期化
 	Object3d::StaticInitialize(dxCommon->GetDev(), dxCommon->GetCmdList(), WinApp::windows_width, WinApp::windows_height);
+	// FBXローダーの初期化
+	FbxLoader::GetInstance()->Initialize(dxCommon->GetDev());
 }
 
 void GameBase::Finalize()
 {
+	// FBXローダーの解放
+	FbxLoader::GetInstance()->Finalize();
 	// シーンファクトリ解放
 	delete sceneFactory_;
 	// デバッグテキスト解放
