@@ -150,6 +150,7 @@
   <ItemGroup>
     <ClCompile Include="AbstractSceneFactory.cpp" />
     <ClCompile Include="FbxLoader.cpp" />
+    <ClCompile Include="FbxModel.cpp" />
     <ClCompile Include="GameBase.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="MyGameEngine.cpp" />
@@ -218,6 +219,7 @@
   <ItemGroup>
     <ClInclude Include="AbstractSceneFactory.h" />
     <ClInclude Include="FbxLoader.h" />
+    <ClInclude Include="FbxModel.h" />
     <ClInclude Include="GameBase.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="BaseScene.h" />
