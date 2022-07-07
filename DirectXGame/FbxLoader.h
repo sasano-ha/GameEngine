@@ -45,6 +45,22 @@ public:
 	/// <param name="fbxNode">解析対象のノード</param>
 	void ParseNodeRecursive(FbxModel* fbxmodel, FbxNode* fbxNode, Node* parent = nullptr);
 
+	/// <summary>
+	/// メッシュ読み取り
+	/// </summary>
+	/// <param name="model">読み込み先モデルオブジェクト</param>
+	/// <param name="fbxNode">解析対象のノード</param>
+	void ParseMesh(FbxModel* fbxmodel, FbxNode* fbxNode);
+
+	// 頂点座標読み取り
+	void ParseMeshVertices(FbxModel* fbxmodel, FbxMesh* fbxMesh);
+	// 面積情報読み取り
+	void ParseMeshFaces(FbxModel* fbxmodel, FbxMesh* fbxMesh);
+	// マテリアル読み取り
+	void ParseMaterial(FbxModel* fbxmodel, FbxNode* fbxNode);
+	// テクスチャ読み込み
+	void LoadTexture(FbxModel* fbxmodel, const std::string& fullpath);
+
 	// 定数
 	// モデル格納ルートパス
 	static const string baseDirectory_;
