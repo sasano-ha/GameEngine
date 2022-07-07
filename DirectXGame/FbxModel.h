@@ -4,33 +4,72 @@
 #include <DirectXmath.h>
 #include <vector>
 #include <DirectXTex.h>
+#include <Windows.h>
+#include <wrl.h>
+#include <d3d12.h>
+#include <d3dx12.h>
 
 struct Node
 {
 	// 名前
 	std::string name;
 	// ローカルスケール
-	DirectX::XMVECTOR scaling = { 1, 1, 1, 0 };
+	DirectX::XMVECTOR scaling_ = { 1, 1, 1, 0 };
 	// ローカル回転角
-	DirectX::XMVECTOR rotation = { 0, 0, 0, 0 };
+	DirectX::XMVECTOR rotation_ = { 0, 0, 0, 0 };
 	// ローカル移動
-	DirectX::XMVECTOR translation = { 0, 0, 0, 1 };
+	DirectX::XMVECTOR translation_ = { 0, 0, 0, 1 };
 	// ローカル変形行列
-	DirectX::XMMATRIX transform;
+	DirectX::XMMATRIX transform_;
 	// グローバル変形行列
-	DirectX::XMMATRIX globalTransform;
+	DirectX::XMMATRIX globalTransform_;
 	// 親ノード
-	Node* parent = nullptr;
+	Node* parent_ = nullptr;
 };
 
 class FbxModel
 {
+private:	// エイリアス
+	// Microsoft::WRL::を省略
+	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
+	// DirectX::を省略
+	using XMFLOAT2 = DirectX::XMFLOAT2;
+	using XMFLOAT3 = DirectX::XMFLOAT3;
+	using XMFLOAT4 = DirectX::XMFLOAT4;
+	using XMMATRIX = DirectX::XMMATRIX;
+	using TexMetadata = DirectX::TexMetadata;
+	using ScratchImge = DirectX::ScratchImage;
+	// std::を省力
+	using string = std::string;
+	template <class T> using vector = std::vector<T>;
+
+	// 頂点バッファ
+	ComPtr<ID3D12Resource> vertBuff_;
+	// インッデクスバッファ
+	ComPtr<ID3D12Resource> indexBuff_;
+	// テクスチャバッファ
+	ComPtr<ID3D12Resource> texbuff_;
+	// 頂点バッファビュー
+	D3D12_VERTEX_BUFFER_VIEW vbView_ = {};
+	// インッデクスバッファビュー 
+	D3D12_INDEX_BUFFER_VIEW ibView_ = {};
+	// SRV用でスクリプタヒープ
+	ComPtr<ID3D12DescriptorHeap> descHeapSRV_;
+
 public:
 	// フレンドクラス
 	friend class FbxLoader;
+	// バッファ生成
+	void CreateBuffers(ID3D12Device* device);
+	// 描画
+	void Draw(ID3D12GraphicsCommandList* cmdList);
+	// モデルの変形行列取得
+	const XMMATRIX& GetModelTransform() { return meshNode_->globalTransform_; }
+
+
 private:
 	// モデル名
-	std::string name;
+	std::string name_;
 	// ノード配列
 	std::vector<Node> nodes_;
 	// アンビエント係数

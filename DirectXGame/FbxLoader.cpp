@@ -61,7 +61,7 @@ void FbxLoader::LoadModelFromFile(const string& modelName)
 
     // モデル生成
     FbxModel* fbxmodel = new FbxModel();
-    fbxmodel->name = modelName;
+    fbxmodel->name_ = modelName;
     // FBXノードの数を取得
     int nodeCount = fbxScene->GetNodeCount();
     // あらかじめ必要数分のメモリを確保することで、アドレスがずれるのを予防
@@ -70,6 +70,9 @@ void FbxLoader::LoadModelFromFile(const string& modelName)
     ParseNodeRecursive(fbxmodel, fbxScene->GetRootNode());
     // FBXシーン解放
     fbxScene->Destroy();
+
+    // バッファ生成
+    fbxmodel->CreateBuffers(device_);
 }
 
 void FbxLoader::ParseNodeRecursive(FbxModel* fbxmodel, FbxNode* fbxNode, Node* parent)
@@ -89,33 +92,33 @@ void FbxLoader::ParseNodeRecursive(FbxModel* fbxmodel, FbxNode* fbxNode, Node* p
     FbxDouble3 translation = fbxNode->LclTranslation.Get();
 
     // 形式変換して代入
-    node.rotation = { (float)rotation[0], (float)rotation[1], (float)rotation[2], 0.0f };
-    node.scaling = { (float)scaling[0], (float)scaling[1], (float)scaling[2], 0.0f };
-    node.translation = { (float)translation[0], (float)translation[1], (float)translation[2], 1.0f };
+    node.rotation_ = { (float)rotation[0], (float)rotation[1], (float)rotation[2], 0.0f };
+    node.scaling_ = { (float)scaling[0], (float)scaling[1], (float)scaling[2], 0.0f };
+    node.translation_ = { (float)translation[0], (float)translation[1], (float)translation[2], 1.0f };
 
     // 回転角をDegree(度)からラジアンの計算
-    node.rotation.m128_f32[0] = XMConvertToRadians(node.rotation.m128_f32[0]);
-    node.rotation.m128_f32[1] = XMConvertToRadians(node.rotation.m128_f32[1]);
-    node.rotation.m128_f32[2] = XMConvertToRadians(node.rotation.m128_f32[2]);
+    node.rotation_.m128_f32[0] = XMConvertToRadians(node.rotation_.m128_f32[0]);
+    node.rotation_.m128_f32[1] = XMConvertToRadians(node.rotation_.m128_f32[1]);
+    node.rotation_.m128_f32[2] = XMConvertToRadians(node.rotation_.m128_f32[2]);
 
     // スケール、回転平行移動行列の計算
     XMMATRIX matScaling, matRotation, matTranslation;
-    matScaling = XMMatrixScalingFromVector(node.scaling);
-    matRotation = XMMatrixRotationRollPitchYawFromVector(node.rotation);
-    matTranslation = XMMatrixTranslationFromVector(node.translation);
+    matScaling = XMMatrixScalingFromVector(node.scaling_);
+    matRotation = XMMatrixRotationRollPitchYawFromVector(node.rotation_);
+    matTranslation = XMMatrixTranslationFromVector(node.translation_);
 
     // ローカル変形行列の計算
-    node.transform = XMMatrixIdentity();
-    node.transform *= matScaling;   // ワールド行列にスケーリングを反映
-    node.transform *= matRotation;  // ワールド行列に回転を反映
-    node.transform *= matTranslation;   // ワールド行列に平行移動を反映
+    node.transform_ = XMMatrixIdentity();
+    node.transform_ *= matScaling;   // ワールド行列にスケーリングを反映
+    node.transform_ *= matRotation;  // ワールド行列に回転を反映
+    node.transform_ *= matTranslation;   // ワールド行列に平行移動を反映
 
     // グローバル変形行列の計算
-    node.globalTransform = node.transform;
+    node.globalTransform_ = node.transform_;
     if (parent) {
-        node.parent = parent;
+        node.parent_ = parent;
         // 親の変形を乗算
-        node.globalTransform *= parent->globalTransform;
+        node.globalTransform_ *= parent->globalTransform_;
     }
 
     // FBXノードのメッシュ情報を解析（Todo）
@@ -275,7 +278,7 @@ void FbxLoader::ParseMaterial(FbxModel* fbxmodel, FbxNode* fbxNode)
                         string path_str(filepath);
                         string name = ExtractFileName(path_str);
                         // テクスチャ読み込み
-                        LoadTexture(fbxmodel, baseDirectory_ + fbxmodel->name + "/" + name);
+                        LoadTexture(fbxmodel, baseDirectory_ + fbxmodel->name_ + "/" + name);
                         textureLoaded = true;
                     }
                 }
