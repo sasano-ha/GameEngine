@@ -3,6 +3,7 @@
 #include <string>
 #include <DirectXmath.h>
 #include <vector>
+#include <DirectXTex.h>
 
 struct Node
 {
@@ -31,7 +32,15 @@ private:
 	// モデル名
 	std::string name;
 	// ノード配列
-	std::vector<Node> nodes;
+	std::vector<Node> nodes_;
+	// アンビエント係数
+	DirectX::XMFLOAT3 ambient_ = { 1, 1, 1 };
+	// ディフューズ係数
+	DirectX::XMFLOAT3 diffuse_ = { 1, 1, 1 };
+	// テクスチャデータ
+	DirectX::TexMetadata metadata_ = {};
+	// スクラッチイメージ
+	DirectX::ScratchImage scratchImg_ = {};
 
 public:	// サブクラス
 	// 頂点データ構造体
@@ -42,10 +51,10 @@ public:	// サブクラス
 		DirectX::XMFLOAT2 uv;				//uv座標
 	};
 
-	//メッシュを持つノード
-	Node* meshNode = nullptr;
+	// メッシュを持つノード
+	Node* meshNode_ = nullptr;
 	// 頂点データ配列
-	std::vector<VertexPosNormalUvSkin> vertices;
+	std::vector<VertexPosNormalUvSkin> vertices_;
 	// 頂点インデックス配列
-	std::vector<unsigned short> indices;
+	std::vector<unsigned short> indices_;
 };

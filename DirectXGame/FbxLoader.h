@@ -61,6 +61,9 @@ public:
 	// テクスチャ読み込み
 	void LoadTexture(FbxModel* fbxmodel, const std::string& fullpath);
 
+	// ディレクトリを含んだファイルパスからファイル名を抽出する
+	std::string ExtractFileName(const std::string& path);
+
 	// 定数
 	// モデル格納ルートパス
 	static const string baseDirectory_;
