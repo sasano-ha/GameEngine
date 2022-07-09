@@ -5,6 +5,7 @@
 #include "TitleScene.h"
 #include "SceneManager.h"
 #include "FbxLoader.h"
+#include "FbxObject3d.h"
 
 void GameScene::Initialize()
 {
@@ -17,14 +18,14 @@ void GameScene::Initialize()
 	// スプライトの生成
 	sprite = Sprite::Create(1, { 0,0 }, false, false);
 
-	//OBJからモデルデータを読み込む
+	// OBJからモデルデータを読み込む
 	model_1 = Model::LoadFromOBJ("ground");
 	model_2 = Model::LoadFromOBJ("triangle_mat");
-	//3Dオブジェクト生成
+	// 3Dオブジェクト生成
 	object3d_1 = Object3d::Create();
 	object3d_2 = Object3d::Create();
 	object3d_3 = Object3d::Create();
-	//3Dオブジェクトに3Dモデルをひもづけ
+	// 3Dオブジェクトに3Dモデルをひもづけ
 	object3d_1->SetModel(model_1);
 	object3d_2->SetModel(model_2);
 	object3d_3->SetModel(model_2);
@@ -41,7 +42,12 @@ void GameScene::Initialize()
 	//audio->PlayWave("Alarm01.wav");
 
 	// モデル名を指定してファイル読み込み
-	FbxLoader::GetInstance()->LoadModelFromFile("cube");
+	//FbxLoader::GetInstance()->LoadModelFromFile("cube");
+	fbxmodel_1 = FbxLoader::GetInstance()->LoadModelFromFile("cube");
+
+	fbxobject_1 = new FbxObject3d;
+	fbxobject_1->Initialize();
+	fbxobject_1->SetModel(fbxmodel_1);
 }
 
 void GameScene::Finalize()
@@ -57,6 +63,9 @@ void GameScene::Finalize()
 	delete object3d_1;
 	delete object3d_2;
 	delete object3d_3;
+
+	delete(fbxobject_1);
+	delete(fbxmodel_1);
 }
 
 void GameScene::Update()
@@ -89,11 +98,13 @@ void GameScene::Update()
 	object3d_2->Update();
 	object3d_3->Update();
 
+	fbxobject_1->Updata();
+
 	//スプライト更新
 	sprite->Update();
 }
 
-void GameScene::Draw()
+void GameScene::Draw(DirectXCommon* dxCommon)
 {
 	// スプライト共通コマンド
 	SpriteCommon::GetInstance()->PreDraw();
@@ -105,9 +116,11 @@ void GameScene::Draw()
 	Object3d::PreDraw();
 
 	//3Dオブジェクトの描画
-	/*object3d_1->Draw();
-	object3d_2->Draw();
-	object3d_3->Draw();*/
+	//object3d_1->Draw();
+	//object3d_2->Draw();
+	//object3d_3->Draw();
+
+	fbxobject_1->Draw(dxCommon->GetCmdList());
 
 	//3Dオブジェクトの描画後処理
 	Object3d::PostDraw();

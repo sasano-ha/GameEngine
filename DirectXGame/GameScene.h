@@ -3,6 +3,7 @@
 #include "BaseScene.h"
 #include "Sprite.h"
 #include "Object3d.h"
+#include "FbxObject3d.h"
 
 /// <summary>
 /// ÉQÅ[ÉÄÉVÅ[Éì
@@ -28,7 +29,7 @@ public:
 	/// <summary>
 	/// ï`âÊ
 	/// </summary>
-	void Draw() override;
+	void Draw(DirectXCommon* dxCommon) override;
 
 private:
 	Sprite* sprite = nullptr;
@@ -38,5 +39,8 @@ private:
 	Object3d* object3d_1 = nullptr;
 	Object3d* object3d_2 = nullptr;
 	Object3d* object3d_3 = nullptr;
+
+	FbxModel* fbxmodel_1 = nullptr;
+	FbxObject3d* fbxobject_1 = nullptr;
 };
 

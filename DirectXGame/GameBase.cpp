@@ -1,4 +1,5 @@
 #include "GameBase.h"
+#include "FbxObject3d.h"
 
 void GameBase::Initialize()
 {
@@ -44,10 +45,21 @@ void GameBase::Initialize()
 	// 音声再生
 	//audio->PlayWave("Alarm01.wav");
 
-	//3Dオブジェクト静的初期化
+	// 3Dオブジェクト静的初期化
 	Object3d::StaticInitialize(dxCommon->GetDev(), dxCommon->GetCmdList(), WinApp::windows_width, WinApp::windows_height);
 	// FBXローダーの初期化
 	FbxLoader::GetInstance()->Initialize(dxCommon->GetDev());
+
+	// デバイスをセット
+	FbxObject3d::SetDevice(dxCommon->GetDev());
+	camera_ = new Camera(1280, 720);
+	// カメラをセット
+	FbxObject3d::SetCamera(camera_);
+	// カメラ注視点をセット
+	camera_->SetTarget({ 0, 20, 0 });
+	camera_->SetEye({ 0, 20, -100 });
+	// グラフィックスパイプライン生成
+	FbxObject3d::CreateGraphicsPipeline();
 }
 
 void GameBase::Finalize()
@@ -81,6 +93,7 @@ void GameBase::Update()
 	}
 
 	input->Update();
+	camera_->Update();
 
 	// シーンの更新
 	SceneManager::GetInstance()->Update();
@@ -91,7 +104,7 @@ void GameBase::Draw()
 	//描画前処理
 	dxCommon->PreDraw();
 
-	SceneManager::GetInstance()->Draw();
+	SceneManager::GetInstance()->Draw(dxCommon);
 
 	// デバッグテキスト描画
 	debugText->DrawAll();

@@ -39,7 +39,7 @@ void TitleScene::Update()
 	sprite->Update();
 }
 
-void TitleScene::Draw()
+void TitleScene::Draw(DirectXCommon* dxCommon)
 {
 	// スプライト共通コマンド
 	SpriteCommon::GetInstance()->PreDraw();

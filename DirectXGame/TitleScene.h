@@ -3,6 +3,7 @@
 #include "BaseScene.h"
 #include "Sprite.h"
 #include "Object3d.h"
+#include "DirectXCommon.h"
 
 /// <summary>
 /// タイトルシーン
@@ -28,7 +29,7 @@ public:
 	/// <summary>
 	/// 描画
 	/// </summary>
-	void Draw() override;
+	void Draw(DirectXCommon* dxCommon) override;
 
 private:
 	Sprite* sprite = nullptr;

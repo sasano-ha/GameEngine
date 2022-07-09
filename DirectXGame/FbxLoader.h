@@ -35,7 +35,7 @@ public:
 	/// ファイルからFBXモデル読み込み
 	/// </summary>
 	/// <param name="modeName">モデル名</param>
-	void LoadModelFromFile(const string& modelName);
+	FbxModel* LoadModelFromFile(const string& modelName);
 
 
 	/// <summary>

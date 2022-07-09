@@ -105,5 +105,17 @@ void FbxModel::CreateBuffers(ID3D12Device* device)
 
 void FbxModel::Draw(ID3D12GraphicsCommandList* cmdList)
 {
+	// 頂点バッファをセット（VBV）
+	cmdList->IASetVertexBuffers(0, 1, &vbView_);
+	// インデックスバッファをセット（IBV）
+	cmdList->IASetIndexBuffer(&ibView_);
 
+	// デスクリプタヒープのセット
+	ID3D12DescriptorHeap* ppHeaps[] = { descHeapSRV_.Get() };
+	cmdList->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
+	// シェーダリソースビューをセット
+	cmdList->SetGraphicsRootDescriptorTable(1, descHeapSRV_->GetGPUDescriptorHandleForHeapStart());
+
+	// 描画コマンド
+	cmdList->DrawIndexedInstanced((UINT)indices_.size(), 1, 0, 0, 0);
 }

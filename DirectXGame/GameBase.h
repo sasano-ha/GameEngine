@@ -12,6 +12,8 @@
 #include "SceneManager.h"
 #include "AbstractSceneFactory.h"
 #include "FbxLoader.h"
+#include "Camera.h"
+
 
 /// <summary>
 /// フレームワーク
@@ -51,5 +53,6 @@ protected:
 	Sound* audio = nullptr;
 	SpriteCommon* spriteCommon = nullptr;
 	AbstractSceneFactory* sceneFactory_ = nullptr;
+	Camera* camera_ = nullptr;
 };
 

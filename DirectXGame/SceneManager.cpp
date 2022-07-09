@@ -37,9 +37,9 @@ void SceneManager::Update()
 	scene_->Update();
 }
 
-void SceneManager::Draw()
+void SceneManager::Draw(DirectXCommon* dxCommon)
 {
-	scene_->Draw();
+	scene_->Draw(dxCommon);
 }
 
 void SceneManager::ChangeScene(const std::string& sceneName)
