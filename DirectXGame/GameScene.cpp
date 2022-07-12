@@ -6,6 +6,7 @@
 #include "SceneManager.h"
 #include "FbxLoader.h"
 #include "FbxObject3d.h"
+#include "SafeDelete.h"
 
 void GameScene::Initialize()
 {
@@ -53,19 +54,19 @@ void GameScene::Initialize()
 void GameScene::Finalize()
 {
 	// スプライト解放
-	delete sprite;
+	safedelete(sprite);
 
 	// 3Dオブジェクト解放
-	delete model_1;
-	delete model_2;
+	safedelete(model_1);
+	safedelete(model_2);
 
 	// 3Dオブジェクト解放
-	delete object3d_1;
-	delete object3d_2;
-	delete object3d_3;
+	safedelete(object3d_1);
+	safedelete(object3d_2);
+	safedelete(object3d_3);
 
-	delete(fbxobject_1);
-	delete(fbxmodel_1);
+	safedelete(fbxobject_1);
+	safedelete(fbxmodel_1);
 }
 
 void GameScene::Update()

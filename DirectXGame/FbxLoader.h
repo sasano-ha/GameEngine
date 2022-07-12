@@ -52,6 +52,13 @@ public:
 	/// <param name="fbxNode">解析対象のノード</param>
 	void ParseMesh(FbxModel* fbxmodel, FbxNode* fbxNode);
 
+	/// <summary>
+	/// FBXの行列をXMMatrixに変換
+	/// </summary>
+	/// <param name="dst">書き込み先</param>
+	/// <param name="src">元となるFBX行列</param>
+	static void ConvertMatrixFromFbx(DirectX::XMMATRIX* dst, const FbxAMatrix& src);
+
 	// 頂点座標読み取り
 	void ParseMeshVertices(FbxModel* fbxmodel, FbxMesh* fbxMesh);
 	// 面積情報読み取り
@@ -60,6 +67,8 @@ public:
 	void ParseMaterial(FbxModel* fbxmodel, FbxNode* fbxNode);
 	// テクスチャ読み込み
 	void LoadTexture(FbxModel* fbxmodel, const std::string& fullpath);
+	// スキニング情報の読み取り
+	void ParseSkin(FbxModel* fbxmodel, FbxMesh* fbxMesh);
 
 	// ディレクトリを含んだファイルパスからファイル名を抽出する
 	std::string ExtractFileName(const std::string& path);

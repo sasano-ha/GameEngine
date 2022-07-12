@@ -1,4 +1,5 @@
 #pragma once
+#include "fbxsdk.h"
 
 #include <string>
 #include <DirectXmath.h>
@@ -12,7 +13,7 @@
 struct Node
 {
 	// 名前
-	std::string name;
+	std::string name_;
 	// ローカルスケール
 	DirectX::XMVECTOR scaling_ = { 1, 1, 1, 0 };
 	// ローカル回転角
@@ -57,6 +58,23 @@ private:	// エイリアス
 	ComPtr<ID3D12DescriptorHeap> descHeapSRV_;
 
 public:
+	// ボーン構造体
+	struct Bone
+	{
+		// 名前
+		std::string name;
+		// 初期化姿勢の逆行列
+		DirectX::XMMATRIX invInitialPose;
+		// クラスター（FBX側のボーン情報）
+		FbxCluster* fbxCluster;
+		// コンストラクタ
+		Bone(const std::string& name) {
+			this->name = name;
+		}
+	};
+
+	// デストラクタ
+	~FbxModel();
 	// フレンドクラス
 	friend class FbxLoader;
 	// バッファ生成
@@ -80,14 +98,22 @@ private:
 	DirectX::TexMetadata metadata_ = {};
 	// スクラッチイメージ
 	DirectX::ScratchImage scratchImg_ = {};
+	// ボーン配列
+	std::vector<Bone> bones_;
+
+public:	// 定数
+	// ボーンインデックスの最大数
+	static const int MAX_BONE_INDICES = 4;
 
 public:	// サブクラス
 	// 頂点データ構造体
 	struct VertexPosNormalUvSkin
 	{
-		DirectX::XMFLOAT3 pos;				//xyz座標
-		DirectX::XMFLOAT3 normal;			//法線ベクトル
-		DirectX::XMFLOAT2 uv;				//uv座標
+		DirectX::XMFLOAT3 pos;				// xyz座標
+		DirectX::XMFLOAT3 normal;			// 法線ベクトル
+		DirectX::XMFLOAT2 uv;				// uv座標
+		UINT boneIndex[MAX_BONE_INDICES];	// ボーン番号
+		float boneWeight[MAX_BONE_INDICES];	// ボーン重み
 	};
 
 	// メッシュを持つノード
@@ -96,4 +122,10 @@ public:	// サブクラス
 	std::vector<VertexPosNormalUvSkin> vertices_;
 	// 頂点インデックス配列
 	std::vector<unsigned short> indices_;
+	// FBXシーン
+	FbxScene* fbxScene_ = nullptr;
+	// getter
+	std::vector<Bone>& GetBones() { return bones_; }
+	// getter
+	FbxScene* GetFbxScene() { return fbxScene_; }
 };

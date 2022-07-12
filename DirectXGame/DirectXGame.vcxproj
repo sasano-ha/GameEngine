@@ -242,6 +242,7 @@
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="MyGameEngine.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SafeDelete.h" />
     <ClInclude Include="SceneFactory.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Sound.h" />
