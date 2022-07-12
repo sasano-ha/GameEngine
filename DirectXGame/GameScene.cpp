@@ -44,7 +44,7 @@ void GameScene::Initialize()
 
 	// モデル名を指定してファイル読み込み
 	//FbxLoader::GetInstance()->LoadModelFromFile("cube");
-	fbxmodel_1 = FbxLoader::GetInstance()->LoadModelFromFile("cube");
+	fbxmodel_1 = FbxLoader::GetInstance()->LoadModelFromFile("boneTest");
 
 	fbxobject_1 = new FbxObject3d;
 	fbxobject_1->Initialize();

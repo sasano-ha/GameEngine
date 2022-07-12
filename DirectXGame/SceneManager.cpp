@@ -19,7 +19,7 @@ SceneManager* SceneManager::GetInstance()
 void SceneManager::Update()
 {
 	// シーン切り替えがあるなら
-	if (nextScene_ != nullptr) {
+	if (nextScene_) {
 		if (scene_) {
 			// 旧シーンの終了
 			scene_->Finalize();

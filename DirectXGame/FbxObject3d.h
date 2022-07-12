@@ -86,5 +86,17 @@ protected:	// メンバ変数
 	XMMATRIX matWorld_;
 	// モデル
 	FbxModel* fbxmodel_ = nullptr;
+	// 定数バッファ（スキン）
+	ComPtr<ID3D12Resource> constBuffSkin_;
+
+public:	// 定数
+	// ボーンの最大数
+	static const int MAX_BONES = 32;
+
+	// 定数バッファ用データ構造体（スキニング）
+	struct ConstBufferDataSkin
+	{
+		XMMATRIX bones[MAX_BONES];
+	};
 };
 
