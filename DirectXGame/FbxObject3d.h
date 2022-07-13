@@ -73,6 +73,11 @@ public:	// メンバ関数
 	/// <param name="model">モデル</param>
 	void SetModel(FbxModel* fbxmodel) { this->fbxmodel_ = fbxmodel; }
 
+	/// <summary>
+	/// アニメーション
+	/// </summary>
+	void PlayAnimation();
+
 protected:	// メンバ変数
 	// 定数バッファ
 	ComPtr<ID3D12Resource> constBuffTransform_;
@@ -88,6 +93,16 @@ protected:	// メンバ変数
 	FbxModel* fbxmodel_ = nullptr;
 	// 定数バッファ（スキン）
 	ComPtr<ID3D12Resource> constBuffSkin_;
+	// 1フレーム
+	FbxTime frameTime_;
+	// アニメーション開始時間
+	FbxTime startTime_;
+	// アニメーション終了時間
+	FbxTime endTime_;
+	// 現在時間（アニメーション）
+	FbxTime currentTime_;
+	// アニメーション再生中
+	bool isPlay_ = false;
 
 public:	// 定数
 	// ボーンの最大数
