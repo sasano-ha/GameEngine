@@ -56,8 +56,8 @@ void GameBase::Initialize()
 	// カメラをセット
 	FbxObject3d::SetCamera(camera_);
 	// カメラ注視点をセット
-	camera_->SetTarget({ 0, 20, 0 });
-	camera_->SetEye({ 0, 20, -50 });
+	camera_->SetTarget({ 0, 5, 0 });
+	camera_->SetEye({ 0, 5, 10 });
 	// グラフィックスパイプライン生成
 	FbxObject3d::CreateGraphicsPipeline();
 }

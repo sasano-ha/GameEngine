@@ -149,6 +149,8 @@ void FbxLoader::ParseMesh(FbxModel* fbxmodel, FbxNode* fbxNode)
 	ParseMeshFaces(fbxmodel, fbxMesh);
 	// マテリアルの読み取り
 	ParseMaterial(fbxmodel, fbxNode);
+	// スキニング情報の読み取り
+	ParseSkin(fbxmodel, fbxMesh);
 }
 
 void FbxLoader::ConvertMatrixFromFbx(DirectX::XMMATRIX* dst, const FbxAMatrix& src)
