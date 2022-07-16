@@ -4,6 +4,7 @@
 #include "Sprite.h"
 #include "Object3d.h"
 #include "FbxObject3d.h"
+#include "PostEffect.h"
 
 /// <summary>
 /// ÉQÅ[ÉÄÉVÅ[Éì
@@ -42,5 +43,7 @@ private:
 
 	FbxModel* fbxmodel_1 = nullptr;
 	FbxObject3d* fbxobject_1 = nullptr;
+
+	PostEffect* posteffect_ = nullptr;
 };
 

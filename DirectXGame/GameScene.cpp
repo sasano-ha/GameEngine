@@ -11,13 +11,17 @@
 void GameScene::Initialize()
 {
 	SpriteCommon::GetInstance()->LoadTexture(1, L"Resources/gameplay.png");
+	SpriteCommon::GetInstance()->LoadTexture(100, L"Resources/white1x1.png");
 
 	// スプライト共通テクスチャ読み込み
 	//spriteCommon->LoadTexture(1, L"Resources/gameplay.png");
 	//spriteCommon->LoadTexture(2, L"Resources/house.png");
 
 	// スプライトの生成
-	sprite = Sprite::Create(1, { 0,0 }, false, false);
+	sprite = Sprite::Create(1, { 0, 0 }, false, false);
+
+	posteffect_ = new PostEffect();
+	posteffect_->Initialize(100, { 500,500 }, { 0, 0 }, false, false);
 
 	// OBJからモデルデータを読み込む
 	model_1 = Model::LoadFromOBJ("ground");
@@ -55,6 +59,7 @@ void GameScene::Finalize()
 {
 	// スプライト解放
 	safedelete(sprite);
+	safedelete(posteffect_);
 
 	// 3Dオブジェクト解放
 	safedelete(model_1);
@@ -117,6 +122,7 @@ void GameScene::Draw(DirectXCommon* dxCommon)
 
 	// スプライト描画
 	//sprite->Draw();
+	posteffect_->Draw(dxCommon->GetCmdList());
 
 	//3Dオブジェクト描画前処理
 	Object3d::PreDraw();

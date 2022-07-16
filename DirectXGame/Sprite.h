@@ -40,6 +40,8 @@ public:
 	/// 初期化
 	/// </summary>
 	void Initialize(UINT texNumber, DirectX::XMFLOAT2 anchorpoint, bool isFlipX, bool isFlipY);
+	// サイズ指定版
+	void Initialize(UINT texNumber, DirectX::XMFLOAT2 size, DirectX::XMFLOAT2 anchorpoint, bool isFlipX, bool isFlipY);
 
 	/// <summary>
 	/// 頂点バッファの転送
@@ -60,6 +62,11 @@ public:
 	void SetTexSize(const::DirectX::XMFLOAT2& texSize) { texSize_ = texSize; }
 
 private:
+
+	// パイプライン生成
+	void CreateGraphicsPipeline();
+
+protected:
 	//頂点バッファ;
 	Microsoft::WRL::ComPtr<ID3D12Resource> vertBuff_;
 	//頂点バッファビュー;
@@ -90,4 +97,8 @@ private:
 	DirectX::XMFLOAT2 texSize_ = { 100, 100 };
 	// 非表示
 	bool isInvisible_ = false;
+
+	PipelineSet pipelineset_;
+
+	SpriteCommon* spriteCommon;
 };

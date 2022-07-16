@@ -73,8 +73,8 @@ private:	//宣言のみで使える
 	//コマンドリスト（借りてくる）
 	ID3D12GraphicsCommandList* commandList_ = nullptr;
 
-private:
+public:
 	// パイプライン生成
-	void CreateGraphicsPipeline();
+	//void CreateGraphicsPipeline();
 };
 
