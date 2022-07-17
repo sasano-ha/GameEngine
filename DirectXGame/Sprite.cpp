@@ -81,7 +81,7 @@ void Sprite::Initialize(UINT texNumber, DirectX::XMFLOAT2 anchorpoint, bool isFl
 	constBuff_->Unmap(0, nullptr);
 }
 
-void Sprite::Initialize(UINT texNumber, DirectX::XMFLOAT2 size, DirectX::XMFLOAT2 anchorpoint, bool isFlipX, bool isFlipY)
+void Sprite::SizeInitialize(UINT texNumber, DirectX::XMFLOAT2 size, DirectX::XMFLOAT2 anchorpoint, bool isFlipX, bool isFlipY)
 {
 
 	HRESULT result = S_FALSE;

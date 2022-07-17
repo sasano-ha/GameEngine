@@ -41,7 +41,7 @@ public:
 	/// </summary>
 	void Initialize(UINT texNumber, DirectX::XMFLOAT2 anchorpoint, bool isFlipX, bool isFlipY);
 	// サイズ指定版
-	void Initialize(UINT texNumber, DirectX::XMFLOAT2 size, DirectX::XMFLOAT2 anchorpoint, bool isFlipX, bool isFlipY);
+	void SizeInitialize(UINT texNumber, DirectX::XMFLOAT2 size, DirectX::XMFLOAT2 anchorpoint, bool isFlipX, bool isFlipY);
 
 	/// <summary>
 	/// 頂点バッファの転送

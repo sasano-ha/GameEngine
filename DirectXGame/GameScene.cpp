@@ -21,7 +21,9 @@ void GameScene::Initialize()
 	sprite = Sprite::Create(1, { 0, 0 }, false, false);
 
 	posteffect_ = new PostEffect();
-	posteffect_->Initialize(100, { 500,500 }, { 0, 0 }, false, false);
+	posteffect_->SizeInitialize(100, { 500,500 }, { 0, 0 }, false, false);
+
+	posteffect_->Initialize();
 
 	// OBJからモデルデータを読み込む
 	model_1 = Model::LoadFromOBJ("ground");
