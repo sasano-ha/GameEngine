@@ -59,7 +59,7 @@ bool Input::PushKey(BYTE keyNumber)
 
 bool Input::TriggerKey(BYTE keyNumber)
 {
-    if (keyPre[keyNumber] && key[keyNumber]) {
+    if (!keyPre[keyNumber] && key[keyNumber]) {
         return true;
     }
     return false;

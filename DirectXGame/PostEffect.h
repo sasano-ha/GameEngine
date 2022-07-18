@@ -40,7 +40,7 @@ public:
     void CreateGrapicsPipelineState();
 
     // テクスチャバッファ
-    Microsoft::WRL::ComPtr<ID3D12Resource> texBuff_;
+    Microsoft::WRL::ComPtr<ID3D12Resource> texBuff_[2];
     // SRV用デスクリプタヒープ
     Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descHeapSRV_;
     // 深度バッファ
