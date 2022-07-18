@@ -71,6 +71,7 @@ void SceneManager::Update()
 	}
 
 	scene_->Update();
+	posteffect_->Update();
 }
 
 void SceneManager::Draw(DirectXCommon* dxCommon)
@@ -89,7 +90,7 @@ void SceneManager::Draw(DirectXCommon* dxCommon)
 	spritecommon->PreDraw();
 
 	// デバッグテキスト描画
-	debugText->DrawAll();
+	//debugText->DrawAll();
 
 	//描画後処理
 	dxCommon->PostDraw();

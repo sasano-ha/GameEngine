@@ -14,6 +14,8 @@ public:
     /// </summary>
     void Initialize();
 
+    void Update();
+
     /// <summary>
     /// 描画コマンドリスト
     /// </summary>
@@ -32,6 +34,11 @@ public:
     /// <param name="cmdList">コマンドリスト</param>
     void PostDrawScene(ID3D12GraphicsCommandList* cmdList);
 
+    /// <summary>
+    /// パイプライン生成
+    /// </summary>
+    void CreateGrapicsPipelineState();
+
     // テクスチャバッファ
     Microsoft::WRL::ComPtr<ID3D12Resource> texBuff_;
     // SRV用デスクリプタヒープ
@@ -42,6 +49,10 @@ public:
     Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descHeapRTV_;
     // DSV用デスクリプタヒープ
     Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descHeapDSV_;
+    // グラフィックパイプライン
+    Microsoft::WRL::ComPtr<ID3D12PipelineState> pipelineState_;
+    // ルートシグネチャ
+    Microsoft::WRL::ComPtr<ID3D12RootSignature> rootSignature_;
 
 private:
     // 画面クリアー

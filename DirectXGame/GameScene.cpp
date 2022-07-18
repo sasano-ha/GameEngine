@@ -11,7 +11,7 @@
 void GameScene::Initialize()
 {
 	SpriteCommon::GetInstance()->LoadTexture(1, L"Resources/gameplay.png");
-	SpriteCommon::GetInstance()->LoadTexture(100, L"Resources/white1x1.png");
+	//SpriteCommon::GetInstance()->LoadTexture(100, L"Resources/white1x1.png");
 
 	// スプライト共通テクスチャ読み込み
 	//spriteCommon->LoadTexture(1, L"Resources/gameplay.png");
@@ -116,7 +116,7 @@ void GameScene::Update()
 void GameScene::Draw(DirectXCommon* dxCommon)
 {
 	// スプライト共通コマンド
-	SpriteCommon::GetInstance()->PreDraw();
+	//SpriteCommon::GetInstance()->PreDraw();
 
 	// スプライト描画
 	//sprite->Draw();
@@ -135,5 +135,5 @@ void GameScene::Draw(DirectXCommon* dxCommon)
 	Object3d::PostDraw();
 
 	// スプライト共通コマンド
-	SpriteCommon::GetInstance()->PreDraw();
+	//SpriteCommon::GetInstance()->PreDraw();
 }
