@@ -67,6 +67,8 @@ private:
 	void CreateGraphicsPipeline();
 
 protected:
+
+	static const int vertNum = 4;
 	//頂点バッファ;
 	Microsoft::WRL::ComPtr<ID3D12Resource> vertBuff_;
 	//頂点バッファビュー;

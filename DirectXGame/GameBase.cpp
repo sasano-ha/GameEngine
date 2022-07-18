@@ -18,20 +18,6 @@ void GameBase::Initialize()
 
 	// DirectX初期化処理　ここから
 
-	// スプライト共通部分の初期化
-	spriteCommon = SpriteCommon::GetInstance();
-	spriteCommon->Initialize(dxCommon->GetDev(), dxCommon->GetCmdList(), winApp->windows_width, winApp->windows_height);
-
-	//デバッグテキスト
-	debugText = DebugText::GetInstance();
-	// デバッグテキスト用のテクスチャ番号を指定
-	const int debugTextTexNumber = 0;
-	// デバッグテキスト用のテクスチャ読み込み
-	spriteCommon->LoadTexture(debugTextTexNumber, L"Resources/debugfont.png");
-	// デバッグテキスト初期化
-	debugText->Initialize(spriteCommon, debugTextTexNumber);
-
-
 	//入力の初期化
 	input = Input::GetInstance();
 	input->Initialize(winApp);
@@ -68,19 +54,18 @@ void GameBase::Finalize()
 	FbxLoader::GetInstance()->Finalize();
 	// シーンファクトリ解放
 	delete sceneFactory_;
-	// デバッグテキスト解放
-	debugText->Finalize();
-
-	//オーディオ解放
-	audio->Finalize();
-
+	
 	//DirectX解放
 	delete dxCommon;
 
 	//windowsAPIの終了処理
 	winApp->Finalize();
+
 	// WindowsAPI解放
 	delete winApp;
+
+	//オーディオ解放
+	audio->Finalize();
 }
 
 void GameBase::Update()
@@ -101,14 +86,5 @@ void GameBase::Update()
 
 void GameBase::Draw()
 {
-	//描画前処理
-	dxCommon->PreDraw();
-
 	SceneManager::GetInstance()->Draw(dxCommon);
-
-	// デバッグテキスト描画
-	debugText->DrawAll();
-
-	//描画後処理
-	dxCommon->PostDraw();
 }

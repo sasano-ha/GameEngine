@@ -20,9 +20,31 @@ public:
     /// <param name="cmdList">コマンドリスト</param>
     void Draw(ID3D12GraphicsCommandList* cmdList);
 
+    /// <summary>
+    /// シーン描画前処理
+    /// </summary>
+    /// <param name="cmdList">コマンドリスト</param>
+    void PreDrawScene(ID3D12GraphicsCommandList* cmdList);
+
+    /// <summary>
+    /// シーン描画後処理
+    /// </summary>
+    /// <param name="cmdList">コマンドリスト</param>
+    void PostDrawScene(ID3D12GraphicsCommandList* cmdList);
+
     // テクスチャバッファ
     Microsoft::WRL::ComPtr<ID3D12Resource> texBuff_;
     // SRV用デスクリプタヒープ
     Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descHeapSRV_;
+    // 深度バッファ
+    Microsoft::WRL::ComPtr<ID3D12Resource> depthBuff_;
+    // RTV用デスクリプタヒープ
+    Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descHeapRTV_;
+    // DSV用デスクリプタヒープ
+    Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descHeapDSV_;
+
+private:
+    // 画面クリアー
+    static const float clearColor[4];
 };
 

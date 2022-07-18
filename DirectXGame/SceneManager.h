@@ -2,6 +2,11 @@
 
 #include "BaseScene.h"
 #include "AbstractSceneFactory.h"
+#include "PostEffect.h"
+#include "DebugText.h"
+#include "SpriteCommon.h"
+#include "WinApp.h"
+#include "DirectXCommon.h"
 
 /// <summary>
 /// シーン管理
@@ -10,6 +15,9 @@ class SceneManager
 {
 public:
 	static SceneManager* GetInstance();
+
+
+	void Initialze(DirectXCommon* dxCommon, WinApp* winApp);
 
 	/// <summary>
 	/// 更新
@@ -36,5 +44,8 @@ private:
 	~SceneManager();
 	SceneManager(const SceneManager&) = delete;
 	void operator = (const SceneManager&) = delete;
+	PostEffect* posteffect_ = nullptr;
+	DebugText* debugText = nullptr;
+	SpriteCommon* spritecommon = nullptr;
 };
 

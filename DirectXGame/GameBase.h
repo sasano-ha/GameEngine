@@ -13,6 +13,7 @@
 #include "AbstractSceneFactory.h"
 #include "FbxLoader.h"
 #include "Camera.h"
+#include "PostEffect.h"
 
 
 /// <summary>
@@ -47,12 +48,10 @@ public:
 protected:
 	bool endRequst_ = false;
 	Input* input = nullptr;
-	WinApp* winApp = nullptr;
-	DirectXCommon* dxCommon = nullptr;
-	DebugText* debugText = nullptr;
 	Sound* audio = nullptr;
-	SpriteCommon* spriteCommon = nullptr;
 	AbstractSceneFactory* sceneFactory_ = nullptr;
 	Camera* camera_ = nullptr;
+	DirectXCommon* dxCommon = nullptr;
+	WinApp* winApp = nullptr;
 };
 

@@ -77,7 +77,7 @@ void Sprite::Initialize(UINT texNumber, DirectX::XMFLOAT2 anchorpoint, bool isFl
 	ConstBufferData* constMap = nullptr;
 	result = constBuff_->Map(0, nullptr, (void**)&constMap);
 	constMap->color = XMFLOAT4(1, 1, 1, 1); // 色指定（RGBA）
-	constMap->mat = spriteCommon->GetMatProjection();
+	constMap->mat = XMMatrixIdentity();
 	constBuff_->Unmap(0, nullptr);
 }
 

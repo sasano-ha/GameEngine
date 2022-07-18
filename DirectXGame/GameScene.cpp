@@ -20,10 +20,7 @@ void GameScene::Initialize()
 	// スプライトの生成
 	sprite = Sprite::Create(1, { 0, 0 }, false, false);
 
-	posteffect_ = new PostEffect();
-	posteffect_->SizeInitialize(100, { 500,500 }, { 0, 0 }, false, false);
 
-	posteffect_->Initialize();
 
 	// OBJからモデルデータを読み込む
 	model_1 = Model::LoadFromOBJ("ground");
@@ -61,7 +58,6 @@ void GameScene::Finalize()
 {
 	// スプライト解放
 	safedelete(sprite);
-	safedelete(posteffect_);
 
 	// 3Dオブジェクト解放
 	safedelete(model_1);
@@ -107,9 +103,9 @@ void GameScene::Update()
 	DebugText::GetInstance()->Print("Nihon Kogakuin", 200, 200, 2.0f);
 
 	//3Dオブジェクト更新
-	object3d_1->Update();
+	/*object3d_1->Update();
 	object3d_2->Update();
-	object3d_3->Update();
+	object3d_3->Update();*/
 
 	fbxobject_1->Updata();
 
@@ -124,7 +120,6 @@ void GameScene::Draw(DirectXCommon* dxCommon)
 
 	// スプライト描画
 	//sprite->Draw();
-	posteffect_->Draw(dxCommon->GetCmdList());
 
 	//3Dオブジェクト描画前処理
 	Object3d::PreDraw();

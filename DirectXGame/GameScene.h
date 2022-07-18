@@ -43,7 +43,5 @@ private:
 
 	FbxModel* fbxmodel_1 = nullptr;
 	FbxObject3d* fbxobject_1 = nullptr;
-
-	PostEffect* posteffect_ = nullptr;
 };
 
