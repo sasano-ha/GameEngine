@@ -1,6 +1,5 @@
 #include "PostEffect.h"
 #include "WinApp.h"
-#include "input.h"
 
 #include <d3d12.h>
 #include <d3dx12.h>
@@ -78,7 +77,7 @@ void PostEffect::Initialize()
 	D3D12_DESCRIPTOR_HEAP_DESC srvDescHeapDesc = {};
 	srvDescHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
 	srvDescHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
-	srvDescHeapDesc.NumDescriptors = 1;
+	srvDescHeapDesc.NumDescriptors = 2;
 	// SRV用デスクリプタヒープを生成
 	result = spriteCommon->GetInstance()->GetDevice()->CreateDescriptorHeap(&srvDescHeapDesc, IID_PPV_ARGS(&descHeapSRV_));
 	assert(SUCCEEDED(result));
@@ -90,11 +89,17 @@ void PostEffect::Initialize()
 	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;	// 2Dテクスチャ
 	srvDesc.Texture2D.MipLevels = 1;
 
-	// デスクリプタヒープにSRV作成
-	spriteCommon->GetInstance()->GetDevice()->CreateShaderResourceView(texBuff_[0].Get(),	// ビューと関連付けるバッファ
-		&srvDesc,
-		descHeapSRV_->GetCPUDescriptorHandleForHeapStart()
-	);
+	for (int i = 0; i < 2; i++) {
+		// デスクリプタヒープにSRV作成
+		spriteCommon->GetInstance()->GetDevice()->CreateShaderResourceView(texBuff_[i].Get(),	// ビューと関連付けるバッファ
+			&srvDesc,
+			CD3DX12_CPU_DESCRIPTOR_HANDLE(
+				descHeapSRV_->GetCPUDescriptorHandleForHeapStart(), i,
+				spriteCommon->GetInstance()->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV)
+			)
+		);
+	}
+
 
 	// RTV用デスクリプタヒープ設定
 	D3D12_DESCRIPTOR_HEAP_DESC rtvDescHeapDesc{};
@@ -225,23 +230,6 @@ void PostEffect::Draw(ID3D12GraphicsCommandList* cmdList)
 
 	ID3D12GraphicsCommandList* commandList = spriteCommon->GetCommandList();
 
-	if (Input::GetInstance()->TriggerKey(DIK_9)) {
-		// デスクリプタヒープにSRV作成
-		static int tex = 0;
-		// テクスチャ番号を0と1までに切り替え
-		tex = (tex + 1) % 2;
-
-		D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};	// 設定構造体
-		srvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-		srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-		srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;	// 2Dテクスチャ
-		srvDesc.Texture2D.MipLevels = 1;
-		spriteCommon->GetInstance()->GetDevice()->CreateShaderResourceView(texBuff_[tex].Get(),	// ビューと関連付けるバッファ
-			&srvDesc,
-			descHeapSRV_->GetCPUDescriptorHandleForHeapStart()
-		);
-	}
-
 	// パイプラインステートの設定
 	commandList->SetPipelineState(pipelineset_.pipelinestate.Get());
 
@@ -265,7 +253,19 @@ void PostEffect::Draw(ID3D12GraphicsCommandList* cmdList)
 	// ルートパラメーター1番にシェーダリソースビューをセット
 	spriteCommon->SetGraphicsRootDescriptorTable(1, texNumber_);
 
-	commandList->SetGraphicsRootDescriptorTable(1, descHeapSRV_->GetGPUDescriptorHandleForHeapStart());
+	commandList->SetGraphicsRootDescriptorTable(1,
+		CD3DX12_GPU_DESCRIPTOR_HANDLE(
+			descHeapSRV_->GetGPUDescriptorHandleForHeapStart(), 0,
+			spriteCommon->GetInstance()->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV)
+		)
+	);
+
+	commandList->SetGraphicsRootDescriptorTable(2,
+		CD3DX12_GPU_DESCRIPTOR_HANDLE(
+			descHeapSRV_->GetGPUDescriptorHandleForHeapStart(), 1,
+			spriteCommon->GetInstance()->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV)
+		)
+	);
 
 	// ポリゴンの描画（4頂点で四角形）
 	commandList->DrawInstanced(4, 1, 0, 0);
@@ -433,13 +433,17 @@ void PostEffect::CreateGrapicsPipelineState()
 	gpipeline.SampleDesc.Count = 1; // 1ピクセルにつき1回サンプリング
 
 	// デスクリプタテーブルの設定
-	CD3DX12_DESCRIPTOR_RANGE descRangeSRV;
-	descRangeSRV.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 0); // t0 レジスタ
+	CD3DX12_DESCRIPTOR_RANGE descRangeSRV0;
+	descRangeSRV0.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 0); // t0 レジスタ
+
+	CD3DX12_DESCRIPTOR_RANGE descRangeSRV1;
+	descRangeSRV1.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 1); // t1 レジスタ
 
 	// ルートパラメータの設定
-	CD3DX12_ROOT_PARAMETER rootparams[2];
+	CD3DX12_ROOT_PARAMETER rootparams[3];
 	rootparams[0].InitAsConstantBufferView(0); // 定数バッファビューとして初期化(b0レジスタ)
-	rootparams[1].InitAsDescriptorTable(1, &descRangeSRV);
+	rootparams[1].InitAsDescriptorTable(1, &descRangeSRV0, D3D12_SHADER_VISIBILITY_ALL);
+	rootparams[2].InitAsDescriptorTable(1, &descRangeSRV1, D3D12_SHADER_VISIBILITY_ALL);
 
 	// スタティックサンプラー
 	CD3DX12_STATIC_SAMPLER_DESC samplerDesc = CD3DX12_STATIC_SAMPLER_DESC(0);
