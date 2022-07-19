@@ -16,73 +16,94 @@
     <Filter Include="シェーダーファイル">
       <UniqueIdentifier>{7e5584a5-2895-4181-9eaf-f65622106b57}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2d">
+      <UniqueIdentifier>{e86fe753-e9c9-49e3-8444-c9f68b2a16fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3d">
+      <UniqueIdentifier>{39989744-eded-414f-a382-f146241ab278}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base">
+      <UniqueIdentifier>{a7286227-a555-4b62-b925-40efebda30f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="camera">
+      <UniqueIdentifier>{cbabec05-d084-4caf-bd0a-786faffdc2e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="input">
+      <UniqueIdentifier>{d8478f7c-8b38-4563-96f3-3ade51d34971}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scene">
+      <UniqueIdentifier>{e46b5981-74c2-4067-a69a-5d4d9c8d5c77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sound">
+      <UniqueIdentifier>{dd5c1ca8-cbb1-4ee3-9a52-c8ba9911c922}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="input.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="2d\DebugText.cpp">
+      <Filter>2d</Filter>
     </ClCompile>
-    <ClCompile Include="WinApp.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="2d\Sprite.cpp">
+      <Filter>2d</Filter>
     </ClCompile>
-    <ClCompile Include="DirectXCommon.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="2d\SpriteCommon.cpp">
+      <Filter>2d</Filter>
     </ClCompile>
-    <ClCompile Include="Object3d.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="2d\PostEffect.cpp">
+      <Filter>2d</Filter>
     </ClCompile>
-    <ClCompile Include="Model.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="3d\FbxLoader.cpp">
+      <Filter>3d</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteCommon.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="3d\FbxModel.cpp">
+      <Filter>3d</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="3d\FbxObject3d.cpp">
+      <Filter>3d</Filter>
     </ClCompile>
-    <ClCompile Include="DebugText.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="3d\Model.cpp">
+      <Filter>3d</Filter>
     </ClCompile>
-    <ClCompile Include="Sound.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="3d\Object3d.cpp">
+      <Filter>3d</Filter>
     </ClCompile>
-    <ClCompile Include="MyGameEngine.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="base\DirectXCommon.cpp">
+      <Filter>base</Filter>
     </ClCompile>
-    <ClCompile Include="GameBase.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="base\GameBase.cpp">
+      <Filter>base</Filter>
     </ClCompile>
-    <ClCompile Include="GameScene.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="base\MyGameEngine.cpp">
+      <Filter>base</Filter>
     </ClCompile>
-    <ClCompile Include="TitleScene.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="base\SceneFactory.cpp">
+      <Filter>base</Filter>
     </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="base\SceneManager.cpp">
+      <Filter>base</Filter>
     </ClCompile>
-    <ClCompile Include="AbstractSceneFactory.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="base\WinApp.cpp">
+      <Filter>base</Filter>
     </ClCompile>
-    <ClCompile Include="SceneFactory.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="camera\Camera.cpp">
+      <Filter>camera</Filter>
     </ClCompile>
-    <ClCompile Include="FbxLoader.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="input\input.cpp">
+      <Filter>input</Filter>
     </ClCompile>
-    <ClCompile Include="FbxModel.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="scene\AbstractSceneFactory.cpp">
+      <Filter>scene</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="scene\GameScene.cpp">
+      <Filter>scene</Filter>
     </ClCompile>
-    <ClCompile Include="FbxObject3d.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="scene\TitleScene.cpp">
+      <Filter>scene</Filter>
     </ClCompile>
-    <ClCompile Include="PostEffect.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="sound\Sound.cpp">
+      <Filter>sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -92,9 +113,13 @@
     <None Include="Resources\shaders\OBJShaderHeader.hlsli">
       <Filter>シェーダーファイル</Filter>
     </None>
-    <None Include="Resources\shaders\FBX.hlsli" />
-    <None Include="Resources\shaders\Sprite.hlsli" />
     <None Include="Resources\shaders\PostEffectTest.hlsli">
+      <Filter>シェーダーファイル</Filter>
+    </None>
+    <None Include="Resources\shaders\FBX.hlsli">
+      <Filter>シェーダーファイル</Filter>
+    </None>
+    <None Include="Resources\shaders\Sprite.hlsli">
       <Filter>シェーダーファイル</Filter>
     </None>
   </ItemGroup>
@@ -117,90 +142,94 @@
     <FxCompile Include="Resources\shaders\OBJVertexShader.hlsl">
       <Filter>シェーダーファイル</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\FBXPS.hlsl" />
-    <FxCompile Include="Resources\shaders\FBXVS.hlsl" />
     <FxCompile Include="Resources\shaders\PostEffectTestPS.hlsl">
       <Filter>シェーダーファイル</Filter>
     </FxCompile>
     <FxCompile Include="Resources\shaders\PostEffectTestVS.hlsl">
       <Filter>シェーダーファイル</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\shaders\FBXPS.hlsl">
+      <Filter>シェーダーファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\FBXVS.hlsl">
+      <Filter>シェーダーファイル</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="input.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="WinApp.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectXCommon.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Object3d.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteCommon.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="PipelineSet.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugText.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Sound.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="MyGameEngine.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="GameBase.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleScene.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="AbstractSceneFactory.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneFactory.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="FbxLoader.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="FbxModel.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="FbxObject3d.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="2d\DebugText.h">
+      <Filter>2d</Filter>
     </ClInclude>
-    <ClInclude Include="BaseScene.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="2d\Sprite.h">
+      <Filter>2d</Filter>
     </ClInclude>
-    <ClInclude Include="SafeDelete.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="2d\SpriteCommon.h">
+      <Filter>2d</Filter>
     </ClInclude>
-    <ClInclude Include="PostEffect.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="2d\PostEffect.h">
+      <Filter>2d</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\FbxLoader.h">
+      <Filter>3d</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\FbxModel.h">
+      <Filter>3d</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\FbxObject3d.h">
+      <Filter>3d</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Model.h">
+      <Filter>3d</Filter>
+    </ClInclude>
+    <ClInclude Include="3d\Object3d.h">
+      <Filter>3d</Filter>
+    </ClInclude>
+    <ClInclude Include="base\BaseScene.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\DirectXCommon.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\GameBase.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\MyGameEngine.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\PipelineSet.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\SafeDelete.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\SceneFactory.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\SceneManager.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\WinApp.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="camera\Camera.h">
+      <Filter>camera</Filter>
+    </ClInclude>
+    <ClInclude Include="input\input.h">
+      <Filter>input</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\AbstractSceneFactory.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\GameScene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\TitleScene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="sound\Sound.h">
+      <Filter>sound</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
