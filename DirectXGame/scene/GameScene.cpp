@@ -83,8 +83,12 @@ void GameScene::Update()
 		SceneManager::GetInstance()->ChangeScene("TITLE");
 	}
 
-	if (input->TriggerKey(DIK_0))
+	/*if (input->TriggerKey(DIK_0))
 	{
+		fbxobject_1->PlayAnimation();
+	}*/
+
+	if (input->PushMouseLeft()) {
 		fbxobject_1->PlayAnimation();
 	}
 
