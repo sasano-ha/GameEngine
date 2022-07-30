@@ -71,24 +71,23 @@ void SceneManager::Update()
 	}
 
 	scene_->Update();
-	posteffect_->Update();
+	//posteffect_->Update();
 }
 
 void SceneManager::Draw(DirectXCommon* dxCommon)
 {
 	// レンダーテクスチャへの描画
-	posteffect_->PreDrawScene(dxCommon->GetCmdList());
-	scene_->Draw(dxCommon);
-	posteffect_->PostDrawScene(dxCommon->GetCmdList());
+	//posteffect_->PreDrawScene(dxCommon->GetCmdList());
+	//posteffect_->PostDrawScene(dxCommon->GetCmdList());
 
 
 	//描画前処理
 	dxCommon->PreDraw();
 
-	posteffect_->Draw(dxCommon->GetCmdList());
+	//posteffect_->Draw(dxCommon->GetCmdList());
 
 	spritecommon->PreDraw();
-
+	scene_->Draw(dxCommon);
 	// デバッグテキスト描画
 	//debugText->DrawAll();
 

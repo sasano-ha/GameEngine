@@ -47,6 +47,8 @@ private:	//メンバ変数
 	ComPtr<ID3D12Resource> depthBuffer;
 	ComPtr<ID3D12Fence> fence;
 	ComPtr<ID3D12DescriptorHeap> dsvHeap;
+	ComPtr<ID3D12Debug1> debugController_;
+	ComPtr<ID3D12InfoQueue> InfoQueue_;
 
 private:	//メンバ関数
 	//デバイスの初期化

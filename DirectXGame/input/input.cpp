@@ -1,4 +1,5 @@
 #include "input.h"
+#include "Object3d.h"
 
 #pragma comment(lib, "dinput8.lib")
 #pragma comment(lib, "dxguid.lib")
@@ -64,6 +65,16 @@ void Input::Update()
     // マウスの入力
     result = devMouse->GetDeviceState(sizeof(mouseState), &mouseState);
 
+    MousePos();
+}
+
+POINT Input::MousePos()
+{
+    GetCursorPos(&mousePos_);
+    // 取得したスクリーン座標をウィンドウ座標に変換する
+    ScreenToClient(winApp->GetHwnd(), &mousePos_);
+
+    return mousePos_;
 }
 
 bool Input::PushKey(BYTE keyNumber)
@@ -118,6 +129,17 @@ bool Input::TriggerMouseLeft()
 {
     // 前回が0で、今回が0でなければトリガー
     if (!mouseStatePre.rgbButtons[0] && mouseState.rgbButtons[0]) {
+        return true;
+    }
+
+    // トリガーでない
+    return false;
+}
+
+bool Input::TriggerMouseRight()
+{
+    // 前回が0で、今回が0でなければトリガー
+    if (!mouseStatePre.rgbButtons[1] && mouseState.rgbButtons[1]) {
         return true;
     }
 

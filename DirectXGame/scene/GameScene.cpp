@@ -11,6 +11,7 @@
 void GameScene::Initialize()
 {
 	SpriteCommon::GetInstance()->LoadTexture(1, L"Resources/gameplay.png");
+	SpriteCommon::GetInstance()->LoadTexture(2, L"Resources/cursor.png");
 	//SpriteCommon::GetInstance()->LoadTexture(100, L"Resources/white1x1.png");
 
 	// スプライト共通テクスチャ読み込み
@@ -18,12 +19,14 @@ void GameScene::Initialize()
 	//spriteCommon->LoadTexture(2, L"Resources/house.png");
 
 	// スプライトの生成
-	sprite = Sprite::Create(1, { 0, 0 }, false, false);
+	sprite_1 = Sprite::Create(1, { 0, 0 }, false, false);
+	sprite_2 = Sprite::Create(2, { 0, 0 }, false, false);
+	sprite_2->SetPosition({ 0, 0, 0});
 
-
+	//sprite->SetRotation(mousePos_);
 
 	// OBJからモデルデータを読み込む
-	model_1 = Model::LoadFromOBJ("ground");
+	model_1 = Model::LoadFromOBJ("boll");
 	model_2 = Model::LoadFromOBJ("triangle_mat");
 	// 3Dオブジェクト生成
 	object3d_1 = Object3d::Create();
@@ -34,9 +37,11 @@ void GameScene::Initialize()
 	object3d_2->SetModel(model_2);
 	object3d_3->SetModel(model_2);
 
+	object3d_1->SetScale({ 5.0f, 5.0f, 5.0f });
 	object3d_2->SetScale({ 20.0f, 20.0f, 20.0f });
 	object3d_3->SetScale({ 30.0f, 30.0f, 30.0f });
 
+	object3d_1->SetPosition({ -5, 0, -5 });
 	object3d_2->SetPosition({ -5, 0, -5 });
 	object3d_3->SetPosition({ +5, 0, +5 });
 
@@ -57,7 +62,8 @@ void GameScene::Initialize()
 void GameScene::Finalize()
 {
 	// スプライト解放
-	safedelete(sprite);
+	safedelete(sprite_1);
+	safedelete(sprite_2);
 
 	// 3Dオブジェクト解放
 	safedelete(model_1);
@@ -77,26 +83,28 @@ void GameScene::Update()
 
 	Input* input = Input::GetInstance();
 
-	if (input->TriggerKey(DIK_SPACE))
-	{
-		// シーン切り替え
-		SceneManager::GetInstance()->ChangeScene("TITLE");
-	}
+	//if (input->TriggerKey(DIK_SPACE))
+	//{
+	//	// シーン切り替え
+	//	SceneManager::GetInstance()->ChangeScene("TITLE");
+	//}
 
-	/*if (input->TriggerKey(DIK_0))
+	if (input->TriggerKey(DIK_0))
 	{
-		fbxobject_1->PlayAnimation();
-	}*/
-
-	if (input->PushMouseLeft()) {
 		fbxobject_1->PlayAnimation();
 	}
 
 	// 座標操作
-	if (input->PushKey(DIK_UP) || input->PushKey(DIK_DOWN) || input->PushKey(DIK_RIGHT) || input->PushKey(DIK_LEFT))
-	{
+	//if (input->PushKey(DIK_UP) || input->PushKey(DIK_DOWN) || input->PushKey(DIK_RIGHT) || input->PushKey(DIK_LEFT))
+	//{
 
-	}
+	//}
+
+	//if (input->PushKey(DIK_W)) {
+	//	object3d_1->SetPosition(object3d_1->GetPosition().y + XMFLOAT3{0, 1.0, 0});
+	//}
+
+	sprite_2->SetPosition(XMFLOAT3{float(input->GetInstance()->MousePos().x) - 100, float(input->GetInstance()->MousePos().y) - 100, 0 });
 
 	if (input->PushKey(DIK_D) || input->PushKey(DIK_A))
 	{
@@ -106,24 +114,28 @@ void GameScene::Update()
 	DebugText::GetInstance()->Print("Hello,DirectX!!", 200, 100);
 	DebugText::GetInstance()->Print("Nihon Kogakuin", 200, 200, 2.0f);
 
+
+
 	//3Dオブジェクト更新
-	/*object3d_1->Update();
-	object3d_2->Update();
+	object3d_1->Update();
+	/*object3d_2->Update();
 	object3d_3->Update();*/
 
-	fbxobject_1->Updata();
+	//fbxobject_1->Updata();
 
 	//スプライト更新
-	sprite->Update();
+	sprite_1->Update();
+	sprite_2->Update();
 }
 
 void GameScene::Draw(DirectXCommon* dxCommon)
 {
 	// スプライト共通コマンド
-	//SpriteCommon::GetInstance()->PreDraw();
+	SpriteCommon::GetInstance()->PreDraw();
 
 	// スプライト描画
-	//sprite->Draw();
+	sprite_1->Draw();
+	sprite_2->Draw();
 
 	//3Dオブジェクト描画前処理
 	Object3d::PreDraw();
@@ -133,11 +145,8 @@ void GameScene::Draw(DirectXCommon* dxCommon)
 	//object3d_2->Draw();
 	//object3d_3->Draw();
 
-	fbxobject_1->Draw(dxCommon->GetCmdList());
+	//fbxobject_1->Draw(dxCommon->GetCmdList());
 
 	//3Dオブジェクトの描画後処理
 	Object3d::PostDraw();
-
-	// スプライト共通コマンド
-	//SpriteCommon::GetInstance()->PreDraw();
 }

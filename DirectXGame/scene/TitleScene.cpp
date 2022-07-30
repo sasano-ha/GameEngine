@@ -29,7 +29,7 @@ void TitleScene::Update()
 
 	}
 
-	if (input->TriggerKey(DIK_RETURN))
+	if (input->TriggerKey(DIK_1))
 	{
 		// ƒV[ƒ“Ø‚è‘Ö‚¦
 		SceneManager::GetInstance()->ChangeScene("GAME");

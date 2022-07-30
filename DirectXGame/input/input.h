@@ -7,8 +7,9 @@
 #include "WinApp.h"
 
 
+
 // 入力
-class Input
+class Input final
 {
 public:
 	// namespace省略
@@ -40,7 +41,7 @@ public:// メンバ関数
 	/// <summary>
 	///	キーのトリガーをチェック
 	/// </summary>
-		/// <paragm name = "keyNumber">キー番号（DIK_0 等）</paragm>
+	/// <paragm name = "keyNumber">キー番号（DIK_0 等）</paragm>
 	/// <returns>トリガーか</return>
 	bool TriggerKey(BYTE keyNumber);
 
@@ -69,10 +70,34 @@ public:// メンバ関数
 	bool TriggerMouseLeft();
 
 	/// <summary>
+	/// キーの左ボタントリガーをチェック
+	/// </summary>
+	/// <returns>トリガーか</returns>
+	bool TriggerMouseRight();
+
+	/// <summary>
 	/// キーの中ボタントリガーをチェック
 	/// </summary>
 	/// <returns>トリガーか</returns>
 	bool TriggerMouseMiddle();
+
+	/// <summary>
+	/// マウスの座標
+	/// </summary>
+	/// <returns></returns>
+	POINT MousePos();
+
+private:
+	// コンストラクタをprivateにする
+	Input() = default;
+	// デストラクタをprivateとにする
+	~Input() = default;
+public:
+	// コピーコンストラクタを無効にする
+	Input(const Input& obj) = delete;
+	// 代入演算子を無効にする
+	Input& operator=(const Input& obj) = delete;
+
 
 private:// メンバ関数
 	// DirectInputのインスタンス生成
@@ -91,4 +116,5 @@ private:// メンバ関数
 	DIMOUSESTATE2 mouseState = {};
 	// 前回マウスの状態（）
 	DIMOUSESTATE2 mouseStatePre = {};
+	POINT mousePos_;
 };

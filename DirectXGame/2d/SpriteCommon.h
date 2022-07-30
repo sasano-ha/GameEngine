@@ -8,7 +8,7 @@
 /// スプライト共通部分
 /// </summary>
 
-class SpriteCommon
+class SpriteCommon final
 {
 public:	//プロジェクト全体で使える
 
@@ -58,6 +58,14 @@ public:	//プロジェクト全体で使える
 	const DirectX::XMMATRIX& GetMatProjection() { return matProjection_; }
 
 	ID3D12GraphicsCommandList* GetCommandList() { return commandList_; }
+
+private:
+	SpriteCommon() = default;
+	~SpriteCommon() = default;
+public:
+	SpriteCommon(const SpriteCommon& obj) = delete;
+	SpriteCommon& operator=(const SpriteCommon& obj) = delete;
+
 
 private:	//宣言のみで使える
 	// パイプラインセット

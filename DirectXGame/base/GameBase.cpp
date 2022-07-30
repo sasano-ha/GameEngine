@@ -12,6 +12,7 @@ void GameBase::Initialize()
 #pragma endregion WindowsAPI‰Šú‰»
 
 #pragma region DirectX‰Šú‰»ˆ—
+
 	//DirectX‚Ì‰Šú‰»
 	dxCommon = new DirectXCommon();
 	dxCommon->Initialize(winApp);

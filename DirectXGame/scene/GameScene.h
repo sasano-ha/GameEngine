@@ -6,11 +6,19 @@
 #include "FbxObject3d.h"
 #include "PostEffect.h"
 
+#include <DirectXMath.h>
+
 /// <summary>
 /// ÉQÅ[ÉÄÉVÅ[Éì
 /// </summary>
 class GameScene : public BaseScene
 {
+	// DirectX::Çè»ó™
+	using XMFLOAT2 = DirectX::XMFLOAT2;
+	using XMFLOAT3 = DirectX::XMFLOAT3;
+	using XMFLOAT4 = DirectX::XMFLOAT4;
+	using XMMATRIX = DirectX::XMMATRIX;
+
 public:
 	/// <summary>
 	/// èâä˙âª
@@ -33,7 +41,8 @@ public:
 	void Draw(DirectXCommon* dxCommon) override;
 
 private:
-	Sprite* sprite = nullptr;
+	Sprite* sprite_1 = nullptr;
+	Sprite* sprite_2 = nullptr;
 	Model* model_1 = nullptr;
 	Model* model_2 = nullptr;
 
@@ -43,5 +52,7 @@ private:
 
 	FbxModel* fbxmodel_1 = nullptr;
 	FbxObject3d* fbxobject_1 = nullptr;
+
+	XMFLOAT3 speed_ = {1.0f, 1.0f, 1.0f};
 };
 

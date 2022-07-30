@@ -2,7 +2,7 @@
 
 #include <wrl.h>
 #include <d3d12.h>
-#include <DirectXTex.h>
+#include <DirectXMath.h>
 
 #include "SpriteCommon.h"
 
@@ -11,6 +11,13 @@
 /// </summary>
 class Sprite
 {
+private:
+	// DirectX::を省略
+	using XMFLOAT2 = DirectX::XMFLOAT2;
+	using XMFLOAT3 = DirectX::XMFLOAT3;
+	using XMFLOAT4 = DirectX::XMFLOAT4;
+	using XMMATRIX = DirectX::XMMATRIX;
+
 public:
 
 	// 頂点データ
@@ -55,11 +62,13 @@ public:
 
 	void Draw();
 
-	void SetPosition(const DirectX::XMFLOAT3& position) { position_ = position; }
+	const XMFLOAT3& GetPosition() { return position_; }
+
+	void SetPosition(const XMFLOAT3& position) { position_ = position; }
 	void SetRotation(float rotation) { rotation_ = rotation; }
-	void SetSize(const DirectX::XMFLOAT2& size) { size_ = size; }
-	void SetTexLeftTop(const::DirectX::XMFLOAT2& texLeftTop) { texLeftTop_ = texLeftTop; }
-	void SetTexSize(const::DirectX::XMFLOAT2& texSize) { texSize_ = texSize; }
+	void SetSize(const XMFLOAT2& size) { size_ = size; }
+	void SetTexLeftTop(const XMFLOAT2& texLeftTop) { texLeftTop_ = texLeftTop; }
+	void SetTexSize(const XMFLOAT2& texSize) { texSize_ = texSize; }
 
 private:
 
