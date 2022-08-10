@@ -1,13 +1,15 @@
 #pragma once
 
-#include "FbxModel.h"
-#include "Camera.h"
 #include <Windows.h>
 #include <wrl.h>
 #include <d3d12.h>
 #include <d3dx12.h>
 #include <DirectXMath.h>
 #include <string>
+
+#include "FbxModel.h"
+#include "Camera.h"
+#include "Vector3.h"
 
 class FbxObject3d
 {

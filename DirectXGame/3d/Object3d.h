@@ -1,13 +1,14 @@
 ﻿#pragma once
 
-#include "Model.h"
-
 #include <Windows.h>
 #include <wrl.h>
 #include <d3d12.h>
 #include <DirectXMath.h>
 #include <d3dx12.h>
 #include <string>
+
+#include "Model.h"
+#include "Vector3.h"
 
 /// <summary>
 /// 3Dオブジェクト
@@ -167,13 +168,13 @@ public: // メンバ関数
 	/// 座標の取得
 	/// </summary>
 	/// <returns>座標</returns>
-	const XMFLOAT3& GetPosition() { return position_; }
+	const Vector3& GetPosition() { return position_; }
 
 	/// <summary>
 	/// 座標の設定
 	/// </summary>
 	/// <param name="position">座標</param>
-	void SetPosition(XMFLOAT3 position_) { this->position_ = position_; }
+	void SetPosition(Vector3 position_) { this->position_ = position_; }
 
 	/// <summary>
 	/// setter
@@ -188,11 +189,11 @@ private: // メンバ変数
 	// 行列用定数バッファ
 	ComPtr<ID3D12Resource>constBuffB0_;	//定数バッファ
 	// ローカルスケール
-	XMFLOAT3 scale_ = { 1,1,1 };
+	XMFLOAT3 scale_ = { 1, 1, 1 };
 	// X,Y,Z軸回りのローカル回転角
-	XMFLOAT3 rotation_ = { 0,0,0 };
+	XMFLOAT3 rotation_ = { 0, 0, 0 };
 	// ローカル座標
-	XMFLOAT3 position_ = { 0,0,0 };
+	Vector3 position_ = { 1.0f, 1.0f, 1.0f };
 	// ローカルワールド変換行列
 	XMMATRIX matWorld_;
 	// 親オブジェクト

@@ -8,6 +8,7 @@
 #include "FbxObject3d.h"
 #include "SafeDelete.h"
 
+
 void GameScene::Initialize()
 {
 	SpriteCommon::GetInstance()->LoadTexture(1, L"Resources/gameplay.png");
@@ -100,9 +101,9 @@ void GameScene::Update()
 
 	//}
 
-	//if (input->PushKey(DIK_W)) {
-	//	object3d_1->SetPosition(object3d_1->GetPosition().y + XMFLOAT3{0, 1.0, 0});
-	//}
+	if (input->PushKey(DIK_W)) {
+		object3d_1->SetPosition(object3d_1->GetPosition()+ speed_);
+	}
 
 	sprite_2->SetPosition(XMFLOAT3{float(input->GetInstance()->MousePos().x) - 100, float(input->GetInstance()->MousePos().y) - 100, 0 });
 
@@ -141,7 +142,7 @@ void GameScene::Draw(DirectXCommon* dxCommon)
 	Object3d::PreDraw();
 
 	//3Dオブジェクトの描画
-	//object3d_1->Draw();
+	object3d_1->Draw();
 	//object3d_2->Draw();
 	//object3d_3->Draw();
 

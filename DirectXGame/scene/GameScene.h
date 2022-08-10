@@ -5,6 +5,7 @@
 #include "Object3d.h"
 #include "FbxObject3d.h"
 #include "PostEffect.h"
+#include "Vector3.h"
 
 #include <DirectXMath.h>
 
@@ -53,6 +54,6 @@ private:
 	FbxModel* fbxmodel_1 = nullptr;
 	FbxObject3d* fbxobject_1 = nullptr;
 
-	XMFLOAT3 speed_ = {1.0f, 1.0f, 1.0f};
+	Vector3 speed_ = {0, 1.0f, 0};
 };
 
