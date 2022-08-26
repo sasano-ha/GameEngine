@@ -30,21 +30,33 @@ void GameScene::Initialize()
 	model_1 = Model::LoadFromOBJ("boll");
 	model_2 = Model::LoadFromOBJ("triangle_mat");
 	// 3Dオブジェクト生成
-	object3d_1 = Object3d::Create();
-	object3d_2 = Object3d::Create();
-	object3d_3 = Object3d::Create();
+	player = Object3d::Create();
+	for (int i = 0; i < 3; i++) {
+		enemy[i] = Object3d::Create();
+	}
+	bullet = Object3d::Create();
+
+
 	// 3Dオブジェクトに3Dモデルをひもづけ
-	object3d_1->SetModel(model_1);
-	object3d_2->SetModel(model_2);
-	object3d_3->SetModel(model_2);
+	player->SetModel(model_1);
+	for (int i = 0; i < 3; i++) {
+		enemy[i]->SetModel(model_2);
+	}
+	bullet->SetModel(model_1);
 
-	object3d_1->SetScale({ 5.0f, 5.0f, 5.0f });
-	object3d_2->SetScale({ 20.0f, 20.0f, 20.0f });
-	object3d_3->SetScale({ 30.0f, 30.0f, 30.0f });
+	// scaleの設定
+	player->SetScale({ 3.0f, 3.0f, 3.0f });
+	for (int i = 0; i < 3; i++) {
+		enemy[i]->SetScale({ 20.0f, 20.0f, 20.0f });
+	}
+	bullet->SetScale({ 2.0f, 2.0f, 2.0f });
 
-	object3d_1->SetPosition({ -5, 0, -5 });
-	object3d_2->SetPosition({ -5, 0, -5 });
-	object3d_3->SetPosition({ +5, 0, +5 });
+	// positionの設定
+	player->SetPosition({ -5, 0, -5 });
+	enemy[0]->SetPosition({ -70, 0, 100 });
+	enemy[1]->SetPosition({   0, 0, 100 });
+	enemy[2]->SetPosition({  70, 0, 100});
+	bullet->SetPosition({ -5, 0, -5 });
 
 	// 音声読み込み
 	Sound::GetInstance()->LoadWave("Alarm01.wav");
@@ -71,9 +83,13 @@ void GameScene::Finalize()
 	safedelete(model_2);
 
 	// 3Dオブジェクト解放
-	safedelete(object3d_1);
-	safedelete(object3d_2);
-	safedelete(object3d_3);
+	safedelete(player);
+
+	for (int i = 0; i < 3; i++) {
+		safedelete(enemy[i]);
+	}
+	
+	safedelete(bullet);
 
 	safedelete(fbxobject_1);
 	safedelete(fbxmodel_1);
@@ -101,26 +117,62 @@ void GameScene::Update()
 
 	//}
 
+
+	// 自機の操作
 	if (input->PushKey(DIK_W)) {
-		object3d_1->SetPosition(object3d_1->GetPosition()+ speed_);
+		player->SetPosition(player->GetPosition() + Vector3(0, speed, 0));
 	}
+	else if (input->PushKey(DIK_S)) {
+		player->SetPosition(player->GetPosition() + Vector3(0, -speed, 0));
+	}
+	else if (input->PushKey(DIK_A)) {
+		player->SetPosition(player->GetPosition() + Vector3(-speed, 0, 0));
+	}
+	else if (input->PushKey(DIK_D)) {
+		player->SetPosition(player->GetPosition() + Vector3(speed, 0, 0));
+	}
+
+	// space押した時
+	if (input->TriggerKey(DIK_SPACE)) {
+		bullet->SetPosition(player->GetPosition());
+		bulletFlag = true;
+	}
+
+	if (bulletFlag == true) {
+		bullet->SetPosition(bullet->GetPosition() + Vector3(0, 0, speed));
+		if (bullet->GetPosition().z > 120) {
+			bulletFlag = false;
+		}
+	}
+
+	for (int i = 0; i < 3; i++) {
+		float distance = (enemy[i]->GetPosition().x - bullet->GetPosition().x) * (enemy[i]->GetPosition().x - bullet->GetPosition().x) +
+			(enemy[i]->GetPosition().y - bullet->GetPosition().y) + (enemy[i]->GetPosition().z - bullet->GetPosition().z);
+		if (distance <= bulletRadius + enemuyRadius[i]) {
+			enemyFlag[i] = false;
+			bulletFlag = false;
+		}
+	}
+	
 
 	sprite_2->SetPosition(XMFLOAT3{float(input->GetInstance()->MousePos().x) - 100, float(input->GetInstance()->MousePos().y) - 100, 0 });
 
-	if (input->PushKey(DIK_D) || input->PushKey(DIK_A))
-	{
-
-	}
-
-	DebugText::GetInstance()->Print("Hello,DirectX!!", 200, 100);
+	//DebugText::GetInstance()->Print("Hello,DirectX!!", 200, 100);
 	DebugText::GetInstance()->Print("Nihon Kogakuin", 200, 200, 2.0f);
 
+	if (input->PushMouseLeft()) {
+		DebugText::GetInstance()->Print("Hello,DirectX!!", 200, 100);
+	}
 
 
 	//3Dオブジェクト更新
-	object3d_1->Update();
-	/*object3d_2->Update();
-	object3d_3->Update();*/
+	player->Update();
+
+	for (int i = 0; i < 3; i++) {
+		enemy[i]->Update();
+	}
+	
+	bullet->Update();
 
 	//fbxobject_1->Updata();
 
@@ -142,9 +194,18 @@ void GameScene::Draw(DirectXCommon* dxCommon)
 	Object3d::PreDraw();
 
 	//3Dオブジェクトの描画
-	object3d_1->Draw();
-	//object3d_2->Draw();
-	//object3d_3->Draw();
+	player->Draw();
+
+	for (int i = 0; i < 3; i++) {
+		if (enemyFlag[i] == true) {
+			enemy[i]->Draw();
+		}
+	}
+	
+	if (bulletFlag == true) {
+		bullet->Draw();
+	}
+	
 
 	//fbxobject_1->Draw(dxCommon->GetCmdList());
 
