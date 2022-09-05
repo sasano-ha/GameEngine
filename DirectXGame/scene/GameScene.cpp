@@ -7,6 +7,7 @@
 #include "FbxLoader.h"
 #include "FbxObject3d.h"
 #include "SafeDelete.h"
+#include "Player.h"
 
 
 void GameScene::Initialize()
@@ -24,39 +25,27 @@ void GameScene::Initialize()
 	sprite_2 = Sprite::Create(2, { 0, 0 }, false, false);
 	sprite_2->SetPosition({ 0, 0, 0});
 
-	//sprite->SetRotation(mousePos_);
+	player_ = new Player();
+	player_->Initialze();
+
+	enemy_[2] = new Enemy();
+	enemy_[2]->Initialze();
+
+	bullet_ = new Bullet();
+	bullet_->Initialze();
 
 	// OBJからモデルデータを読み込む
-	model_1 = Model::LoadFromOBJ("boll");
-	model_2 = Model::LoadFromOBJ("triangle_mat");
-	// 3Dオブジェクト生成
-	player = Object3d::Create();
-	for (int i = 0; i < 3; i++) {
-		enemy[i] = Object3d::Create();
-	}
-	bullet = Object3d::Create();
+	//bullet = Object3d::Create();
 
 
 	// 3Dオブジェクトに3Dモデルをひもづけ
-	player->SetModel(model_1);
-	for (int i = 0; i < 3; i++) {
-		enemy[i]->SetModel(model_2);
-	}
-	bullet->SetModel(model_1);
+	//bullet->SetModel(model_1);
 
 	// scaleの設定
-	player->SetScale({ 3.0f, 3.0f, 3.0f });
-	for (int i = 0; i < 3; i++) {
-		enemy[i]->SetScale({ 20.0f, 20.0f, 20.0f });
-	}
-	bullet->SetScale({ 2.0f, 2.0f, 2.0f });
+	//bullet->SetScale({ 2.0f, 2.0f, 2.0f });
 
 	// positionの設定
-	player->SetPosition({ -5, 0, -5 });
-	enemy[0]->SetPosition({ -70, 0, 100 });
-	enemy[1]->SetPosition({   0, 0, 100 });
-	enemy[2]->SetPosition({  70, 0, 100});
-	bullet->SetPosition({ -5, 0, -5 });
+	//bullet->SetPosition({ -5, 0, -5 });
 
 	// 音声読み込み
 	Sound::GetInstance()->LoadWave("Alarm01.wav");
@@ -79,17 +68,12 @@ void GameScene::Finalize()
 	safedelete(sprite_2);
 
 	// 3Dオブジェクト解放
-	safedelete(model_1);
-	safedelete(model_2);
 
-	// 3Dオブジェクト解放
-	safedelete(player);
-
-	for (int i = 0; i < 3; i++) {
-		safedelete(enemy[i]);
-	}
+	player_->Finalize();
+	enemy_[2]->Finalize();
+	bullet_->Finalize();
 	
-	safedelete(bullet);
+	//safedelete(bullet);
 
 	safedelete(fbxobject_1);
 	safedelete(fbxmodel_1);
@@ -117,23 +101,8 @@ void GameScene::Update()
 
 	//}
 
-
-	// 自機の操作
-	if (input->PushKey(DIK_W)) {
-		player->SetPosition(player->GetPosition() + Vector3(0, speed, 0));
-	}
-	else if (input->PushKey(DIK_S)) {
-		player->SetPosition(player->GetPosition() + Vector3(0, -speed, 0));
-	}
-	else if (input->PushKey(DIK_A)) {
-		player->SetPosition(player->GetPosition() + Vector3(-speed, 0, 0));
-	}
-	else if (input->PushKey(DIK_D)) {
-		player->SetPosition(player->GetPosition() + Vector3(speed, 0, 0));
-	}
-
 	// space押した時
-	if (input->TriggerKey(DIK_SPACE)) {
+	/*if (input->TriggerKey(DIK_SPACE)) {
 		bullet->SetPosition(player->GetPosition());
 		bulletFlag = true;
 	}
@@ -152,7 +121,8 @@ void GameScene::Update()
 			enemyFlag[i] = false;
 			bulletFlag = false;
 		}
-	}
+	}*/
+	
 	
 
 	sprite_2->SetPosition(XMFLOAT3{float(input->GetInstance()->MousePos().x) - 100, float(input->GetInstance()->MousePos().y) - 100, 0 });
@@ -166,13 +136,9 @@ void GameScene::Update()
 
 
 	//3Dオブジェクト更新
-	player->Update();
-
-	for (int i = 0; i < 3; i++) {
-		enemy[i]->Update();
-	}
-	
-	bullet->Update();
+	player_->Update();
+	enemy_[2]->Update();
+	bullet_->Update();
 
 	//fbxobject_1->Updata();
 
@@ -194,17 +160,12 @@ void GameScene::Draw(DirectXCommon* dxCommon)
 	Object3d::PreDraw();
 
 	//3Dオブジェクトの描画
-	player->Draw();
-
-	for (int i = 0; i < 3; i++) {
-		if (enemyFlag[i] == true) {
-			enemy[i]->Draw();
-		}
-	}
-	
-	if (bulletFlag == true) {
+	player_->Draw();
+	enemy_[2]->Draw();
+	bullet_->Draw();
+	/*if (bulletFlag == true) {
 		bullet->Draw();
-	}
+	}*/
 	
 
 	//fbxobject_1->Draw(dxCommon->GetCmdList());

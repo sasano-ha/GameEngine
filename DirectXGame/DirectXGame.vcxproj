@@ -165,9 +165,12 @@
     <ClCompile Include="base\SceneFactory.cpp" />
     <ClCompile Include="base\SceneManager.cpp" />
     <ClCompile Include="base\WinApp.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="camera\Camera.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="input\input.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="scene\AbstractSceneFactory.cpp" />
     <ClCompile Include="scene\GameScene.cpp" />
     <ClCompile Include="scene\TitleScene.cpp" />
@@ -267,8 +270,11 @@
     <ClInclude Include="base\SceneFactory.h" />
     <ClInclude Include="base\SceneManager.h" />
     <ClInclude Include="base\WinApp.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="camera\Camera.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="input\input.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="scene\AbstractSceneFactory.h" />
     <ClInclude Include="scene\GameScene.h" />

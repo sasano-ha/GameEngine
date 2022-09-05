@@ -5,6 +5,9 @@
 #include "Object3d.h"
 #include "FbxObject3d.h"
 #include "PostEffect.h"
+#include "Player.h"
+#include "Enemy.h"
+#include "Bullet.h"
 
 #include <DirectXMath.h>
 
@@ -43,12 +46,12 @@ public:
 private:
 	Sprite* sprite_1 = nullptr;
 	Sprite* sprite_2 = nullptr;
-	Model* model_1 = nullptr;
-	Model* model_2 = nullptr;
 
-	Object3d* player = nullptr;
-	Object3d* enemy[3] = { nullptr };
-	Object3d* bullet = nullptr;
+	
+	Player* player_ = nullptr;
+	Enemy* enemy_[3] = { nullptr };
+	Bullet* bullet_ = nullptr;
+	//Object3d* bullet = nullptr;
 
 	FbxModel* fbxmodel_1 = nullptr;
 	FbxObject3d* fbxobject_1 = nullptr;
@@ -57,12 +60,9 @@ private:
 	float speed = 1.0f;
 
 	// bulletのフラグ
-	bool bulletFlag = false;
+	//bool bulletFlag = false;
 
 	// enemyのフラグ
-	bool enemyFlag[3] = { true, true, true };
-
 	float bulletRadius = 5.0f;
-	float enemuyRadius[3] = { 5.0f };
 };
 
