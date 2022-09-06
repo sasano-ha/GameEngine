@@ -26,8 +26,6 @@ public:
 
 private:
 	Model* model_3 = nullptr;
-	Object3d* player = nullptr;
-	Object3d* enemy[2] = { nullptr };
 	Object3d* bullet = nullptr;
 
 	// bullet‚Ìƒtƒ‰ƒO

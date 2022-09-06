@@ -57,3 +57,8 @@ void Player::Draw()
 	//3Dオブジェクトの描画
 	player->Draw();
 }
+
+void Player::PlayerAttack()
+{
+	bullet->SetPosition(player->GetPosition());
+}

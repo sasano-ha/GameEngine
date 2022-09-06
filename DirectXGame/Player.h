@@ -25,6 +25,11 @@ public:
 	/// </summary>
 	void Draw();
 
+	/// <summary>
+	/// ’e‚Ì”­Ëˆ—
+	/// </summary>
+	void PlayerAttack();
+
 
 private:
 	Model* model_1 = nullptr;
