@@ -53,6 +53,7 @@ void GameBase::Finalize()
 {
 	// FBXローダーの解放
 	FbxLoader::GetInstance()->Finalize();
+
 	// シーンファクトリ解放
 	delete sceneFactory_;
 	

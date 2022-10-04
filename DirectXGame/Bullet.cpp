@@ -28,18 +28,18 @@ void Bullet::Update()
 {
 	Input* input = Input::GetInstance();
 
-	// space‰Ÿ‚µ‚½Žž
-	if (input->TriggerKey(DIK_SPACE)) {
-		bullet->SetPosition(player->GetPosition());
-		bulletFlag = true;
-	}
+	//// space‰Ÿ‚µ‚½Žž
+	//if (input->TriggerKey(DIK_SPACE)) {
+	//	bullet->SetPosition(player->GetPosition());
+	//	bulletFlag = true;
+	//}
 
-	if (bulletFlag == true) {
-		bullet->SetPosition(bullet->GetPosition() + Vector3(0, 0, speed));
-		if (bullet->GetPosition().z > 120) {
-			bulletFlag = false;
-		}
-	}
+	//if (bulletFlag == true) {
+	//	bullet->SetPosition(bullet->GetPosition() + Vector3(0, 0, speed));
+	//	if (bullet->GetPosition().z > 120) {
+	//		bulletFlag = false;
+	//	}
+	//}
 }
 
 void Bullet::Draw()

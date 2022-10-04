@@ -31,8 +31,8 @@ void GameScene::Initialize()
 	enemy_[2] = new Enemy();
 	enemy_[2]->Initialze();
 
-	bullet_ = new Bullet();
-	bullet_->Initialze();
+	/*bullet_ = new Bullet();
+	bullet_->Initialze();*/
 
 	// OBJからモデルデータを読み込む
 	//bullet = Object3d::Create();
@@ -71,7 +71,7 @@ void GameScene::Finalize()
 
 	player_->Finalize();
 	enemy_[2]->Finalize();
-	bullet_->Finalize();
+	/*bullet_->Finalize();*/
 	
 	//safedelete(bullet);
 
@@ -138,7 +138,7 @@ void GameScene::Update()
 	//3Dオブジェクト更新
 	player_->Update();
 	enemy_[2]->Update();
-	bullet_->Update();
+	//bullet_->Update();
 
 	//fbxobject_1->Updata();
 
@@ -162,7 +162,7 @@ void GameScene::Draw(DirectXCommon* dxCommon)
 	//3Dオブジェクトの描画
 	player_->Draw();
 	enemy_[2]->Draw();
-	bullet_->Draw();
+	//bullet_->Draw();
 	/*if (bulletFlag == true) {
 		bullet->Draw();
 	}*/

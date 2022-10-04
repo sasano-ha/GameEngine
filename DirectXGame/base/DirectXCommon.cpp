@@ -141,10 +141,11 @@ void DirectXCommon::InitializeDevice()
 		D3D_FEATURE_LEVEL_11_0,
 	};
 
-	/*if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController_)))) {
+	
+	if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController_)))) {
 		debugController_->EnableDebugLayer();
 		debugController_->SetEnableGPUBasedValidation(TRUE);
-	}*/
+	}
 
 	D3D_FEATURE_LEVEL featureLevel;
 
@@ -160,25 +161,25 @@ void DirectXCommon::InitializeDevice()
 		}
 	}
 
-	//if (SUCCEEDED(dev->QueryInterface(IID_PPV_ARGS(&InfoQueue_)))) {
-	//	InfoQueue_->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);	// ヤバイエラー時に止まる
-	//	InfoQueue_->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, true);	// エラー時に止まる
-	//	InfoQueue_->Release();
-	//}
+	if (SUCCEEDED(dev->QueryInterface(IID_PPV_ARGS(&InfoQueue_)))) {
+		InfoQueue_->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);	// ヤバイエラー時に止まる
+		InfoQueue_->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, true);	// エラー時に止まる
+		InfoQueue_->Release();
+	}
 
-	//// 抑制するエラー
-	//D3D12_MESSAGE_ID denyIds[] = {
-	//	D3D12_MESSAGE_ID_RESOURCE_BARRIER_MISMATCHING_COMMAND_LIST_TYPE
-	//};
-	//// 抑制するレベル
-	//D3D12_MESSAGE_SEVERITY severitices[] = { D3D12_MESSAGE_SEVERITY_INFO };
-	//D3D12_INFO_QUEUE_FILTER filter{};
-	//filter.DenyList.NumIDs = _countof(denyIds);
-	//filter.DenyList.pIDList = denyIds;
-	//filter.DenyList.NumSeverities = _countof(severitices);
-	//filter.DenyList.pSeverityList = severitices;
-	//// 指定したエラーの表示を抑制する
-	//InfoQueue_->PushStorageFilter(&filter);
+	// 抑制するエラー
+	D3D12_MESSAGE_ID denyIds[] = {
+		D3D12_MESSAGE_ID_RESOURCE_BARRIER_MISMATCHING_COMMAND_LIST_TYPE
+	};
+	// 抑制するレベル
+	D3D12_MESSAGE_SEVERITY severitices[] = { D3D12_MESSAGE_SEVERITY_INFO };
+	D3D12_INFO_QUEUE_FILTER filter{};
+	filter.DenyList.NumIDs = _countof(denyIds);
+	filter.DenyList.pIDList = denyIds;
+	filter.DenyList.NumSeverities = _countof(severitices);
+	filter.DenyList.pSeverityList = severitices;
+	// 指定したエラーの表示を抑制する
+	InfoQueue_->PushStorageFilter(&filter);
 }
 
 void DirectXCommon::InitializeCommand()

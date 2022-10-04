@@ -60,5 +60,5 @@ void Player::Draw()
 
 void Player::PlayerAttack()
 {
-	bullet->SetPosition(player->GetPosition());
+	//bullet->SetPosition(player->GetPosition());
 }
