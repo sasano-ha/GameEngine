@@ -15,19 +15,29 @@ void DebugText::Initialize(SpriteCommon* spriteCommon, UINT texnumber)
 	// 引数をメンバ変数に格納
 	spriteCommon_ = spriteCommon;
 
+	//int count = 0;
 	// 全てのスプライトデータについて
 	for (int i = 0; i < _countof(sprites_); i++)
 	{
 		// スプライトを生成する
 		sprites_[i] = Sprite::Create(texnumber, { 0,0 });
+		//count++;
 	}
+	//std::string s = std::to_string(count);
+	//OutputDebugStringA(s.c_str());
 }
 
 void DebugText::Finalize()
 {
-	for (auto& sprite : sprites_) {
-		delete sprite;
+	// 全てのスプライトデータについて
+	for (int i = 0; i < _countof(sprites_); i++)
+	{
+			delete sprites_[i];
+			sprites_[i] = nullptr;
 	}
+	//for (auto& sprite : sprites_) {
+	//	delete sprite;
+	//}
 }
 
 void DebugText::Print(const std::string& text, float x, float y, float scale_)

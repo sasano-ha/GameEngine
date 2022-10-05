@@ -48,6 +48,8 @@ void Player::Update()
 		player->SetPosition(player->GetPosition() + Vector3(speed, 0, 0));
 	}
 
+
+
 	//3Dオブジェクト更新
 	player->Update();
 }

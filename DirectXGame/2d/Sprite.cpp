@@ -8,6 +8,20 @@
 using namespace Microsoft::WRL;
 using namespace DirectX;
 
+Sprite::~Sprite()
+{
+	vertBuff_.Reset();
+	constBuff_.Reset();
+
+	auto p = pipelineset_.rootsignature.GetAddressOf();
+	pipelineset_.rootsignature.Reset();
+	pipelineset_.pipelinestate.Reset();
+
+	static int a = 0;
+	a++;
+
+}
+
 Sprite* Sprite::Create(UINT texNumber, DirectX::XMFLOAT2 anchorpoint, bool isFlipX, bool isFlipY)
 {
 	//メモリ確保
@@ -376,10 +390,12 @@ void Sprite::CreateGraphicsPipeline()
 	result = D3DX12SerializeVersionedRootSignature(&rootSignatureDesc, D3D_ROOT_SIGNATURE_VERSION_1_0, &rootSigBlob, &errorBlob);
 	// ルートシグネチャの生成
 	result = device->CreateRootSignature(0, rootSigBlob->GetBufferPointer(), rootSigBlob->GetBufferSize(), IID_PPV_ARGS(&pipelineset_.rootsignature));
+	assert(SUCCEEDED(result));
 
 	// パイプラインにルートシグネチャをセット
 	gpipeline.pRootSignature = pipelineset_.rootsignature.Get();
 
 	result = device->CreateGraphicsPipelineState(&gpipeline, IID_PPV_ARGS(&pipelineset_.pipelinestate));
+	assert(SUCCEEDED(result));
 
 }

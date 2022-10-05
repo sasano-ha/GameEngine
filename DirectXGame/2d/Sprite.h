@@ -20,6 +20,8 @@ private:
 
 public:
 
+	~Sprite();
+
 	// 頂点データ
 	struct VertexPosUv
 	{

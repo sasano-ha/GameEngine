@@ -1,5 +1,6 @@
 #include "FbxObject3d.h"
 #include "FbxLoader.h"
+#include "SafeDelete.h"
 
 #include <d3dcompiler.h>
 #pragma comment(lib, "d3dcompiler.lib")
@@ -177,6 +178,12 @@ void FbxObject3d::CreateGraphicsPipeline()
 	// グラフィックスパイプラインの生成
 	result = device_->CreateGraphicsPipelineState(&gpipeline, IID_PPV_ARGS(pipelinestate_.ReleaseAndGetAddressOf()));
 	if (FAILED(result)) { assert(0); }
+}
+
+void FbxObject3d::DestroyGraphicsPipeline()
+{
+	rootsignature_.Reset();
+	pipelinestate_.Reset();
 }
 
 void FbxObject3d::Initialize()

@@ -57,6 +57,12 @@ void GameBase::Finalize()
 	// シーンファクトリ解放
 	delete sceneFactory_;
 	
+	// グラフィックパイプラインの解放
+	FbxObject3d::DestroyGraphicsPipeline();
+
+	// グラフィックパイプラインの解放
+	Object3d::FinalizeGraphicsPipeline();
+
 	//DirectX解放
 	delete dxCommon;
 

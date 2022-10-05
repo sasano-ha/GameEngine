@@ -32,6 +32,11 @@ public:	// 静的メンバ関数
 	/// </summary>
 	static void CreateGraphicsPipeline();
 
+	/// <summary>
+	/// グラフィックパイプラインの終了
+	/// </summary>
+	static void DestroyGraphicsPipeline();
+
 private:	// 静的メンバ変数
 	// デバイス
 	static ID3D12Device* device_;
@@ -79,6 +84,7 @@ public:	// メンバ関数
 	/// アニメーション
 	/// </summary>
 	void PlayAnimation();
+
 
 protected:	// メンバ変数
 	// 定数バッファ

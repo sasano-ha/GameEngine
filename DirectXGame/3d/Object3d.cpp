@@ -52,6 +52,12 @@ bool Object3d::StaticInitialize(ID3D12Device* device, ID3D12GraphicsCommandList*
 	return true;
 }
 
+void Object3d::FinalizeGraphicsPipeline()
+{
+	rootsignature.Reset();
+	pipelinestate.Reset();
+}
+
 void Object3d::PreDraw()
 {
 	//// PreDrawとPostDrawがペアで呼ばれていなければエラー
