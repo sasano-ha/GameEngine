@@ -1,6 +1,8 @@
 #include "Player.h"
 #include "SafeDelete.h"
 #include "input.h"
+#include "Vector3.h"
+#include "PlayerBullet.h"
 
 
 void Player::Initialze()
@@ -28,6 +30,7 @@ void Player::Finalize()
 
 	// 3Dオブジェクト解放
 	safedelete(player);
+	//safedelete(bullet_);
 }
 
 void Player::Update()
@@ -48,19 +51,37 @@ void Player::Update()
 		player->SetPosition(player->GetPosition() + Vector3(speed, 0, 0));
 	}
 
-
+	if (input->PushKey(DIK_SPACE)) {
+		Player::Attack();
+	}
 
 	//3Dオブジェクト更新
 	player->Update();
+
+	for (std::unique_ptr<PlayerBullet>& bullet : bullets_) {
+		bullet->Update();
+	}
+	
+	
 }
 
 void Player::Draw()
 {
 	//3Dオブジェクトの描画
 	player->Draw();
+	for (std::unique_ptr<PlayerBullet>&bullet : bullets_) {
+		bullet->Draw();
+	}
 }
 
-void Player::PlayerAttack()
+void Player::Attack()
 {
-	//bullet->SetPosition(player->GetPosition());
+	const float kBulletSpeed = 1.0f;
+	Vector3 velocity(0, 0, kBulletSpeed);
+
+	std::unique_ptr<PlayerBullet> newBullet = std::make_unique<PlayerBullet>();
+	newBullet->Initialze(player->GetPosition(), velocity);
+
+	//弾を登録する
+	bullets_.push_back(std::move(newBullet));
 }

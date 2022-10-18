@@ -7,7 +7,6 @@
 #include "FbxLoader.h"
 #include "FbxObject3d.h"
 #include "SafeDelete.h"
-#include "Player.h"
 
 
 void GameScene::Initialize()
@@ -31,21 +30,21 @@ void GameScene::Initialize()
 	enemy_[2] = new Enemy();
 	enemy_[2]->Initialze();
 
-	/*bullet_ = new Bullet();
+	/*bullet_ = new PlayerBullet();
 	bullet_->Initialze();*/
 
-	// OBJからモデルデータを読み込む
-	//bullet = Object3d::Create();
+	////OBJからモデルデータを読み込む
+	//bullet_ = Object3d::Create();
 
 
-	// 3Dオブジェクトに3Dモデルをひもづけ
-	//bullet->SetModel(model_1);
+	////3Dオブジェクトに3Dモデルをひもづけ
+	//bullet_->SetModel(model_1);
 
-	// scaleの設定
-	//bullet->SetScale({ 2.0f, 2.0f, 2.0f });
+	////scaleの設定
+	//bullet_->SetScale({ 2.0f, 2.0f, 2.0f });
 
-	// positionの設定
-	//bullet->SetPosition({ -5, 0, -5 });
+	////positionの設定
+	//bullet_->SetPosition({ -5, 0, -5 });
 
 	// 音声読み込み
 	Sound::GetInstance()->LoadWave("Alarm01.wav");
@@ -71,7 +70,7 @@ void GameScene::Finalize()
 
 	player_->Finalize();
 	enemy_[2]->Finalize();
-	/*bullet_->Finalize();*/
+	//bullet_->Finalize();
 	
 	//safedelete(bullet);
 

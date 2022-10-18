@@ -64,7 +64,7 @@ void GameBase::Finalize()
 	Object3d::FinalizeGraphicsPipeline();
 
 	//DirectX‰ð•ú
-	delete dxCommon;
+	//delete dxCommon;
 
 	//windowsAPI‚ÌI—¹ˆ—
 	winApp->Finalize();

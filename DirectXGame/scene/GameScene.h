@@ -7,7 +7,7 @@
 #include "PostEffect.h"
 #include "Player.h"
 #include "Enemy.h"
-#include "Bullet.h"
+#include "playerBullet.h"
 
 #include <DirectXMath.h>
 
@@ -50,8 +50,7 @@ private:
 	
 	Player* player_ = nullptr;
 	Enemy* enemy_[3] = { nullptr };
-	Bullet* bullet_ = nullptr;
-	//Object3d* bullet = nullptr;
+	//PlayerBullet* bullet_ = nullptr;
 
 	FbxModel* fbxmodel_1 = nullptr;
 	FbxObject3d* fbxobject_1 = nullptr;
