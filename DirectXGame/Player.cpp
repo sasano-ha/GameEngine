@@ -51,9 +51,14 @@ void Player::Update()
 		player->SetPosition(player->GetPosition() + Vector3(speed, 0, 0));
 	}
 
-	if (input->PushKey(DIK_SPACE)) {
+	if (input->TriggerKey(DIK_SPACE)) {
 		Player::Attack();
 	}
+
+	bullets_.remove_if([](std::unique_ptr<PlayerBullet>& bullet) {
+		return bullet->IsDead();
+		}
+	);
 
 	//3Dオブジェクト更新
 	player->Update();
@@ -61,15 +66,15 @@ void Player::Update()
 	for (std::unique_ptr<PlayerBullet>& bullet : bullets_) {
 		bullet->Update();
 	}
-	
-	
+
+
 }
 
 void Player::Draw()
 {
 	//3Dオブジェクトの描画
 	player->Draw();
-	for (std::unique_ptr<PlayerBullet>&bullet : bullets_) {
+	for (std::unique_ptr<PlayerBullet>& bullet : bullets_) {
 		bullet->Draw();
 	}
 }

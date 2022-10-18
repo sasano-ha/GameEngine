@@ -25,15 +25,20 @@ public:
 	/// </summary>
 	void Draw();
 
+	bool IsDead() const { return isDead_; }
+
 private:
 	Model* model_3 = nullptr;
 	Object3d* bullet = nullptr;
-	bool bulletFlag = false;
-
-	// bulletの半径
-	float bulletRadius = 5.0f;
 
 	// スピード
 	Vector3 velocity_;
+
+	// 寿命
+	static const int32_t kLifeTime = 60 * 3;
+
+	// デスタイマー
+	int32_t deathTimer_ = kLifeTime;
+	bool isDead_ = false;
 };
 

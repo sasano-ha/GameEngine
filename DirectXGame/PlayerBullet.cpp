@@ -32,15 +32,15 @@ void PlayerBullet::Finalize()
 void PlayerBullet::Update()
 {
 	bullet->SetPosition(bullet->GetPosition() + velocity_);
-	/*if (bullet->GetPosition().z > 120) {
-		bulletFlag = false;
-	}*/
+
+	if (--deathTimer_ <= 0) {
+		isDead_ = true;
+	}
+
 	bullet->Update();
 }
 
 void PlayerBullet::Draw()
 {
-	//if (bulletFlag == true) {
-		bullet->Draw();
-	//}
+	bullet->Draw();
 }
