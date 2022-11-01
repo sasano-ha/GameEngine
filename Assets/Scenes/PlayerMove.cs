@@ -10,6 +10,9 @@ public class PlayerMove : MonoBehaviour
     // カメラから見た画面右下の座標を入れる変数
     Vector3 RightTop;
 
+    private Vector3 mouse;
+    private Vector3 target;
+
 
     // Start is called before the first frame update
     void Start()
@@ -27,31 +30,35 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // プレイヤーのワールド座標を取得
-        Vector3 pos = transform.position;
+        //// プレイヤーのワールド座標を取得
+        //Vector3 pos = transform.position;
 
-        // 右矢印キーが入力されたら時
-        if (Input.GetKey(KeyCode.D))
-        {
-            pos.x += 0.01f;
-        }
-        // 左矢印キーが入力されたら時
-        if (Input.GetKey(KeyCode.A))
-        {
-            pos.x -= 0.01f;
-        }
-        // 右矢印キーが入力されたら時
-        if (Input.GetKey(KeyCode.W))
-        {
-            pos.y += 0.01f;
-        }
-        // 右矢印キーが入力されたら時
-        if (Input.GetKey(KeyCode.S))
-        {
-            pos.y -= 0.01f;
-        }
+        //// 右矢印キーが入力されたら時
+        //if (Input.GetKey(KeyCode.D))
+        //{
+        //    pos.x += 0.01f;
+        //}
+        //// 左矢印キーが入力されたら時
+        //if (Input.GetKey(KeyCode.A))
+        //{
+        //    pos.x -= 0.01f;
+        //}
+        //// 右矢印キーが入力されたら時
+        //if (Input.GetKey(KeyCode.W))
+        //{
+        //    pos.y += 0.01f;
+        //}
+        //// 右矢印キーが入力されたら時
+        //if (Input.GetKey(KeyCode.S))
+        //{
+        //    pos.y -= 0.01f;
+        //}
 
-        transform.position = new Vector3(Mathf.Clamp(pos.x, LeftBottom.x + transform.localScale.x, RightTop.x - transform.localScale.x),
-           Mathf.Clamp(pos.y, LeftBottom.y + transform.localScale.y, RightTop.y - transform.localScale.y),pos.z);
+        mouse = Input.mousePosition;
+        target = Camera.main.ScreenToWorldPoint(new Vector3(mouse.x, mouse.y, 5));
+        this.transform.position = target;
+
+        //transform.position = new Vector3(Mathf.Clamp(mouse.x, LeftBottom.x + transform.localScale.x, RightTop.x - transform.localScale.x),
+        //   Mathf.Clamp(mouse.y, LeftBottom.y + transform.localScale.y, RightTop.y - transform.localScale.y), -4);
     }
 }
