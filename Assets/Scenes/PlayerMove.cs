@@ -17,14 +17,14 @@ public class PlayerMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // カメラとプレイヤーの距離を測る（表示画面の四隅を設定するために必要）
-        var distance = Vector3.Distance(Camera.main.transform.position, transform.position);
+        //// カメラとプレイヤーの距離を測る（表示画面の四隅を設定するために必要）
+        //var distance = Vector3.Distance(Camera.main.transform.position, transform.position);
 
-        // スクリーン画面左下の位置を設定する
-        LeftBottom = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance));
+        //// スクリーン画面左下の位置を設定する
+        //LeftBottom = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance));
 
-        // スクリーン画面左下の位置を設定する
-        RightTop = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, distance));
+        //// スクリーン画面左下の位置を設定する
+        //RightTop = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, distance));
     }
 
     // Update is called once per frame
@@ -54,11 +54,11 @@ public class PlayerMove : MonoBehaviour
         //    pos.y -= 0.01f;
         //}
 
-        mouse = Input.mousePosition;
-        target = Camera.main.ScreenToWorldPoint(new Vector3(mouse.x, mouse.y, 5));
-        this.transform.position = target;
-
         //transform.position = new Vector3(Mathf.Clamp(mouse.x, LeftBottom.x + transform.localScale.x, RightTop.x - transform.localScale.x),
         //   Mathf.Clamp(mouse.y, LeftBottom.y + transform.localScale.y, RightTop.y - transform.localScale.y), -4);
+
+        mouse = Input.mousePosition;
+        target = Camera.main.ScreenToWorldPoint(new Vector3(mouse.x, mouse.y, 5));
+        transform.position = target;
     }
 }
