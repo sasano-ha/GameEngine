@@ -36,23 +36,37 @@ public class PlayerMove : MonoBehaviour
         //// 右矢印キーが入力されたら時
         //if (Input.GetKey(KeyCode.D))
         //{
-        //    pos.x += 0.01f;
+        //    pos.x += 1.0f;
         //}
         //// 左矢印キーが入力されたら時
         //if (Input.GetKey(KeyCode.A))
         //{
-        //    pos.x -= 0.01f;
+        //    pos.x -= 1.0f;
         //}
         //// 右矢印キーが入力されたら時
         //if (Input.GetKey(KeyCode.W))
         //{
-        //    pos.y += 0.01f;
+        //    pos.y += 1.0f;
         //}
         //// 右矢印キーが入力されたら時
         //if (Input.GetKey(KeyCode.S))
         //{
-        //    pos.y -= 0.01f;
+        //    pos.y -= 1.0f;
         //}
+
+        //// 右矢印キーが入力されたら時
+        //if (Input.GetKey(KeyCode.UpArrow))
+        //{
+        //    pos.z += 1.0f;
+        //}
+
+        //// 右矢印キーが入力されたら時
+        //if (Input.GetKey(KeyCode.DownArrow))
+        //{
+        //    pos.z -= 1.0f;
+        //}
+
+        //transform.position = new Vector3(pos.x, pos.y, pos.z);
 
         //transform.position = new Vector3(Mathf.Clamp(mouse.x, LeftBottom.x + transform.localScale.x, RightTop.x - transform.localScale.x),
         //   Mathf.Clamp(mouse.y, LeftBottom.y + transform.localScale.y, RightTop.y - transform.localScale.y), -4);
