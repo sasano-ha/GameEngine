@@ -17,19 +17,18 @@ public class PlayerMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //// カメラとプレイヤーの距離を測る（表示画面の四隅を設定するために必要）
-        //var distance = Vector3.Distance(Camera.main.transform.position, transform.position);
+        // マウスカーソルを表示させない
+        Cursor.visible = false;
 
-        //// スクリーン画面左下の位置を設定する
-        //LeftBottom = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance));
-
-        //// スクリーン画面左下の位置を設定する
-        //RightTop = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, distance));
+        // マウスカーソルの移動範囲の制限
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     // Update is called once per frame
     void Update()
     {
+       
+
         //// プレイヤーのワールド座標を取得
         //Vector3 pos = transform.position;
 
