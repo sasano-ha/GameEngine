@@ -4,30 +4,31 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    // カメラから見た画面左下の座標を入れる変数
-    Vector3 LeftBottom;
-
-    // カメラから見た画面右下の座標を入れる変数
-    Vector3 RightTop;
-
+    // マウス
     private Vector3 mouse;
+
+    // ターゲット
     private Vector3 target;
+
+    // playerのHP
+    private int playerHp;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        // マウスカーソルを表示させない
-        Cursor.visible = false;
-
         // マウスカーソルの移動範囲の制限
         Cursor.lockState = CursorLockMode.Confined;
+
+        // 生成時に体力を指定しておく
+        playerHp = 3;
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+        // マウスカーソルを表示させない
+        Cursor.visible = false;
 
         //// プレイヤーのワールド座標を取得
         //Vector3 pos = transform.position;
@@ -73,5 +74,15 @@ public class PlayerMove : MonoBehaviour
         mouse = Input.mousePosition;
         target = Camera.main.ScreenToWorldPoint(new Vector3(mouse.x, mouse.y, 5));
         transform.position = target;
+
+        if(playerHp <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    public void Damage()
+    {
+        playerHp--;
     }
 }
