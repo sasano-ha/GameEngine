@@ -17,6 +17,9 @@ public class PlayerMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // マウスカーソルを表示させない
+        Cursor.visible = false;
+
         // マウスカーソルの移動範囲の制限
         Cursor.lockState = CursorLockMode.Confined;
 
@@ -27,9 +30,6 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // マウスカーソルを表示させない
-        Cursor.visible = false;
-
         //// プレイヤーのワールド座標を取得
         //Vector3 pos = transform.position;
 
