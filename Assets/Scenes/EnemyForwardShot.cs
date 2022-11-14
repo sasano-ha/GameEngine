@@ -30,7 +30,7 @@ public class EnemyForwardShot : MonoBehaviour
     void Update()
     {
         // もしプレイヤーの情報が入ってなかったら
-        if(player == null)
+        if (player == null)
         {
             // プロジェクトのplayerを探して情報を取得する
             player = GameObject.FindGameObjectWithTag("Player");
@@ -39,7 +39,7 @@ public class EnemyForwardShot : MonoBehaviour
         nowtime -= Time.deltaTime;
 
         // もしタイマーが0以下になったら
-        if(nowtime <= 0)
+        if (nowtime <= 0)
         {
             // 弾を生成
             CreateShotObject(-transform.localEulerAngles.y);

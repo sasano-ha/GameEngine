@@ -16,11 +16,11 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        player = GameObject.FindGameObjectsWithTag("Player");
+        //player = GameObject.FindGameObjectsWithTag("Player");
 
-        if(player.Length == 0)
-        {
-            SceneManager.LoadScene("EndScene");
-        }
+        //if(player.Length == 0)
+        //{
+        //    SceneManager.LoadScene("EndScene");
+        //}
     }
 }

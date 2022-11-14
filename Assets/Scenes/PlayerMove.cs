@@ -72,10 +72,10 @@ public class PlayerMove : MonoBehaviour
         //   Mathf.Clamp(mouse.y, LeftBottom.y + transform.localScale.y, RightTop.y - transform.localScale.y), -4);
 
         mouse = Input.mousePosition;
-        target = Camera.main.ScreenToWorldPoint(new Vector3(mouse.x, mouse.y, 5));
+        target = Camera.main.ScreenToWorldPoint(new Vector3(mouse.x, mouse.y, 7));
         transform.position = target;
 
-        if(playerHp <= 0)
+        if (playerHp <= 0)
         {
             Destroy(this.gameObject);
         }
