@@ -80,16 +80,10 @@ public class PlayerMove : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
-
     }
 
-    public void Damage()
-    {
-        playerHp--;
-    }
+    //public void Damage()
+    //{
+    //    playerHp--;
+    //}
 }
