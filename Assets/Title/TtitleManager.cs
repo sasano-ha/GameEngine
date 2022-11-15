@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerManager : MonoBehaviour
+public class TtitleManager : MonoBehaviour
 {
-    private GameObject[] player;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -16,11 +14,9 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        player = GameObject.FindGameObjectsWithTag("Player");
-
-        if (player.Length == 0)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            SceneManager.LoadScene("EndScene");
+            SceneManager.LoadScene("GameScene");
         }
     }
 }
