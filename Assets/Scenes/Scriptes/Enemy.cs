@@ -9,6 +9,8 @@ public class Enemy: MonoBehaviour
 
     private Vector3 targetpos;
 
+    public GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +38,7 @@ public class Enemy: MonoBehaviour
         // ‚à‚µ‘Ì—Í‚ª0ˆÈ‰º‚É‚È‚Á‚½‚ç
         if (enemyHp <= 0 || targetpos.z <= -10)
         {
+            gameManager.AddCrushingCount();
             // Ž©•ª‚ÅÁ‚¦‚é
             Destroy(this.gameObject);
         }

@@ -35,7 +35,6 @@ public class Bullet : MonoBehaviour
         {
             other.GetComponent<Enemy>().Damage();
         }
-
         Destroy(this.gameObject);
     }
 }

@@ -1,10 +1,26 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public void ChangScene(string nextScene)
+    private int crushingCount;
+    public Text texComponent;
+
+    private void Start()
     {
-        SceneManager.LoadScene(nextScene);
+        crushingCount = 0;
+        Application.targetFrameRate = 60;
+    }
+
+    //public void ChangScene(string nextScene)
+    //{
+    //    SceneManager.LoadScene(nextScene);
+    //}
+
+    public void AddCrushingCount()
+    {
+        crushingCount += 1;
+        texComponent.text = "CrushingCount : " + crushingCount;
     }
 }
