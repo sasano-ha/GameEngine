@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy: MonoBehaviour
 {
     // Enemy‚Ì‘Ì—Í—p•Ï”
     private int enemyHp;
@@ -22,6 +22,13 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         targetpos.z -= 0.005f;
+
+        if(targetpos.z <= 2)
+        {
+            targetpos.x += 0.1f;
+            targetpos.z -= 0.1f;
+        }
+
         //targetpos.x -= 0.01f;
 
         transform.position = new Vector3(Mathf.Sin(Time.time) * 2.0f + targetpos.x, targetpos.y, targetpos.z);

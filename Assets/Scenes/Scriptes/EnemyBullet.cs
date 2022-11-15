@@ -69,7 +69,7 @@ public class EnemyBullet : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            other.GetComponent<PlayerMove>().Damage();
+            other.GetComponent<PlayerHp>().Damage();
             //Destroy(this.gameObject);
         }
         
