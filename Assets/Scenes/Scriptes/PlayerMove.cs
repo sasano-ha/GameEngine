@@ -13,16 +13,11 @@ public class PlayerMove : MonoBehaviour
     // playerのHP
     private int playerHp;
 
+    private bool cusorflag = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        // マウスカーソルを表示させない
-        Cursor.visible = false;
-
-        // マウスカーソルの移動範囲の制限
-        Cursor.lockState = CursorLockMode.Confined;
-
         // 生成時に体力を指定しておく
         playerHp = 3;
     }
@@ -30,6 +25,12 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // マウスカーソルを表示させない
+        Cursor.visible = false;
+
+        // マウスカーソルの移動範囲の制限
+        Cursor.lockState = CursorLockMode.Confined;
+
         //// プレイヤーのワールド座標を取得
         //Vector3 pos = transform.position;
 
@@ -79,6 +80,12 @@ public class PlayerMove : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
     }
 
     public void Damage()
