@@ -21,10 +21,10 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        targetpos.z -= 0.01f;
-        targetpos.x -= 0.01f;
+        targetpos.z -= 0.005f;
+        //targetpos.x -= 0.01f;
 
-        transform.position = new Vector3(Mathf.Sin(Time.time) * 5.0f + targetpos.x, targetpos.y, targetpos.z);
+        transform.position = new Vector3(Mathf.Sin(Time.time) * 2.0f + targetpos.x, targetpos.y, targetpos.z);
 
         // ‚à‚µ‘Ì—Í‚ª0ˆÈ‰º‚É‚È‚Á‚½‚ç
         if (enemyHp <= 0 || targetpos.z <= -10)
