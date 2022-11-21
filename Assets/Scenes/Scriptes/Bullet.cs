@@ -7,6 +7,8 @@ public class Bullet : MonoBehaviour
 
     private float velocity = 0.05f;
     private Rigidbody rb;
+    // 自然消滅までのタイマー
+    public float time = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -31,8 +33,11 @@ public class Bullet : MonoBehaviour
         // 弾の移動
         transform.position = new Vector3(pos.x, pos.y, pos.z);
 
+        // 時間制限が来たら自然消滅する
+        time -= Time.deltaTime;
+
         // 一定距離進んだら消滅する
-        if (pos.z >= 20)
+        if (time <= 0)
         {
             Destroy(this.gameObject);
         }
