@@ -19,7 +19,7 @@ public class Shot : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            // 弾を生成する
+            // 弾を生成する（クローンさせている）
             Instantiate(Bullet, transform.position, Quaternion.identity);
         }
     }

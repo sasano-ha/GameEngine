@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+
+    private float velocity = 0.05f;
+    private Rigidbody rb;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,22 +17,28 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        BulletMove();
+    }
+
+    public void BulletMove()
+    {
         // ’e‚Ìƒ[ƒ‹ƒhÀ•W‚ðŽæ“¾
         Vector3 pos = transform.position;
 
         // ³–Ê‚É‚Ü‚Á‚·‚®”ò‚Ô
-        pos.z += 0.05f;
+        pos.z += 1.0f;
 
         // ’e‚ÌˆÚ“®
         transform.position = new Vector3(pos.x, pos.y, pos.z);
 
         // ˆê’è‹——£i‚ñ‚¾‚çÁ–Å‚·‚é
-        if(pos.z >= 20)
+        if (pos.z >= 20)
         {
             Destroy(this.gameObject);
         }
     }
 
+    // “–‚½‚è”»’è
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Enemy")

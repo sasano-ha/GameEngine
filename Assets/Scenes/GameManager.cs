@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     private int crushingCount;
-    public Text texComponent;
+    public Text textComponent;
 
     private void Start()
     {
@@ -21,6 +21,6 @@ public class GameManager : MonoBehaviour
     public void AddCrushingCount()
     {
         crushingCount += 1;
-        texComponent.text = "CrushingCount : " + crushingCount;
+        textComponent.text = "CrushingCount : " + crushingCount;
     }
 }
