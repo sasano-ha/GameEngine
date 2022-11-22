@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class PlayerHp : MonoBehaviour
 {
+    public static PlayerHp instance;
+
     // player‚ÌHP
-    private int playerHp;
+    public float playerHp;
 
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
         // ¶¬‚É‘Ì—Í‚ğw’è‚µ‚Ä‚¨‚­
-        playerHp = 3;
+        playerHp = 100;
     }
 
     // Update is called once per frame
@@ -25,6 +28,6 @@ public class PlayerHp : MonoBehaviour
 
     public void Damage()
     {
-        playerHp--;
+        playerHp -= 1;
     }
 }
