@@ -18,7 +18,7 @@ public class PlayerHpBar : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         image2.fillAmount = 1 - PlayerHp.instance.playerHp / 100.0f;
 
@@ -40,32 +40,6 @@ public class PlayerHpBar : MonoBehaviour
         {
 
             image1.color = Color.green;
-
-        }
-
-
-
-        // マウスを使ってゲージを増減させる
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            mouseButton = true;
-        }
-        else if (Input.GetKey(KeyCode.UpArrow))
-        {
-            mouseButton = false;
-        }
-
-
-        if (mouseButton)
-        {
-
-            image2.fillAmount += Time.deltaTime;
-
-        }
-        else if (image2.fillAmount > 0f)
-        {
-
-            image2.fillAmount -= Time.deltaTime;
 
         }
     }
