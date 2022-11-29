@@ -9,8 +9,6 @@ public class PlayerHpBar : MonoBehaviour
     Image image1;
     Image image2;
 
-    bool mouseButton = false;
-
     // Start is called before the first frame update
     void Start()
     {

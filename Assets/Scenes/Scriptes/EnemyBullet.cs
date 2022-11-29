@@ -65,6 +65,7 @@ public class EnemyBullet : MonoBehaviour
         this.forwardAxis = axis;
     }
 
+    // “–‚½‚è”»’èi“G’e‚ª©‹@‚É“–‚½‚Á‚½j
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player")

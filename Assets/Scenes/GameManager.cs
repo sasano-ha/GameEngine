@@ -4,7 +4,10 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    // “GŒ‚”j—p•Ï”
     private int crushingCount;
+
+    // “GŒ‚”jƒeƒLƒXƒg
     public Text textComponent;
 
     private void Start()
