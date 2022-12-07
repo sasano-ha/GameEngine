@@ -71,6 +71,7 @@ public class EnemyBullet : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             other.GetComponent<PlayerHp>().Damage();
+            other.GetComponent<FlushController>().Damage();
             Destroy(this.gameObject);
         }
         
