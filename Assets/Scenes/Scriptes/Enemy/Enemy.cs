@@ -54,6 +54,14 @@ public class Enemy: MonoBehaviour
         
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            other.GetComponent<PlayerHp>().Damage();
+        }
+    }
+
     private void OnBecameInvisible()
     {
         isInsideCamera = false;
