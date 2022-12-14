@@ -5,7 +5,20 @@ using UnityEngine.UI;
 
 public class FlushController : MonoBehaviour
 {
+    public static FlushController instance;
+
     Image image;
+
+    public bool DamageFlag = false;
+
+    public void Awake()
+    {
+        if (instance == null)
+        {
+            // インスタンスの設定
+            instance = this;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -17,9 +30,10 @@ public class FlushController : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (DamageFlag == true)
         {
             this.image.color = new Color(0.5f, 0f, 0f, 0.5f);
+            DamageFlag = false;
         }
         else
         {

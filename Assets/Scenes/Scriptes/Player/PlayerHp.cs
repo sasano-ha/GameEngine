@@ -43,5 +43,6 @@ public class PlayerHp : MonoBehaviour
     public void Damage()
     {
         playerHp -= damage;
+        FlushController.instance.DamageFlag = true;
     }
 }
