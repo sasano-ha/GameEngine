@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cursor : MonoBehaviour
+public class MiddleCursor : MonoBehaviour
 {
-    // 座標用の変数
-    private Vector3 mousePos, target;
+    private Vector3 mousPos;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +15,8 @@ public class Cursor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //マウス座標の取得
-        transform.position = Input.mousePosition;
+        mousPos = Input.mousePosition;
+
+        transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousPos.x, mousPos.y, 50));
     }
 }
