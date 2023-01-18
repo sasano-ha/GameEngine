@@ -10,10 +10,11 @@ public class Bullet : MonoBehaviour
     // 自然消滅までのタイマー
     public float time = 3;
 
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -42,6 +43,7 @@ public class Bullet : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
 
     // 当たり判定
     private void OnTriggerEnter(Collider other)

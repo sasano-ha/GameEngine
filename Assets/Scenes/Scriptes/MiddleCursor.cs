@@ -17,6 +17,6 @@ public class MiddleCursor : MonoBehaviour
     {
         mousPos = Input.mousePosition;
 
-        transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousPos.x, mousPos.y, 50));
+        transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousPos.x, mousPos.y, 40));
     }
 }

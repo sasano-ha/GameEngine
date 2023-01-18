@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class Cursor : MonoBehaviour
 {
-    // À•W—p‚Ì•Ï”
-    private Vector3 mousePos, target;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        transform.position = transform.position;
     }
 
     // Update is called once per frame

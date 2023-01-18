@@ -54,9 +54,6 @@ public class EnemyForwardShot : MonoBehaviour
         // ベクトルを取得
         var direction = player.transform.position - transform.position;
 
-        // ベクトルのyを初期化
-        //direction.y = 0;
-
         // 向きを取得する
         var lookRotation = Quaternion.LookRotation(direction, Vector3.up);
 

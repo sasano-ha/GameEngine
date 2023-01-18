@@ -82,10 +82,6 @@ public class PlayerMove : MonoBehaviour
         transform.position = new Vector3(Mathf.Clamp(pos.x, LeftBottom.x + transform.localScale.x, RightTop.x - transform.localScale.x),
            Mathf.Clamp(pos.y, LeftBottom.y + transform.localScale.y, RightTop.y - transform.localScale.y), pos.z);
 
-        //mouse = Input.mousePosition;
-        //target = Camera.main.ScreenToWorldPoint(new Vector3(mouse.x, mouse.y, 7));
-        //transform.position = target;
-
         if (playerHp <= 0)
         {
             Destroy(this.gameObject);
