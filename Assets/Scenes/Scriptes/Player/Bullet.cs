@@ -5,11 +5,12 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
 
-    private float velocity = 0.05f;
+    private float speed = 0.05f;
     private Rigidbody rb;
     // 自然消滅までのタイマー
     public float time = 3;
 
+    private Vector3 velocity;
 
     // Start is called before the first frame update
     void Start()
@@ -25,14 +26,9 @@ public class Bullet : MonoBehaviour
 
     public void BulletMove()
     {
-        // 弾のワールド座標を取得
-        Vector3 pos = transform.position;
 
         // 正面にまっすぐ飛ぶ
-        pos.z += 1.0f;
-
-        // 弾の移動
-        transform.position = new Vector3(pos.x, pos.y, pos.z);
+        transform.position += velocity;
 
         // 時間制限が来たら自然消滅する
         time -= Time.deltaTime;
@@ -53,5 +49,21 @@ public class Bullet : MonoBehaviour
             other.GetComponent<Enemy>().Damage();
         }
         Destroy(this.gameObject);
+    }
+
+    public void SetVelocity(Vector3 target_)
+    {
+        // 弾のワールド座標を取得
+        Vector3 pos = transform.position;
+
+        // ベクトルを取得
+        var direction = target_ - pos;
+
+        velocity = direction.normalized * speed;
+
+
+        // キューブと生成時のターゲットの値が同じか
+        // ベクトルでブレイクポイント(z)
+        // 前後で位置が変わったか31
     }
 }
