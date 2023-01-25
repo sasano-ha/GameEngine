@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
 
-    private float speed = 0.05f;
+    private float speed = 1.0f;
     private Rigidbody rb;
     // 自然消滅までのタイマー
     public float time = 3;

@@ -22,7 +22,6 @@ public class Shot : MonoBehaviour
 
             Bullet bulletclone = bulletobject.GetComponent<Bullet>();
 
-
             // 弾を生成する（クローンさせている）
             bulletclone.SetVelocity(Cursor.instance.target);
         }
