@@ -7,23 +7,59 @@ public class Shot : MonoBehaviour
     // ゲームオブジェクトをインスペクターから参照するための変数
     public GameObject bullet;
 
+    // 長押しの為のフラグ
+    private bool mouseflag;
+
+    // 間隔のタイマー
+    private float timer;
+
     // Start is called before the first frame update
     void Start()
     {
+        // フラグを設定
+        mouseflag = false;
 
+        // タイマーを設定
+        timer = 15.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        // 左クリックを押した瞬間
+        if (Input.GetMouseButtonDown(0))
         {
-            GameObject bulletobject = Instantiate(bullet, transform.position, Quaternion.identity);
+            // フラグを立てる
+            mouseflag = true;
+        }
 
-            Bullet bulletclone = bulletobject.GetComponent<Bullet>();
+        // 左クリックを離した瞬間
+        if (Input.GetMouseButtonUp(0))
+        {
+            // フラグを降ろす
+            mouseflag = false;
+        }
 
-            // 弾を生成する（クローンさせている）
-            bulletclone.SetVelocity(Cursor.instance.target);
+        // フラグが立っていたら
+        if(mouseflag == true)
+        {
+            // タイマーを進める
+            timer--;
+
+            if(timer <= 0)
+            {
+                // 弾を生成する
+                GameObject bulletobject = Instantiate(bullet, transform.position, Quaternion.identity);
+
+                // 複製弾をここで生成
+                Bullet bulletclone = bulletobject.GetComponent<Bullet>();
+
+                // ここで速度を作る
+                bulletclone.SetVelocity(Cursor.instance.target);
+
+                // タイマー元に戻す
+                timer = 15.0f;
+            }
         }
     }
 }

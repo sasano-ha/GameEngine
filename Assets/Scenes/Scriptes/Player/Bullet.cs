@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-
+    // 速さの設定
     private float speed = 1.0f;
+
     private Rigidbody rb;
+
     // 自然消滅までのタイマー
     public float time = 3;
 
+    // 速度
     private Vector3 velocity;
 
     // Start is called before the first frame update
@@ -59,6 +62,7 @@ public class Bullet : MonoBehaviour
         // ベクトルを取得
         var direction = target_ - pos;
 
+        // 正規化したベクトルに速さを掛けて速度にする。
         velocity = direction.normalized * speed;
 
 
