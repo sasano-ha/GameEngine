@@ -16,10 +16,10 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 60;
     }
 
-    //public void ChangScene(string nextScene)
-    //{
-    //    SceneManager.LoadScene(nextScene);
-    //}
+    public void ChangScene(string nextScene)
+    {
+        SceneManager.LoadScene(nextScene);
+    }
 
     public void AddCrushingCount()
     {
