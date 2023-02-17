@@ -13,6 +13,8 @@ public class Score : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float score = PlayerMove.instance.pos.z * 10;
+        float score = PlayerMove.instance.pos.z;
+
+        score = Mathf.Floor(score);
     }
 }

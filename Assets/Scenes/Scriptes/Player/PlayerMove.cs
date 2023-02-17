@@ -15,9 +15,12 @@ public class PlayerMove : MonoBehaviour
     // playerÇÃHP
     private int playerHp;
 
+    // é©ã@ÇÃç¿ïWÇÃì¸ÇÍï®
     public Vector3 pos;
 
+
     Vector3 LeftBottom;
+
 
     Vector3 RightTop;
 
@@ -36,7 +39,6 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         var distans = Vector3.Distance(Camera.main.transform.position, transform.position);
-
 
         LeftBottom = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distans));
 
