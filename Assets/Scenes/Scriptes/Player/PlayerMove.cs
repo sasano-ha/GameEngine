@@ -15,9 +15,21 @@ public class PlayerMove : MonoBehaviour
     // playerのHP
     private int playerHp;
 
+    public Vector3 pos;
+
     Vector3 LeftBottom;
 
     Vector3 RightTop;
+
+
+    public void Awake()
+    {
+        if (instance == null)
+        {
+            // インスタンスの設定
+            instance = this;
+        }
+    }
 
 
     // Start is called before the first frame update
@@ -39,7 +51,7 @@ public class PlayerMove : MonoBehaviour
     {
 
         // プレイヤーのワールド座標を取得
-        Vector3 pos = transform.position;
+        pos = transform.position;
 
         // 右矢印キーが入力されたら時
         if (Input.GetKey(KeyCode.D))
@@ -61,20 +73,6 @@ public class PlayerMove : MonoBehaviour
         {
             pos.y -= 0.1f;
         }
-
-        //// 右矢印キーが入力されたら時
-        //if (Input.GetKey(KeyCode.UpArrow))
-        //{
-        //    pos.z += 0.1f;
-        //}
-
-        //// 右矢印キーが入力されたら時
-        //if (Input.GetKey(KeyCode.DownArrow))
-        //{
-        //    pos.z -= 0.1f;
-        //}
-
-        //transform.position = new Vector3(pos.x, pos.y, pos.z);
 
         transform.position = new Vector3(Mathf.Clamp(pos.x, LeftBottom.x + transform.localScale.x, RightTop.x - transform.localScale.x),
            Mathf.Clamp(pos.y, LeftBottom.y + transform.localScale.y, RightTop.y - transform.localScale.y), pos.z);

@@ -20,7 +20,11 @@ public class Aim : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // 計算した3Dオブジェクトのいれものを作る
+        // カーソルを非表示にする。
+        Cursor.visible = false;
+
+        // カーソル移動の制限（画面内）
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     // Update is caｓlled once per frame
