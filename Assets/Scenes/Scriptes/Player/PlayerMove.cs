@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    public static PlayerMove instance;
+
     // マウス
     private Vector3 mouse;
 
@@ -35,11 +37,6 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        // マウスカーソルを表示させない
-        //Cursor.visible = false;
-
-        // マウスカーソルの移動範囲の制限
-        //Cursor.lockState = CursorLockMode.Confined;
 
         // プレイヤーのワールド座標を取得
         Vector3 pos = transform.position;

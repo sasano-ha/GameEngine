@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cursor : MonoBehaviour
+public class Aim : MonoBehaviour
 {
-    public static Cursor instance;
+    public static Aim instance;
 
     public Vector3 target;
 

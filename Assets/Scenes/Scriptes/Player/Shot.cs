@@ -55,7 +55,7 @@ public class Shot : MonoBehaviour
                 Bullet bulletclone = bulletobject.GetComponent<Bullet>();
 
                 // ここで速度を作る
-                bulletclone.SetVelocity(Cursor.instance.target);
+                bulletclone.SetVelocity(Aim.instance.target);
 
                 // タイマー元に戻す
                 timer = 15.0f;
