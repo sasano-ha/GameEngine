@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
+
+    // “GŒ‚”jƒeƒLƒXƒg
+    public Text scoreCount;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,5 +21,7 @@ public class Score : MonoBehaviour
         float score = PlayerMove.instance.pos.z;
 
         score = Mathf.Floor(score);
+
+        scoreCount.text = "" + score;
     }
 }
