@@ -9,19 +9,24 @@ public class Score : MonoBehaviour
     // 敵撃破テキスト
     public Text scoreCount;
 
+    float totalScore;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        float score = PlayerMove.instance.pos.z;
+        // 自機の距離をスコアに変換。
+        float playerScore_ = PlayerMove.instance.pos.z;
 
-        score = Mathf.Floor(score);
+        // スコアが小数点第1位はいらないので切り捨て。
+        totalScore = Mathf.Floor(playerScore_);
 
-        scoreCount.text = "" + score;
+        // 出来たスコアを加算させる。
+        scoreCount.text = "" + totalScore;
     }
 }
