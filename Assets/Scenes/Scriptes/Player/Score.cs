@@ -11,10 +11,15 @@ public class Score : MonoBehaviour
 
     float totalScore;
 
+    private float downScore;
+
     // Start is called before the first frame update
     void Start()
     {
+        // 値の初期化
+        totalScore = 0;
 
+        downScore = 0;
     }
 
     // Update is called once per frame
@@ -28,5 +33,11 @@ public class Score : MonoBehaviour
 
         // 出来たスコアを加算させる。
         scoreCount.text = "" + totalScore;
+    }
+
+    public void AddDownScore()
+    {
+        downScore += 10;
+        scoreCount.text = "DownScore : " + downScore;
     }
 }

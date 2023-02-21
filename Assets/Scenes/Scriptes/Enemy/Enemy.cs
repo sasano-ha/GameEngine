@@ -11,6 +11,8 @@ public class Enemy: MonoBehaviour
 
     public GameManager gameManager;
 
+    public Score score;
+
     private bool isInsideCamera = true;
 
     // Start is called before the first frame update
@@ -43,6 +45,7 @@ public class Enemy: MonoBehaviour
             if (enemyHp <= 0 || targetpos.z <= -10)
             {
                 gameManager.AddCrushingCount();
+                score.AddDownScore();
                 // Ž©•ª‚ÅÁ‚¦‚é
                 Destroy(this.gameObject);
             }
