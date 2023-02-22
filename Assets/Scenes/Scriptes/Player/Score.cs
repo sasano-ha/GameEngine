@@ -7,9 +7,9 @@ public class Score : MonoBehaviour
 {
 
     // 敵撃破テキスト
-    public Text scoreCount;
-
-    float totalScore;
+    [SerializeField] private Text scoreCount;
+     
+    int totalScore;
 
     private float downScore;
 
@@ -17,7 +17,7 @@ public class Score : MonoBehaviour
     void Start()
     {
         // 値の初期化
-        totalScore = 0;
+        //totalScore = 0;
 
         downScore = 0;
     }
@@ -26,13 +26,13 @@ public class Score : MonoBehaviour
     void Update()
     {
         // 自機の距離をスコアに変換。
-        float playerScore_ = PlayerMove.instance.pos.z;
+        int playerScore_ = (int)PlayerMove.instance.pos.z;
 
         // スコアが小数点第1位はいらないので切り捨て。
-        totalScore = Mathf.Floor(playerScore_);
+        //totalScore = Mathf.Floor(playerScore_);
 
         // 出来たスコアを加算させる。
-        scoreCount.text = "" + totalScore;
+        scoreCount.text = "" + playerScore_.ToString("d5");
     }
 
     public void AddDownScore()

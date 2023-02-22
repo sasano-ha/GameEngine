@@ -234,6 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1587527517}
+  score: {fileID: 0}
 --- !u!54 &104679066
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -654,6 +655,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1587527517}
+  score: {fileID: 0}
 --- !u!54 &504629136
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1218,7 +1220,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -849, y: 318}
+  m_AnchoredPosition: {x: -849, y: 370}
   m_SizeDelta: {x: 277.9673, y: 159.8865}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &941561413
@@ -1254,7 +1256,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 000000
+  m_Text: 0
 --- !u!222 &941561414
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1698,6 +1700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1587527517}
+  score: {fileID: 0}
 --- !u!54 &1190203573
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2406,6 +2409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1587527517}
+  score: {fileID: 0}
 --- !u!54 &2020827637
 Rigidbody:
   m_ObjectHideFlags: 0
