@@ -28,16 +28,17 @@ public class Score : MonoBehaviour
         // 自機の距離をスコアに変換。
         int playerScore_ = (int)PlayerMove.instance.pos.z;
 
+        totalScore = playerScore_ + downScore;
+
         // スコアが小数点第1位はいらないので切り捨て。
         //totalScore = Mathf.Floor(playerScore_);
 
         // 出来たスコアを加算させる。
-        scoreCount.text = "" + playerScore_.ToString("d5");
+        scoreCount.text = "" + totalScore.ToString("d5");
     }
 
     public void AddDownScore()
     {
         downScore += 10;
-        scoreCount.text = "DownScore : " + downScore;
     }
 }
