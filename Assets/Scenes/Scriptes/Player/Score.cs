@@ -11,7 +11,7 @@ public class Score : MonoBehaviour
      
     int totalScore;
 
-    private float downScore;
+    private int downScore;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +23,7 @@ public class Score : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         // 自機の距離をスコアに変換。
         int playerScore_ = (int)PlayerMove.instance.pos.z;

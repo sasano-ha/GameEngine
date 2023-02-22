@@ -9,9 +9,10 @@ public class Enemy: MonoBehaviour
 
     private Vector3 targetpos;
 
+    // gameManagerŒÄ‚Ño‚µ
     public GameManager gameManager;
 
-    public Score score;
+    public Score scores;
 
     private bool isInsideCamera = true;
 
@@ -42,10 +43,10 @@ public class Enemy: MonoBehaviour
             transform.position = new Vector3(Mathf.Sin(Time.time) * 2.0f + targetpos.x, targetpos.y, targetpos.z);
 
             // ‚à‚µ‘Ì—Í‚ª0ˆÈ‰º‚É‚È‚Á‚½‚ç
-            if (enemyHp <= 0 || targetpos.z <= -10)
+            if (enemyHp <= 0 )
             {
                 gameManager.AddCrushingCount();
-                score.AddDownScore();
+                scores.AddDownScore();
                 // ©•ª‚ÅÁ‚¦‚é
                 Destroy(this.gameObject);
             }
