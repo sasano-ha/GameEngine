@@ -14,6 +14,8 @@ public class Enemy: MonoBehaviour
 
     public Score scores;
 
+    [SerializeField] GameObject explosionPrefab;
+
     private bool isInsideCamera = true;
 
     // Start is called before the first frame update
@@ -47,6 +49,7 @@ public class Enemy: MonoBehaviour
             {
                 gameManager.AddCrushingCount();
                 scores.AddDownScore();
+                Instantiate(explosionPrefab, transform.position, Quaternion.identity);
                 // é©ï™Ç≈è¡Ç¶ÇÈ
                 Destroy(this.gameObject);
             }
