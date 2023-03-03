@@ -18,6 +18,6 @@ public class UiText : MonoBehaviour
     void Update()
     {
         GetComponent<PlayerHp>().Damage();
-        textUi.text = string.Format("100", PlayerHp.instance.playerHp);
+        textUi.text = string.Format("100", PlayerHp.instance.playerMaxHp);
     }
 }

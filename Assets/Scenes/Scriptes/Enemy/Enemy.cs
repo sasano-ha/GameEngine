@@ -49,21 +49,20 @@ public class Enemy: MonoBehaviour
 
             //targetpos.x -= 0.01f;
 
-
             // 位置の更新
             transform.position = new Vector3(Mathf.Sin(Time.time) * 2.0f + targetpos.x, targetpos.y, targetpos.z);
 
             // もし体力が0以下になったら
-            if (enemyHp <= 0 )
+            if (enemyHp == 0 )
             {
+                // 爆発パーティクル
+                Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+
                 // enemyダウン数関数の呼び出し。
                 gameManager.AddCrushingCount();
 
                 // enemyダウンスコア関数の呼び出し。
                 scores.AddDownScore();
-
-                // 爆発パーティクル
-                Instantiate(explosionPrefab, transform.position, Quaternion.identity);
 
                 // 自分で消える。
                 Destroy(this.gameObject);

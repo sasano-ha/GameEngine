@@ -7,7 +7,7 @@ public class PlayerHp : MonoBehaviour
     public static PlayerHp instance;
 
     // playerのHP
-    public float playerHp;
+    public float playerMaxHp;
 
     // ダメージの変数
     public float damage;
@@ -26,7 +26,7 @@ public class PlayerHp : MonoBehaviour
     void Start()
     {
         // 生成時に体力を指定しておく
-        playerHp = 100;
+        playerMaxHp = 100;
         // ダメージの設定
         damage = 10;
     }
@@ -34,7 +34,7 @@ public class PlayerHp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerHp <= 0)
+        if (playerMaxHp <= 0)
         {
             Destroy(this.gameObject);
         }
@@ -42,7 +42,7 @@ public class PlayerHp : MonoBehaviour
 
     public void Damage()
     {
-        playerHp -= damage;
+        playerMaxHp -= damage;
         FlushController.instance.DamageFlag = true;
     }
 }

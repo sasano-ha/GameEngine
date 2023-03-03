@@ -19,7 +19,7 @@ public class HpText : MonoBehaviour
 
     void LateUpdate()
     {
-        hitPointCount = PlayerHp.instance.playerHp;
+        hitPointCount = PlayerHp.instance.playerMaxHp;
         textHitPoint.text = "" + hitPointCount;
 
         if (hitPointCount < 50)

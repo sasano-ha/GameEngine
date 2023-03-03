@@ -18,7 +18,7 @@ public class PlayerHpBar : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        image2.fillAmount = 1 - PlayerHp.instance.playerHp / 100.0f;
+        image2.fillAmount = 1 - PlayerHp.instance.playerMaxHp / 100.0f;
 
         // Fill Amountによってゲージの色を変える
         // 範囲は 0-1 で、0 は何も表示されず、1 で完全に Image が表示されます。
