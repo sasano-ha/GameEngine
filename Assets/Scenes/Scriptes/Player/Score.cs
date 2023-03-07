@@ -23,7 +23,7 @@ public class Score : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
         // 自機の距離をスコアに変換。
         int playerScore_ = (int)PlayerMove.instance.pos.z;

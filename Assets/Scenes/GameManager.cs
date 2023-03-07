@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     private int crushingCount;
 
     // 敵撃破テキスト
-    public Text textComponent;
+    public Text crashText;
 
     private void Start()
     {
@@ -24,6 +24,6 @@ public class GameManager : MonoBehaviour
     public void AddCrushingCount()
     {
         crushingCount += 1;
-        textComponent.text = "CrushingCount : " + crushingCount;
+        crashText.text = "CrushingCount : " + crushingCount;
     }
 }
