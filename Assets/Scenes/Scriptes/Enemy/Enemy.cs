@@ -11,10 +11,10 @@ public class Enemy: MonoBehaviour
     private Vector3 targetpos;
 
     // gameManager呼び出し
-    public GameManager crashCount;
+    public GameManager gameManager;
 
     // スコアクラスの呼び出し。
-    public Score scores;
+    //public Score scores;
 
     // アタッチするためのもの
     [SerializeField] GameObject explosionPrefab;
@@ -59,10 +59,10 @@ public class Enemy: MonoBehaviour
                 Instantiate(explosionPrefab, transform.position, Quaternion.identity);
 
                 // enemyダウンスコア関数の呼び出し。
-                scores.AddDownScore();
+                gameManager.AddDownScore();
 
                 // enemyダウン数関数の呼び出し。
-                crashCount.AddCrushingCount();
+                gameManager.AddCrushingCount();
 
 
                 // 自分で消える。

@@ -37,6 +37,8 @@ public class PlayerHp : MonoBehaviour
         if (playerMaxHp <= 0)
         {
             Destroy(this.gameObject);
+            GameManager.instance.isPlayerAlive = false;
+
         }
     }
 
