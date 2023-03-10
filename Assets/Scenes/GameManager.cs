@@ -74,18 +74,26 @@ public class GameManager : MonoBehaviour
     // スコア処理
     private void ScoreResults()
     {
-        Time.timeScale = 1.0f;
+        // スローモーション
+        //Time.timeScale = 0.1f;
 
+        // 自機が死んだら
         if (isPlayerAlive == false)
         {
             stopTimer = 0;
         }
 
-        playerScore_ += (int)Time.time * stopTimer;
+        // タイマーを小数点以下切り捨てする。
+        float timer = Time.deltaTime * 100;
 
+        // プレイヤーの生存時間
+        playerScore_ += (int)timer * stopTimer;
+
+        // スコアに生存時間とダウンスコアの加算。
         totalScore = playerScore_ + downScore;
 
-        scoreCount.text = "" + totalScore.ToString("d5");
+        // でた全てのスコアを文字で描画
+        scoreCount.text = "" + totalScore.ToString("d9");
     }
 
 
