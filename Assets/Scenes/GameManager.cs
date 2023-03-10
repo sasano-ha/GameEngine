@@ -56,13 +56,6 @@ public class GameManager : MonoBehaviour
         ScoreResults();
     }
 
-
-    // シーン変更関数
-    public void ChangScene(string nextScene)
-    {
-        SceneManager.LoadScene(nextScene);
-    }
-
     
     // 敵ダウン数関数
     public void AddCrushingCount()
