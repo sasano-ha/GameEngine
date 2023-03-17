@@ -8,7 +8,6 @@ TagManager:
   - Enemy
   - EnemyBullet
   - Target
-  - Collider
   layers:
   - Default
   - TransparentFX

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Aim : MonoBehaviour
 {
@@ -25,6 +26,10 @@ public class Aim : MonoBehaviour
 
         // カーソル移動の制限（画面内）
         Cursor.lockState = CursorLockMode.Confined;
+
+        // 画像を半透明にする
+        gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 0.8f);
+
     }
 
     // Update is caｓlled once per frame

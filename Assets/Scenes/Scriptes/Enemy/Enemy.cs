@@ -26,7 +26,7 @@ public class Enemy: MonoBehaviour
     void Start()
     {
         // ¶¬‚É‘Ì—Í‚ğw’è‚µ‚Ä‚¨‚­
-        enemyHp = 2;
+        enemyHp = 1;
 
         // •Ï”‚ÉŠi”[‚·‚éB
         targetpos = transform.position;

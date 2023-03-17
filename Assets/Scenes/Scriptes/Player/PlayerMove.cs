@@ -18,12 +18,6 @@ public class PlayerMove : MonoBehaviour
     // 自機の座標の入れ物
     public Vector3 pos;
 
-
-    Vector3 LeftBottom;
-
-
-    Vector3 RightTop;
-
     [SerializeField] private float speed = 0.1f;
 
     public float moveForceMultiplier;
@@ -32,7 +26,7 @@ public class PlayerMove : MonoBehaviour
     public float yawTorqueMagnitude = 30.0f;
 
     // 垂直移動時に機首を上下に向けるトルク
-    public float pitchTorqueMagnitude = 60.0f;
+    public float pitchTorqueMagnitude = 90.0f;
 
     // 水平移動時に機体を左右に傾けるトルク
     public float rollTorqueMagnitude = 30.0f;
@@ -60,12 +54,6 @@ public class PlayerMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var distans = Vector3.Distance(Camera.main.transform.position, transform.position);
-
-        LeftBottom = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distans));
-
-        RightTop = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, distans));
-
         // 生成時に体力を指定しておく
         playerHp = 3;
     }
@@ -94,51 +82,12 @@ public class PlayerMove : MonoBehaviour
         Vector3 restoringTorque = new Vector3(forward.y - up.z, right.z - forward.x, up.x - right.y) * restoringTorqueMagnitude;
 
         rigidbody.AddTorque(rotationTorque + restoringTorque);
-
-        // プレイヤーのワールド座標を取得
-        //pos = transform.position;
-
-        //// 右矢印キーが入力されたら時
-        //if (Input.GetKey(KeyCode.D))
-        //{
-        //    rigidbody.AddForce(pos.x * speed, 0, 0);
-        //    //pos.x += speed;
-        //}
-        //// 左矢印キーが入力されたら時
-        //if (Input.GetKey(KeyCode.A))
-        //{
-        //    rigidbody.AddForce(pos.x * -speed, 0, 0);
-        //    //pos.x -= speed;
-        //}
-        //// 右矢印キーが入力されたら時
-        //if (Input.GetKey(KeyCode.W))
-        //{
-        //    rigidbody.AddForce(0, pos.y * speed, 0);
-        //    //pos.y += speed;
-        //}
-        //// 右矢印キーが入力されたら時
-        //if (Input.GetKey(KeyCode.S))
-        //{
-        //    rigidbody.AddForce(0, pos.y * -speed, 0);
-        //    //pos.y -= speed;
-        //}
-
-        //transform.position = new Vector2(
-        //    Mathf.Clamp(transform.position.x, LeftBottom.x + transform.localScale.x, RightTop.x - transform.localScale.x),
-        //    Mathf.Clamp(transform.position.y, LeftBottom.y + transform.localScale.y, RightTop.y - transform.localScale.y)
-        //    );
-
-        //transform.position = new Vector3(Mathf.Clamp(pos.x, LeftBottom.x + transform.localScale.x, RightTop.x - transform.localScale.x),
-        //   Mathf.Clamp(pos.y, LeftBottom.y + transform.localScale.y, RightTop.y - transform.localScale.y), pos.z);
-
+    }
+    private void Update()
+    {
         if (playerHp <= 0)
         {
             Destroy(this.gameObject);
         }
     }
-
-    //public void Damage()
-    //{
-    //    playerHp--;
-    //}
 }

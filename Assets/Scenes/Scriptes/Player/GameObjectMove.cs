@@ -18,7 +18,7 @@ public class GameObjectMove : MonoBehaviour
     void Update()
     {
         Vector3 gameobject = transform.position;
-        gameobject.z += 0.1f;
+        gameobject.z += speed;
         transform.position = new Vector3(gameobject.x, gameobject.y, gameobject.z);
     }
 }
