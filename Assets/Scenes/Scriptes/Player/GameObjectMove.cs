@@ -6,6 +6,8 @@ public class GameObjectMove : MonoBehaviour
 {
     public Vector3 gameobject;
 
+    [SerializeField] public float speed = 10;
+
     // Start is called before the first frame update
     void Start()
     {
