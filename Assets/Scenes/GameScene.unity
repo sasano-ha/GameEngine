@@ -16959,7 +16959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 1480885622890917895, guid: a45002ef21170044da4fcf3114433bb5, type: 3}
-  timer: 8
+  timer: 0.5
 --- !u!1 &1799570266
 GameObject:
   m_ObjectHideFlags: 0
