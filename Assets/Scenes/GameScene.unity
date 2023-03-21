@@ -16958,7 +16958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 763ca857269a1f54ba68da7de3324b99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 1480885622890917895, guid: a45002ef21170044da4fcf3114433bb5, type: 3}
+  bullet: {fileID: 1998734163839175638, guid: f50436b3c912ac54f95f5080b6fd858b, type: 3}
   timer: 0.5
 --- !u!1 &1799570266
 GameObject:
