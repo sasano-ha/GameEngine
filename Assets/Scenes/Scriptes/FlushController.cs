@@ -32,7 +32,7 @@ public class FlushController : MonoBehaviour
     {
         if (DamageFlag == true)
         {
-            this.image.color = new Color(0.5f, 0f, 0f, 0.5f);
+            this.image.color = new Color(1.0f, 0f, 0f, 0.5f);
             DamageFlag = false;
         }
         else
