@@ -22,6 +22,8 @@ public class EnemyBullet : MonoBehaviour
     // Enemy用変数
     protected GameObject enemy;
 
+    public float ratio;
+
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +41,8 @@ public class EnemyBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        homing();
+
         // 移動量を進行方向にスピード分だけ加える
         rb.velocity = forwardAxis * forward * speed;
 
@@ -79,5 +83,21 @@ public class EnemyBullet : MonoBehaviour
             Destroy(this.gameObject);
         }
         
+    }
+
+    private void homing()
+    {
+        var diff = PlayerMove.instance.pos - transform.position;
+        var target_rot = Quaternion.LookRotation(diff);
+        var q = target_rot * Quaternion.Inverse(transform.rotation);
+        if (q.w < 0f)
+        {
+            q.x = -q.x;
+            q.y = -q.y;
+            q.z = -q.z;
+            q.w = -q.w;
+        }
+        var torque = new Vector3(q.x, q.y, q.z) * ratio;
+        GetComponent<Rigidbody>().AddTorque(torque);
     }
 }

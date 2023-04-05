@@ -64,10 +64,5 @@ public class Bullet : MonoBehaviour
 
         // 正規化したベクトルに速さを掛けて速度にする。
         velocity = direction.normalized * speed;
-
-
-        // キューブと生成時のターゲットの値が同じか
-        // ベクトルでブレイクポイント(z)
-        // 前後で位置が変わったか31
     }
 }

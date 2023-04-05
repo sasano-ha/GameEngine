@@ -19,15 +19,18 @@ public class EnemyForwardShot : MonoBehaviour
     // 現在のタイマー時間
     float nowtime = 0;
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
         // タイマーを初期化
         nowtime = delayTime;
+        //target_position = player.transform.position;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         // もしプレイヤーの情報が入ってなかったら
         if (player == null)
