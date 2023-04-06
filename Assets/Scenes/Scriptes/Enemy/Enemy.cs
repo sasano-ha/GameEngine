@@ -50,7 +50,7 @@ public class Enemy: MonoBehaviour
             //targetpos.x -= 0.01f;
 
             // ˆÊ’u‚ÌXV
-            transform.position = new Vector3(Mathf.Sin(Time.time) * 2.0f + targetpos.x, targetpos.y, targetpos.z);
+            //transform.position = new Vector3(Mathf.Sin(Time.time) * 2.0f + targetpos.x, targetpos.y, targetpos.z);
 
             // ‚à‚µ‘Ì—Í‚ª0ˆÈ‰º‚É‚È‚Á‚½‚ç
             if (enemyHp == 0 )

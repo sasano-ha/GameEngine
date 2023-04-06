@@ -7,16 +7,16 @@ public class EnemyShot : MonoBehaviour
     // ゲームオブジェクトをインスペクターから参照するための変数
     public GameObject en_bullet;
 
-    float timer;
+    float timer = 60.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        timer = 60.0f;
+       
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         timer--;
 
@@ -24,9 +24,12 @@ public class EnemyShot : MonoBehaviour
         {
             GameObject en_bulletobject = Instantiate(en_bullet, transform.position, Quaternion.identity);
 
-            NewBehaviourScript en_bulletclone = en_bulletobject.GetComponent<NewBehaviourScript>();
+            //NewBehaviourScript en_bulletclone = en_bulletobject.GetComponent<NewBehaviourScript>();
 
-            en_bulletclone.SetEnemyVelocity(PlayerMove.instance.pos);
+            
+            //en_bulletclone.SetEnemyVelocity(PlayerMove.instance.pos);
+
+            timer = 60;
 
         }
     }

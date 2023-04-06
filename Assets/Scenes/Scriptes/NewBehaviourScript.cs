@@ -5,11 +5,11 @@ using UnityEngine;
 public class NewBehaviourScript : MonoBehaviour
 {
     // 速さの設定
-    private float speed = 0.00f;
-    public float ratio;
+    [SerializeField] private float speed = 0.1f;
+    [SerializeField] private float ratio;
 
     // 自然消滅までのタイマー
-    public float time = 3;
+    [SerializeField] private float time = 1000;
 
     // 速度
     [SerializeField] private Vector3 velocity;
@@ -20,31 +20,14 @@ public class NewBehaviourScript : MonoBehaviour
 
     }
 
-    private void Update()
+    void FixedUpdate()
     {
-        EnemyBulletMove();
-    }
+        Vector3 target_position = PlayerMove.instance.pos;
 
-    public void EnemyBulletMove()
-    {
-
-        // 正面にまっすぐ飛ぶ
-        transform.position += velocity;
-
-        // 時間制限が来たら自然消滅する
-        time -= Time.deltaTime;
-
-        // 一定時間経ったら消滅する
-        if (time <= 0)
-        {
-            Destroy(this.gameObject);
-        }
-    }
-
-    public void SetEnemyVelocity(Vector3 target_position)
-    {
         // ベクトルを取得
         var diff = target_position - transform.position;
+
+        velocity = transform.right * speed;
 
         // ベクトルの方向に向く
         var target_rot = Quaternion.LookRotation(diff);
@@ -61,16 +44,31 @@ public class NewBehaviourScript : MonoBehaviour
             q.w = -q.w;
         }
 
-        //velocity = diff.normalized * speed;
-
-        //transform.rotation *= q;
-
         // 座標の更新
         var torque = new Vector3(q.x, q.y, q.z) * ratio;
 
         // トルクを加える。
         GetComponent<Rigidbody>().AddTorque(torque);
+    }
 
-        velocity = transform.forward * speed;
+    private void Update()
+    {
+        EnemyBulletMove();
+    }
+
+    public void EnemyBulletMove()
+    {
+
+        // 正面にまっすぐ飛ぶ
+        transform.position -= velocity;
+
+        // 時間制限が来たら自然消滅する
+        time -= Time.deltaTime;
+
+        // 一定時間経ったら消滅する
+        if (time <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
