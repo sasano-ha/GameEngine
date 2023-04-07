@@ -23,6 +23,11 @@ public class SceneFade : MonoBehaviour
         StartCoroutine(SceneFadeout());
     }
 
+    public void Fadein()
+    {
+        StartCoroutine(SceneFadein());
+    }
+
 
     private IEnumerator SceneFadeout()
     {
@@ -40,5 +45,18 @@ public class SceneFade : MonoBehaviour
         SceneManager.LoadScene("GameScene");
     }
 
+    private IEnumerator SceneFadein()
+    {
+        while (!isSceneChage)
+        {
+            PanelColor.a -= 0.1f;
+            PanelImage.color = PanelColor;
 
+            if (PanelColor.a <= 0)
+            {
+                isSceneChage = true;
+            }
+            yield return new WaitForSeconds(speed);
+        }
+    }
 }

@@ -7,6 +7,11 @@ public class CameraMove : MonoBehaviour
     private GameObject player;
     private Vector3 offset;
 
+    private void Awake()
+    {
+        GetComponent<SceneFade>().Fadein();
+    }
+
     // Start is called before the first frame update
     void Start()
     {

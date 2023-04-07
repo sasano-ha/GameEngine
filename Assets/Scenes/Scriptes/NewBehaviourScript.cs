@@ -27,8 +27,6 @@ public class NewBehaviourScript : MonoBehaviour
         // ベクトルを取得
         var diff = target_position - transform.position;
 
-        velocity = transform.right * speed;
-
         // ベクトルの方向に向く
         var target_rot = Quaternion.LookRotation(diff);
 
@@ -49,6 +47,8 @@ public class NewBehaviourScript : MonoBehaviour
 
         // トルクを加える。
         GetComponent<Rigidbody>().AddTorque(torque);
+
+        velocity = transform.forward * speed;
     }
 
     private void Update()
@@ -60,7 +60,7 @@ public class NewBehaviourScript : MonoBehaviour
     {
 
         // 正面にまっすぐ飛ぶ
-        transform.position -= velocity;
+        transform.position += velocity;
 
         // 時間制限が来たら自然消滅する
         time -= Time.deltaTime;
