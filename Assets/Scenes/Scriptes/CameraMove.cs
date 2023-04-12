@@ -9,12 +9,13 @@ public class CameraMove : MonoBehaviour
 
     private void Awake()
     {
-        GetComponent<SceneFade>().Fadein();
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        GetComponent<SceneFade>().Fadein();
         this.player = GameObject.Find("GameObject");
         offset = transform.position - player.transform.position;
     }

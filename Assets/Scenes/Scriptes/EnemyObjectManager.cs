@@ -18,7 +18,7 @@ public class EnemyObjectManager : MonoBehaviour
 
     private void Update()
     {
-        
+
     }
 
     private IEnumerator ScaleUp()

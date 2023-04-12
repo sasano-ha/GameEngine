@@ -7,6 +7,8 @@ public class EnemyManager : MonoBehaviour
 {
     private GameObject[] enemies;
 
+    private float enemy_timer = 100;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +22,11 @@ public class EnemyManager : MonoBehaviour
 
         if (enemies.Length == 0)
         {
-            SceneManager.LoadScene("EndScene");
+            enemy_timer--;
+            if(enemy_timer <= 0)
+            {
+                SceneManager.LoadScene("EndScene");
+            }
         }
     }
 }
