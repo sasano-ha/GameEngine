@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
         totalScore = playerScore_ + downScore;
 
         // でた全てのスコアを文字で描画
-        scoreCount.text = "" + totalScore.ToString("d9");
+        scoreCount.text = "" + totalScore.ToString("d7");
     }
 
 

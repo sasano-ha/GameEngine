@@ -34,7 +34,7 @@ public class Score : MonoBehaviour
         //totalScore = Mathf.Floor(playerScore_);
 
         // 出来たスコアを加算させる。
-        scoreCount.text = "" + totalScore.ToString("d5");
+        scoreCount.text = "" + totalScore.ToString("d3");
     }
 
     public void AddDownScore()
