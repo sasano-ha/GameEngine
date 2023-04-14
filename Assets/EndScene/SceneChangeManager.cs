@@ -10,4 +10,24 @@ public class SceneChangeManager : MonoBehaviour
     {
         SceneManager.LoadScene(nextScene);
     }
+
+    public void SceneChangTitle()
+    {
+        SceneManager.LoadScene("TitleScene");
+    }
+
+    public void SceneChangGame()
+    {
+        SceneManager.LoadScene("GameScene");
+    }
+
+    public void SceneChangClear()
+    {
+        SceneManager.LoadScene("EndScene");
+    }
+
+    public void SceneChangEnd()
+    {
+        SceneManager.LoadScene("GameOverScene");
+    }
 }
