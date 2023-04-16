@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Font : MonoBehaviour
 {
 
-    [SerializeField] private Text font_text;
+    [SerializeField] private TextMeshProUGUI font_text;
 
     private Color text;
 
@@ -23,7 +24,7 @@ public class Font : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(fontFadeIn());
     }
 
     // Update is called once per frame
@@ -37,14 +38,20 @@ public class Font : MonoBehaviour
     {
         while (!isfont)
         {
-            text.a -= 0.1f;
-            font_text.color = text;
-
-            if(text.a <= 0f)
+            for (float i = 1.0f; i >= 0f; i -= 0.1f)
             {
-                isfont = true;
+                text.a = i;
+                font_text.color = text;
+                yield return new WaitForSeconds(frame);
             }
-            yield return new WaitForSeconds(frame);
+
+            for (float k = 0; k <= 1.0f; k += 0.1f)
+            {
+                text.a = k;
+                font_text.color = text;
+                yield return new WaitForSeconds(frame);
+            }
+
         }
     }
 }
