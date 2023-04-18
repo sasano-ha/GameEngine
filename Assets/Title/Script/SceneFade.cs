@@ -36,13 +36,13 @@ public class SceneFade : MonoBehaviour
             PanelColor.a += 0.1f;
             PanelImage.color = PanelColor;
 
-            if(PanelColor.a >= 1)
+            if (PanelColor.a >= 1.0f)
             {
                 isSceneChage = true;
             }
             yield return new WaitForSeconds(speed);
         }
-        SceneManager.LoadScene("GameScene");
+        //SceneManager.LoadScene("GameScene");
     }
 
     private IEnumerator SceneFadein()
