@@ -42,7 +42,7 @@ public class SceneFade : MonoBehaviour
             }
             yield return new WaitForSeconds(speed);
         }
-        //SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("ExecutableScene");
     }
 
     private IEnumerator SceneFadein()
