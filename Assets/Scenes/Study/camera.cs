@@ -12,6 +12,8 @@ public class camera : MonoBehaviour
 
     public bool flag = false;
 
+    [SerializeField] private GameObject enemy;
+
     private void Awake()
     {
         //timer = 0;
@@ -28,12 +30,12 @@ public class camera : MonoBehaviour
     void Update()
     {
         timer++;
-        if(timer >= 600)
+        if (timer >= 100)
         {
-            flag = true;  
+            flag = true;
         }
 
-        if(flag == true)
+        if (!flag)
         {
             image_.enabled = true;
         }
