@@ -51,7 +51,6 @@ public class Font : MonoBehaviour
                 font_text.color = text;
                 yield return new WaitForSeconds(frame);
             }
-
         }
     }
 }

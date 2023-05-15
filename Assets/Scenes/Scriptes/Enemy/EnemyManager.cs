@@ -7,22 +7,25 @@ public class EnemyManager : MonoBehaviour
 {
     private GameObject[] enemies;
 
-    private float enemy_timer = 100;
+    private float enemy_timer = 1200;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    public bool isEnemy_Die = true;
 
     // Update is called once per frame
     void Update()
     {
+        // 敵タグを検索
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
+
+        // 敵タグがなくなったら消す。
         if (enemies.Length == 0)
         {
+            isEnemy_Die = false;
+            // 急にシーン遷移しないためのタイマー
             enemy_timer--;
+
+            // 定時になったらシーンをロードする。
             if(enemy_timer <= 0)
             {
                 SceneManager.LoadScene("EndScene");

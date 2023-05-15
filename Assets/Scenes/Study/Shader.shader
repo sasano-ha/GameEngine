@@ -1,43 +1,90 @@
 Shader "Unlit/Shader"
 {
-	// Unity上でやり取りをするプロパティ情報
-   // マテリアルのInspectorウィンドウ上に表示され、スクリプト上からも設定できる
-	Properties
-	{
-		_Color("Main Color", Color) = (1,1,1,1) // Color プロパティー (デフォルトは白)   a____
-	}
-		// サブシェーダー
-		// シェーダーの主な処理はこの中に記述する
-		// サブシェーダーは複数書くことも可能が、基本は一つ
-		SubShader
-	{
-		// パス
-		// 1つのオブジェクトの1度の描画で行う処理をここに書く
-		// これも基本一つだが、複雑な描画をするときは複数書くことも可能
-		Pass
-		{
-			CGPROGRAM   // プログラムを書き始めるという宣言
+    Properties
+    {
+        _MainTex("Texture", 2D) = "white" {}
+    }
+        SubShader
+    {
+        // No culling or depth
+        Cull Off ZWrite Off ZTest Always
 
-			// 関数宣言
-			#pragma vertex vert    // "vert" 関数を頂点シェーダー使用する宣言
-			#pragma fragment frag  // "frag" 関数をピクセルシェーダーと使用する宣言
+        Pass
+        {
+            CGPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
 
-			// 変数宣言
-			fixed4 _Color; // マテリアルからのカラー   a____
+            #include "UnityCG.cginc"
 
-			// 頂点シェーダー
-			float4 vert(float4 vertex : POSITION) : SV_POSITION
-			{
-				return UnityObjectToClipPos(vertex);
-			}
+            struct appdata
+            {
+                float4 vertex : POSITION;
+                float2 uv : TEXCOORD0;
+            };
 
-				// フラグメントシェーダー
-				fixed4 frag() : SV_Target
-				{
-					return _Color;
-				}
+            struct v2f
+            {
+                float2 uv : TEXCOORD0;
+                float4 vertex : SV_POSITION;
+            };
 
-				ENDCG   // プログラムを書き終わるという宣言
-			}
-	}
+            v2f vert(appdata v)
+            {
+                v2f o;
+                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.uv = v.uv;
+                return o;
+            }
+
+            //疑似乱数生成関数
+            float rand(float3 co)
+            {
+                return frac(sin(dot(co.xyz ,float3(12.9898,78.233,45.5432))) * 43758.5453);
+            }
+
+            sampler2D _MainTex;
+
+            static const float division = 768;
+            static const float blackinterval = 6;
+            static const int blackheight = 1;
+            static const float noisewidth = 0.01;
+
+            fixed4 frag(v2f i) : SV_Target
+            {
+                //画面Y座標を分割
+                int divisionindex = i.uv.y * division;
+
+            //一定間隔で横に区切ったブロックを作る
+            int noiseindex = divisionindex / blackinterval;
+
+            //ブロックごとに横にずらす座標を決める前処理
+            //時間による乱数のシード値（timeに互いに素っぽい数をかけたのを複数用意するといい感じになる）
+            float3 timenoise = float3(0, int(_Time.x * 61), int(_Time.x * 83));
+            //ときどき大きくずらす（時間のシード値が変更されるたびに5%の確率でノイズが10倍になる）
+            float noiserate = rand(timenoise) < 0.05 ? 10 : 1;
+
+            //横にずらす大きさを乱数で決める（0~1）（時間的にも位置的にもランダムになるように位置によるシード値と時間によるシード値を別次元で与える）
+            float xnoise = rand(float3(noiseindex, 0, 0) + timenoise);
+            xnoise = xnoise * xnoise - 0.5;             //ずれを2乗して0.5引く（2乗しないと乱れすぎる気がした）
+            xnoise = xnoise * noisewidth * noiserate;   //ずれにスケールをかける
+            xnoise = xnoise * (_SinTime.w / 2 + 1.1);   //時間的にずれに波があるようにする（いい感じになる気がする）
+            xnoise = xnoise + (abs((int(_Time.x * 2000) % int(division / blackinterval)) - noiseindex) < 5 ? 0.005 : 0);    //ラスタースキャンっぽいノイズ
+
+            float2 uv = i.uv + float2(xnoise, 0);
+
+            //ぼやけさせる
+            fixed4 col1 = tex2D(_MainTex, uv);
+            fixed4 col2 = tex2D(_MainTex, uv + float2(0.005, 0));
+            fixed4 col3 = tex2D(_MainTex, uv + float2(-0.005, 0));
+            fixed4 col4 = tex2D(_MainTex, uv + float2(0, 0.005));
+            fixed4 col5 = tex2D(_MainTex, uv + float2(0,-0.005));
+            fixed4 col = (col1 * 4 + col2 + col3 + col4 + col5) / 8;
+
+            col.rgb = divisionindex % blackinterval < blackheight ? float4(0, 0, 0, 1) : col.rgb;
+            return col;
+        }
+        ENDCG
+    }
+    }
 }
