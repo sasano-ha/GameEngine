@@ -7,7 +7,9 @@ public class sample : MonoBehaviour
 {
     private camera camera_;
     float image_time;
+    float image2_time;
     float text_time;
+    float text2_time;
     private RectTransform image_;
 
     float easingtime = 1.0f;
@@ -19,6 +21,10 @@ public class sample : MonoBehaviour
     public Text text;
 
     private Color a;
+
+    private bool endflag = false;
+
+    float totaletime = 0;
 
     // Start is called before the first frame update
     private void Awake()
@@ -35,39 +41,26 @@ public class sample : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float size;
 
         if (camera_s.GetComponent<camera>().flag == true)
         {
-            if (0 < image_time && image_time < easingtime)
-            {
-                size = SineOut(image_time, easingtime, start, end);
-                image_.sizeDelta = new Vector2(size, size);
-            }
-            else if (easingtime < image_time)
-            {
-                image_.sizeDelta = new Vector2(end, end);
-                text.enabled = true;
-            }
-            image_time += Time.deltaTime;
+            ImageEasing();
         }
 
-        if(text.enabled == true)
+        if (text.enabled == true)
         {
-            if(0 < text_time && text_time < 10.0f)
-            {
-                a.a = QuintOut(text_time, 10.0f, 0, 1.0f);
-                text.color = a;
+            TextEasing();
+            totaletime++;
+        }
 
+        if(totaletime > 1000)
+        {
+            EndtextEasing();
+        }
 
-            }
-            else if(10.0f < text_time)
-            {
-                a.a = 1.0f;
-                text.color = a;
-            }
-            
-            text_time += Time.deltaTime;
+        if(endflag == true)
+        {
+            EndEsing();
         }
     }
 
@@ -89,5 +82,73 @@ public class sample : MonoBehaviour
 
         // max‚ªU‚ê•‚Åmin‚ª‚»‚ÌU‚ê•‚Ì’†‰›’l
         return max * Mathf.Sin(t * (Mathf.PI * 90 / 180) / totaltime) + min;
+    }
+
+    private void ImageEasing()
+    {
+        float size;
+        if (0 < image_time && image_time < easingtime)
+        {
+            size = SineOut(image_time, easingtime, start, end);
+            image_.sizeDelta = new Vector2(size, size);
+        }
+        else if (easingtime < image_time)
+        {
+
+            image_.sizeDelta = new Vector2(end, end);
+            text.enabled = true;
+        }
+        image_time += Time.deltaTime;
+    }
+
+    private void TextEasing()
+    {
+        if (0 < text_time && text_time < 10.0f)
+        {
+            a.a = QuintOut(text_time, 10.0f, 0, 1.0f);
+            text.color = a;
+        }
+        else if (10.0f < text_time)
+        {
+            text.enabled = false;
+            endflag = true;
+        }
+
+        text_time += Time.deltaTime;
+    }
+
+    private void EndtextEasing()
+    {
+        if (0 < text2_time && text_time < 10.0f)
+        {
+            a.a = QuintOut(text2_time, 10.0f, 1.0f, 0);
+            text.color = a;
+        }
+        else if (10.0f < text2_time)
+        {
+            a.a = 0f;
+            
+            text.color = a;
+        }
+
+        text2_time += Time.deltaTime;
+    }
+
+    private void EndEsing()
+    {
+        float size_2;
+
+        if (0 < image2_time && image2_time < easingtime)
+        {
+            size_2 = SineOut(image2_time, easingtime, end, start);
+            image_.sizeDelta = new Vector2(size_2, size_2);
+        }
+        else if (easingtime < image2_time)
+        {
+            image_.sizeDelta = new Vector2(start, start);
+            //text.enabled = true;
+        }
+
+        image2_time += Time.deltaTime;
     }
 }

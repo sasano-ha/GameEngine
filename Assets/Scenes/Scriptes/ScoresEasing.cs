@@ -55,7 +55,7 @@ public class ScoresEasing: MonoBehaviour
         float size;
 
         // 敵がいなくなったら
-        if (camera_s.GetComponent<camera>().flag == true)
+        if (camera_s.GetComponent<DrawingSoure>().flag == true)
         {
             // 時間指定内だったらイージングを使ってimageの変数を変更
             if (0 < image_time && image_time < easingtime)
