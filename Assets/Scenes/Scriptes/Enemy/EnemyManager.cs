@@ -7,7 +7,7 @@ public class EnemyManager : MonoBehaviour
 {
     private GameObject[] enemies;
 
-    private float enemy_timer = 1200;
+    private float enemy_timer = 12000;
 
     public bool isEnemy_Die = true;
 
@@ -23,7 +23,7 @@ public class EnemyManager : MonoBehaviour
         {
             isEnemy_Die = false;
             // 急にシーン遷移しないためのタイマー
-            enemy_timer--;
+            enemy_timer -= 1.0f;
 
             // 定時になったらシーンをロードする。
             if(enemy_timer <= 0)

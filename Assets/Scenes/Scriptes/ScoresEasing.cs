@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScoresEasing: MonoBehaviour
+public class ScoresEasing : MonoBehaviour
 {
     // imageタイマーの入れ物
     float image_time;
+    float image2_time;
 
     // textタイマーの入れ物
     float text_time;
+    float text2_time;
 
     // imageの縦横を使うための変数
     private RectTransform image_;
@@ -32,6 +34,10 @@ public class ScoresEasing: MonoBehaviour
     // テキストのα値用の変数
     private Color a;
 
+    private bool endflag = false;
+
+    float totaletime = 0;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -51,54 +57,26 @@ public class ScoresEasing: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 縦横用の変数
-        float size;
-
         // 敵がいなくなったら
         if (camera_s.GetComponent<DrawingSoure>().flag == true)
         {
-            // 時間指定内だったらイージングを使ってimageの変数を変更
-            if (0 < image_time && image_time < easingtime)
-            {
-                // イージング
-                size = SineOut(image_time, easingtime, start, end);
-
-                // イージングで使った変数を縦横に代入
-                image_.sizeDelta = new Vector2(size, size);
-            }
-            
-            // 先程の指定時間外になったらイージングを止めて固定値を入れる
-            else if (easingtime < image_time)
-            {
-                // 縦横に固定値を入れる
-                image_.sizeDelta = new Vector2(end, end);
-
-                // テキストを描画させる
-                text.enabled = true;
-            }
-
-            // imageのタイマーに代入
-            image_time += Time.deltaTime;
+            ImageEasing();
         }
 
-        // テキストが描画されたら
         if (text.enabled == true)
         {
-            // 内容は上記と同じ
-            if (0 < text_time && text_time < 10.0f)
-            {
-                a.a = QuintOut(text_time, 10.0f, 0, 1.0f);
-                text.color = a;
+            TextEasing();
+            totaletime++;
+        }
 
+        if (totaletime > 1000)
+        {
+            EndtextEasing();
+        }
 
-            }
-            else if (10.0f < text_time)
-            {
-                a.a = 1.0f;
-                text.color = a;
-            }
-
-            text_time += Time.deltaTime;
+        if (endflag == true)
+        {
+            EndEsing();
         }
     }
 
@@ -120,5 +98,87 @@ public class ScoresEasing: MonoBehaviour
 
         // maxが振れ幅でminがその振れ幅の中央値
         return max * Mathf.Sin(t * (Mathf.PI * 90 / 180) / totaltime) + min;
+    }
+
+    private void ImageEasing()
+    {
+        // 縦横用の変数
+        float size;
+
+        // 時間指定内だったらイージングを使ってimageの変数を変更
+        if (0 < image_time && image_time < easingtime)
+        {
+            // イージング
+            size = SineOut(image_time, easingtime, start, end);
+
+            // イージングで使った変数を縦横に代入
+            image_.sizeDelta = new Vector2(size, size);
+        }
+
+        // 先程の指定時間外になったらイージングを止めて固定値を入れる
+        else if (easingtime < image_time)
+        {
+            // 縦横に固定値を入れる
+            image_.sizeDelta = new Vector2(end, end);
+
+            // テキストを描画させる
+            text.enabled = true;
+        }
+
+        // imageのタイマーに代入
+        image_time += Time.deltaTime;
+    }
+
+    private void TextEasing()
+    {
+        // 内容は上記と同じ
+        if (0 < text_time && text_time < 10.0f)
+        {
+            a.a = QuintOut(text_time, 10.0f, 0, 1.0f);
+            text.color = a;
+        }
+        else if (10.0f < text_time)
+        {
+            text.enabled = false;
+            endflag = true;
+        }
+
+        text_time += Time.deltaTime;
+    }
+
+    private void EndtextEasing()
+    {
+        if (0 < text2_time && text2_time < 10.0f)
+        {
+            a.a = QuintOut(text2_time, 10.0f, 1.0f, 0);
+            text.color = a;
+        }
+        else if (10.0f < text2_time)
+        {
+            a.a = 0;
+
+            text.color = a;
+        }
+
+        text2_time += Time.deltaTime;
+    }
+
+
+    private void EndEsing()
+    {
+        float size_2;
+
+        if (0 < image2_time && image2_time < easingtime)
+        {
+            size_2 = SineOut(image2_time, easingtime, end, start);
+            image_.sizeDelta = new Vector2(size_2, size_2);
+        }
+        else if (easingtime < image2_time)
+        {
+            image_.sizeDelta = new Vector2(start, start);
+            //text.enabled = true;
+        }
+
+        image2_time += Time.deltaTime;
     }
 }

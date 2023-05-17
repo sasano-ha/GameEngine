@@ -12,7 +12,10 @@ public class camera : MonoBehaviour
 
     public bool flag = false;
 
+    // 別スクリプトから変数を使うための変数
     [SerializeField] private GameObject enemy;
+
+    //[SerializeField] private GameObject enemy;
 
     private void Awake()
     {
@@ -29,15 +32,18 @@ public class camera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer++;
-        if (timer >= 100)
+        if (enemy.GetComponent<EnemyManager>().isEnemy_Die == false)
         {
-            flag = true;
-        }
+            timer += 1.0f;
+            if (timer >= 100)
+            {
+                flag = true;
+            }
 
-        if (!flag)
-        {
-            image_.enabled = true;
+            if (flag == true)
+            {
+                image_.enabled = true;
+            }
         }
     }
 }

@@ -39,7 +39,7 @@ public class DrawingSoure : MonoBehaviour
                 flag = true;
             }
 
-            if (flag == true)
+            if (!flag)
             {
                 // image‚ð•`‰æ‚³‚¹‚é
                 image_.enabled = true;

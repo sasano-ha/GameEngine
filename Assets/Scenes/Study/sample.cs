@@ -24,16 +24,21 @@ public class sample : MonoBehaviour
 
     private bool endflag = false;
 
-    float totaletime = 0;
+    public float totaletime = 0;
+
+    public Text sakao;
 
     // Start is called before the first frame update
     private void Awake()
     {
         a = text.color;
+        
     }
 
     void Start()
     {
+        // FPS‚ð60‚ÉŒÅ’è
+        Application.targetFrameRate = 60;
         image_ = GetComponent<RectTransform>();
         text.enabled = false;
     }
@@ -50,18 +55,19 @@ public class sample : MonoBehaviour
         if (text.enabled == true)
         {
             TextEasing();
-            totaletime++;
+            totaletime += 1.0f;
+            if (totaletime > 1000)
+            {
+                EndtextEasing();
+            }
         }
 
-        if(totaletime > 1000)
-        {
-            EndtextEasing();
-        }
-
-        if(endflag == true)
+        if (endflag == true)
         {
             EndEsing();
         }
+
+        Scoure();
     }
 
     public static float ExpOut(float t, float totaltime, float min, float max)
@@ -119,14 +125,14 @@ public class sample : MonoBehaviour
 
     private void EndtextEasing()
     {
-        if (0 < text2_time && text_time < 10.0f)
+        if (0 < text2_time && text2_time < 10.0f)
         {
             a.a = QuintOut(text2_time, 10.0f, 1.0f, 0);
             text.color = a;
         }
         else if (10.0f < text2_time)
         {
-            a.a = 0f;
+            a.a = 0;
             
             text.color = a;
         }
@@ -150,5 +156,10 @@ public class sample : MonoBehaviour
         }
 
         image2_time += Time.deltaTime;
+    }
+
+    private void Scoure()
+    {
+        sakao.text = "" + totaletime;
     }
 }
