@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     private int downScore = 0;
 
     // トータルスコアの変数
-    int totalScore = 0;
+    public int totalScore = 0;
 
     // 自機生存フラグ
     public bool isPlayerAlive;
@@ -41,14 +41,14 @@ public class GameManager : MonoBehaviour
             // インスタンスの設定
             instance = this;
         }
+
+        // FPSを60に固定
+        Application.targetFrameRate = 60;
     }
 
 
     void Start()
     {
-        // FPSを60に固定
-        Application.targetFrameRate = 60;
-
         isPlayerAlive = true;
     }
 

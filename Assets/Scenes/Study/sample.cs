@@ -5,71 +5,104 @@ using UnityEngine.UI;
 
 public class sample : MonoBehaviour
 {
-    private camera camera_;
+    // カメラをアタッチする為の変数
+    [SerializeField] private GameObject MainCamera;
+
+    // シーンインのimageのタイマー
     float image_time;
+
+    // シーンアウトのimageのタイマー
     float image2_time;
+
+    // シーンインのtextのタイマー
     float text_time;
+
+    // シーンアウトのtextのタイマー
     float text2_time;
+
+    // imageの座標の変数
     private RectTransform image_;
 
+    // イージング時間
     float easingtime = 1.0f;
+
+    // 開始値
     float start = 0;
+
+    // 終了値
     float end = 500;
 
-    public GameObject camera_s;
+    // textをアタッチするための変数
+    [SerializeField] private Text text;
 
-    public Text text;
+    // α値
+    private Color alpha;
 
-    private Color a;
-
+    // textのイージング終了フラグ
     private bool endflag = false;
 
+    // 全体の時間
     public float totaletime = 0;
-
-    public Text sakao;
 
     // Start is called before the first frame update
     private void Awake()
     {
-        a = text.color;
-        
+        // 現在の色を代入
+        alpha = text.color;
     }
 
     void Start()
     {
         // FPSを60に固定
         Application.targetFrameRate = 60;
+
+        // imageの縦横の取得
         image_ = GetComponent<RectTransform>();
+
+        // textは描画しない
         text.enabled = false;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-
-        if (camera_s.GetComponent<camera>().flag == true)
+        // カメラのフラグがたった時
+        if (MainCamera.GetComponent<camera>().flag == true)
         {
+            // リザルト（枠）の描画
             ImageEasing();
         }
 
+        // textが描画されたら
         if (text.enabled == true)
         {
+            // textの描画
             TextEasing();
+
+            // スコアを反映
+            Scoure();
+
+            // 全体の時間を進めて
             totaletime += 1.0f;
-            if (totaletime > 1000)
+
+             // 規定時間になったら
+            if (totaletime > 300)
             {
+                // テキストの描画終了
                 EndtextEasing();
             }
         }
 
+        // フラグがたったら
         if (endflag == true)
         {
+            // リザルト（枠）の描画終了
             EndEsing();
         }
-
-        Scoure();
     }
 
+
+    // イージング関連の関数
     public static float ExpOut(float t, float totaltime, float min, float max)
     {
         max -= min;
@@ -90,56 +123,81 @@ public class sample : MonoBehaviour
         return max * Mathf.Sin(t * (Mathf.PI * 90 / 180) / totaltime) + min;
     }
 
+
+    // テキスト描画の関数
     private void ImageEasing()
     {
+        // ローカル変数
         float size;
+
+        // 規定時間内の時
         if (0 < image_time && image_time < easingtime)
         {
+            // イージングをさせる
             size = SineOut(image_time, easingtime, start, end);
+
+            // 上記の値をimageの縦横に代入
             image_.sizeDelta = new Vector2(size, size);
         }
         else if (easingtime < image_time)
         {
-
+            // imageの値を固定値に
             image_.sizeDelta = new Vector2(end, end);
+
+            // テキストの描画
             text.enabled = true;
         }
+
+        // imageのタイマーを進める
         image_time += Time.deltaTime;
     }
 
+    // textの描画関数
     private void TextEasing()
     {
+        // 規定時間内の時
         if (0 < text_time && text_time < 10.0f)
         {
-            a.a = QuintOut(text_time, 10.0f, 0, 1.0f);
-            text.color = a;
+            // textのα値をイージングさせる
+            alpha.a = QuintOut(text_time, 10.0f, 0, 1.0f);
+
+            // 上記の値を代入
+            text.color = alpha;
         }
         else if (10.0f < text_time)
         {
+            // textを描画させない
             text.enabled = false;
+
+            // フラグを立てる
             endflag = true;
         }
 
+        // テキストタイマーを進める
         text_time += Time.deltaTime;
     }
 
+
+    // text描画終了関数
     private void EndtextEasing()
     {
         if (0 < text2_time && text2_time < 10.0f)
         {
-            a.a = QuintOut(text2_time, 10.0f, 1.0f, 0);
-            text.color = a;
+            alpha.a = QuintOut(text2_time, 10.0f, 1.0f, 0);
+            text.color = alpha;
         }
         else if (10.0f < text2_time)
         {
-            a.a = 0;
+            alpha.a = 0;
             
-            text.color = a;
+            text.color = alpha;
         }
 
         text2_time += Time.deltaTime;
     }
 
+
+    // imageの描画終了関数
     private void EndEsing()
     {
         float size_2;
@@ -152,14 +210,13 @@ public class sample : MonoBehaviour
         else if (easingtime < image2_time)
         {
             image_.sizeDelta = new Vector2(start, start);
-            //text.enabled = true;
         }
 
         image2_time += Time.deltaTime;
     }
 
-    private void Scoure()
+    public void Scoure()
     {
-        sakao.text = "" + totaletime;
+        text.text = "スコア : " + GameManager.instance.totalScore;
     }
 }
