@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     // “GŒ‚”j—p•Ï”
-    private int crushingCount = 0;
+    public int crushingCount = 0;
 
     // “GŒ‚”j—pƒeƒLƒXƒg
     public Text crashText;

@@ -32,11 +32,16 @@ public class sample : MonoBehaviour
     // 終了値
     float end = 500;
 
-    // textをアタッチするための変数
-    [SerializeField] private Text text;
+    // scoretextをアタッチするための変数
+    [SerializeField] private Text scoretext;
+
+    // enemytextをアタッチするための変数
+    [SerializeField] private Text enemytext;
 
     // α値
-    private Color alpha;
+    private Color socre_alpha;
+
+    private Color enemy_alpha;
 
     // textのイージング終了フラグ
     private bool endflag = false;
@@ -44,11 +49,15 @@ public class sample : MonoBehaviour
     // 全体の時間
     public float totaletime = 0;
 
+    // enemytext描画の為のフラグ
+    private bool enemyFlag = false;
+
     // Start is called before the first frame update
     private void Awake()
     {
         // 現在の色を代入
-        alpha = text.color;
+        socre_alpha = scoretext.color;
+        enemy_alpha = enemytext.color;
     }
 
     void Start()
@@ -59,8 +68,11 @@ public class sample : MonoBehaviour
         // imageの縦横の取得
         image_ = GetComponent<RectTransform>();
 
-        // textは描画しない
-        text.enabled = false;
+        // scoretextは描画しない
+        scoretext.enabled = false;
+
+        // enemytextは描画しない
+        enemytext.enabled = false;
     }
 
 
@@ -74,7 +86,7 @@ public class sample : MonoBehaviour
         }
 
         // textが描画されたら
-        if (text.enabled == true)
+        if (scoretext.enabled == true)
         {
             // textの描画
             TextEasing();
@@ -82,15 +94,28 @@ public class sample : MonoBehaviour
             // スコアを反映
             Scoure();
 
+            Enemy();
+        }
+
+        if(enemytext.enabled == true)
+        {
+            //EnemyText();
+
             // 全体の時間を進めて
             totaletime += 1.0f;
 
-             // 規定時間になったら
+            // 規定時間になったら
             if (totaletime > 300)
             {
                 // テキストの描画終了
                 EndtextEasing();
             }
+        }
+
+        if (enemyFlag == true)
+        {
+            enemytext.enabled = true;
+
         }
 
         // フラグがたったら
@@ -145,7 +170,8 @@ public class sample : MonoBehaviour
             image_.sizeDelta = new Vector2(end, end);
 
             // テキストの描画
-            text.enabled = true;
+            scoretext.enabled = true;
+            enemytext.enabled = true;
         }
 
         // imageのタイマーを進める
@@ -159,15 +185,18 @@ public class sample : MonoBehaviour
         if (0 < text_time && text_time < 10.0f)
         {
             // textのα値をイージングさせる
-            alpha.a = QuintOut(text_time, 10.0f, 0, 1.0f);
+            socre_alpha.a = QuintOut(text_time, 10.0f, 0, 1.0f);
+            enemy_alpha.a = QuintOut(text_time, 10.0f, 0, 1.0f);
 
             // 上記の値を代入
-            text.color = alpha;
+            scoretext.color = socre_alpha;
+            enemytext.color = enemy_alpha;
         }
         else if (10.0f < text_time)
         {
             // textを描画させない
-            text.enabled = false;
+            scoretext.enabled = false;
+            enemytext.enabled = false;
 
             // フラグを立てる
             endflag = true;
@@ -183,14 +212,18 @@ public class sample : MonoBehaviour
     {
         if (0 < text2_time && text2_time < 10.0f)
         {
-            alpha.a = QuintOut(text2_time, 10.0f, 1.0f, 0);
-            text.color = alpha;
+            socre_alpha.a = QuintOut(text2_time, 10.0f, 1.0f, 0);
+            enemy_alpha.a = QuintOut(text2_time, 10.0f, 1.0f, 0);
+            scoretext.color = socre_alpha;
+            enemytext.color = socre_alpha;
         }
         else if (10.0f < text2_time)
         {
-            alpha.a = 0;
-            
-            text.color = alpha;
+            socre_alpha.a = 0;
+            enemy_alpha.a = 0;
+            scoretext.color = socre_alpha;
+            enemytext.color = socre_alpha;
+
         }
 
         text2_time += Time.deltaTime;
@@ -215,8 +248,13 @@ public class sample : MonoBehaviour
         image2_time += Time.deltaTime;
     }
 
-    public void Scoure()
+    private void Scoure()
     {
-        text.text = "スコア : " + GameManager.instance.totalScore;
+        scoretext.text = "スコア : " + GameManager.instance.totalScore;
+    }
+
+    private void Enemy()
+    {
+        enemytext.text = "撃破 : " + GameManager.instance.crushingCount;
     }
 }
