@@ -7,7 +7,7 @@ public class EnemyManager : MonoBehaviour
 {
     private GameObject[] enemies;
 
-    private float enemy_timer = 12000;
+    private float enemy_timer = 845;
 
     public bool isEnemy_Die = true;
 
