@@ -129,5 +129,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.1
   ratio: 10
-  time: 1000
+  time: 60
   velocity: {x: 0, y: 0, z: 0}

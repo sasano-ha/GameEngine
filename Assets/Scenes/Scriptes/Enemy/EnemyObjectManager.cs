@@ -8,12 +8,14 @@ public class EnemyObjectManager : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float max_siz;
 
+    private EnemyShot en_StateFlag;
+
     private bool isInsideCamera = false;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        en_StateFlag = GetComponent<EnemyShot>();
     }
 
     private void Update()
@@ -33,5 +35,6 @@ public class EnemyObjectManager : MonoBehaviour
     private void OnBecameVisible()
     {
         StartCoroutine("ScaleUp");
+        en_StateFlag.offence = true;
     }
 }

@@ -9,7 +9,9 @@ public class NewBehaviourScript : MonoBehaviour
     [SerializeField] private float ratio;
 
     // 自然消滅までのタイマー
-    [SerializeField] private float time = 1000;
+    [SerializeField] private float time = 60;
+
+    private float timer = 60;
 
     // 速度
     [SerializeField] private Vector3 velocity;
@@ -22,6 +24,8 @@ public class NewBehaviourScript : MonoBehaviour
 
     void FixedUpdate()
     {
+        timer -= 0.1f;
+
         Vector3 target_position = PlayerMove.instance.pos;
 
         // ベクトルを取得
@@ -42,11 +46,16 @@ public class NewBehaviourScript : MonoBehaviour
             q.w = -q.w;
         }
 
-        // 座標の更新
-        var torque = new Vector3(q.x, q.y, q.z) * ratio;
+        if(10 < timer)
+        {
+            // 座標の更新
+            var torque = new Vector3(q.x, q.y, q.z) * ratio;
 
-        // トルクを加える。
-        GetComponent<Rigidbody>().AddTorque(torque);
+            // トルクを加える。
+            GetComponent<Rigidbody>().AddTorque(torque);
+        }
+
+       
 
         velocity = transform.forward * speed;
     }
