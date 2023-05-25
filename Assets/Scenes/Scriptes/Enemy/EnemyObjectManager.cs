@@ -35,6 +35,6 @@ public class EnemyObjectManager : MonoBehaviour
     private void OnBecameVisible()
     {
         StartCoroutine("ScaleUp");
-        en_StateFlag.offence = true;
+        //en_StateFlag.offence = true;
     }
 }
