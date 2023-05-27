@@ -28,7 +28,7 @@ public class EnemyManager : MonoBehaviour
             // 定時になったらシーンをロードする。
             if(enemy_timer <= 0)
             {
-                SceneManager.LoadScene("EndScene");
+                SceneManager.LoadScene("TitleScene");
             }
         }
     }
