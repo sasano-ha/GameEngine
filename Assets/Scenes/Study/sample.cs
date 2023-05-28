@@ -53,7 +53,15 @@ public class sample : MonoBehaviour
     // enemytext•`‰æ‚Ìˆ×‚Ìƒtƒ‰ƒO
     private bool enemyFlag = false;
 
-    public int scenech = 150;
+    private int scenech = 250;
+
+    public bool scenefade = false;
+
+    //public titlesene fade;
+
+    [SerializeField] private Image fadeout;
+
+    public float alpha = 0;
 
     // Start is called before the first frame update
     private void Awake()
@@ -130,8 +138,13 @@ public class sample : MonoBehaviour
 
             if(scenech >= 0)
             {
-                SceneManager.LoadScene("TitleScene");
+                scenefade = true;
             }
+        }
+
+        if(scenefade == true)
+        {
+            Fadeout_();
         }
     }
 
@@ -265,5 +278,17 @@ public class sample : MonoBehaviour
     private void Enemy()
     {
         enemytext.text = "Œ‚”j : " + GameManager.instance.crushingCount;
+    }
+
+    private void Fadeout_()
+    {
+        alpha += 0.01f;
+
+        fadeout.color = new Color(0, 0, 0, alpha);
+
+        if(alpha >= 1.0f)
+        {
+            SceneManager.LoadScene("TitleScene");
+        }
     }
 }

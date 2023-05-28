@@ -35,7 +35,7 @@ public class camera : MonoBehaviour
         if (enemy.GetComponent<EnemyManager>().isEnemy_Die == false)
         {
             timer += 1.0f;
-            if (timer >= 100)
+            if (timer >= 150)
             {
                 flag = true;
             }

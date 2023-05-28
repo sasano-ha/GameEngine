@@ -86,9 +86,9 @@ public class PlayerMove : MonoBehaviour
     private void Update()
     {
         pos = transform.position;
-        if (playerHp <= 0)
-        {
-            Destroy(this.gameObject);
-        }
+        //if (playerHp <= 0)
+        //{
+        //    Destroy(this.gameObject);
+        //}
     }
 }

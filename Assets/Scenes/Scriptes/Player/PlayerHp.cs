@@ -12,6 +12,7 @@ public class PlayerHp : MonoBehaviour
     // ダメージの変数
     public float damage;
 
+    public GameObject explosionPrefab;
 
     public void Awake()
     {
@@ -26,7 +27,7 @@ public class PlayerHp : MonoBehaviour
     void Start()
     {
         // 生成時に体力を指定しておく
-        playerMaxHp = 100;
+        playerMaxHp = 10;
         // ダメージの設定
         damage = 10;
     }
@@ -36,9 +37,9 @@ public class PlayerHp : MonoBehaviour
     {
         if (playerMaxHp <= 0)
         {
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
             GameManager.instance.isPlayerAlive = false;
-
         }
     }
 
