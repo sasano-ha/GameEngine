@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class sample : MonoBehaviour
 {
@@ -51,6 +52,8 @@ public class sample : MonoBehaviour
 
     // enemytext描画の為のフラグ
     private bool enemyFlag = false;
+
+    public int scenech = 150;
 
     // Start is called before the first frame update
     private void Awake()
@@ -123,6 +126,12 @@ public class sample : MonoBehaviour
         {
             // リザルト（枠）の描画終了
             EndEsing();
+            scenech--;
+
+            if(scenech >= 0)
+            {
+                SceneManager.LoadScene("TitleScene");
+            }
         }
     }
 

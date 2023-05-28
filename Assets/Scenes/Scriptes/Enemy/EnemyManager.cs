@@ -23,13 +23,13 @@ public class EnemyManager : MonoBehaviour
         {
             isEnemy_Die = false;
             // 急にシーン遷移しないためのタイマー
-            enemy_timer -= 1.0f;
+            //enemy_timer -= 1.0f;
 
             // 定時になったらシーンをロードする。
-            if(enemy_timer <= 0)
-            {
-                SceneManager.LoadScene("TitleScene");
-            }
+            //if(enemy_timer <= 0)
+            //{
+            //    SceneManager.LoadScene("TitleScene");
+            //}
         }
     }
 }
