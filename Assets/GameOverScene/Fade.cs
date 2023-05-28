@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Fade : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class Fade : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SceneFadein());
+        StartCoroutine(SceneFadein_());
     }
 
     // Update is called once per frame
@@ -30,9 +31,30 @@ public class Fade : MonoBehaviour
         
     }
 
+    public void Fadeout_()
+    {
+        StartCoroutine(SceneFadeout_());
+    }
 
+    private IEnumerator SceneFadeout_()
+    {
+        while (isSceneChage == true)
+        {
+            PanelColor.a += 0.1f;
+            PanelImage.color = PanelColor;
 
-    private IEnumerator SceneFadein()
+            if (PanelColor.a >= 1.0f)
+            {
+                //isSceneChage = true;
+                SceneManager.LoadScene("TitleScene");
+            }
+            yield return new WaitForSeconds(speed);
+            
+        }
+        
+    }
+
+    private IEnumerator SceneFadein_()
     {
         while (!isSceneChage)
         {
@@ -41,6 +63,7 @@ public class Fade : MonoBehaviour
 
             if (PanelColor.a <= 0)
             {
+                PanelColor.a = 0;
                 isSceneChage = true;
             }
             yield return new WaitForSeconds(speed);

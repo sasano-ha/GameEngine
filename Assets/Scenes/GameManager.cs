@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (enemy.GetComponent<EnemyManager>().isEnemy_Die == true || PlayerManager.instance.player.Length > 0)
+        if (enemy.GetComponent<EnemyManager>().isEnemy_Die == true || PlayerManager.instance.player.Length <= 0)
         {
             ScoreResults();
         }
