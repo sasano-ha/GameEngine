@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy: MonoBehaviour
 {
     // Enemyの体力用変数
-    private int enemyHp;
+    public int enemyHp;
 
     // 狙いたい相手の変数。
     private Vector3 targetpos;
@@ -21,6 +21,8 @@ public class Enemy: MonoBehaviour
 
     // カメラのフラグ
     private bool isInsideCamera = true;
+
+    public bool dedfalg = false;
 
     // Start is called before the first frame update
     void Start()
@@ -53,13 +55,19 @@ public class Enemy: MonoBehaviour
             //transform.position = new Vector3(Mathf.Sin(Time.time) * 2.0f + targetpos.x, targetpos.y, targetpos.z);
 
             // もし体力が0以下になったら
-            if (enemyHp == 0 )
+            if (enemyHp == 0)
+            {
+                dedfalg = true;
+               
+            }
+
+            if (dedfalg == true)
             {
                 // 爆発パーティクル
                 Instantiate(explosionPrefab, transform.position, Quaternion.identity);
 
                 // enemyダウンスコア関数の呼び出し。
-                gameManager.AddDownScore();
+                //gameManager.AddDownScore();
 
                 // enemyダウン数関数の呼び出し。
                 gameManager.AddCrushingCount();

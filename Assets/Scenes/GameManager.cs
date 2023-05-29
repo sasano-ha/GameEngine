@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     public GameObject enemy;
 
 
+
     public void Awake()
     {
         if (instance == null)
