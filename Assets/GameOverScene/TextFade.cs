@@ -19,6 +19,8 @@ public class TextFade : MonoBehaviour
     // 終了値
     float end = 1;
 
+    public bool textFlag = false;
+
     // Update is called once per frame
     void Update()
     {
@@ -42,6 +44,7 @@ public class TextFade : MonoBehaviour
         {
             // imageの値を固定値に
             text.localScale = new Vector2(end, end);
+            textFlag = true;
         }
 
         // imageのタイマーを進める

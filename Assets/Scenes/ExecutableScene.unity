@@ -6279,6 +6279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMaxHp: 0
   damage: 0
+  explosionPrefab: {fileID: 8387876621471258931, guid: 642b53a8da225de4c9ae6cc3d0cdbf49, type: 3}
 --- !u!54 &341076720
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6400,6 +6401,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9ad7262cf07c6042b0db638a2db14bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: []
+  fadeout: {fileID: 151364981}
+  alpha: 0
 --- !u!4 &345749317
 Transform:
   m_ObjectHideFlags: 0
@@ -7365,7 +7369,7 @@ GameObject:
   - component: {fileID: 739543356}
   m_Layer: 5
   m_Name: Score
-  m_TagString: Untagged
+  m_TagString: Score
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7466,7 +7470,7 @@ GameObject:
   - component: {fileID: 756691552}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: Score
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8211,6 +8215,9 @@ MonoBehaviour:
   scoretext: {fileID: 1494553935}
   enemytext: {fileID: 316020932}
   totaletime: 0
+  scenefade: 0
+  fadeout: {fileID: 151364981}
+  alpha: 0
 --- !u!114 &1085745388
 MonoBehaviour:
   m_ObjectHideFlags: 0

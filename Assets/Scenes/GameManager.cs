@@ -68,6 +68,8 @@ public class GameManager : MonoBehaviour
     {
         crushingCount += 1;
         crashText.text = "CrushingCount : " + crushingCount;
+        PlayerPrefs.SetInt("Enemy", crushingCount);
+        PlayerPrefs.Save();
     }
 
     // スコア処理
@@ -94,6 +96,9 @@ public class GameManager : MonoBehaviour
 
         // でた全てのスコアを文字で描画
         scoreCount.text = "" + totalScore.ToString("d7");
+
+        PlayerPrefs.SetInt("Score", totalScore);
+        PlayerPrefs.Save();
     }
 
 

@@ -45,7 +45,6 @@ public class Fade : MonoBehaviour
 
             if (PanelColor.a >= 1.0f)
             {
-                //isSceneChage = true;
                 SceneManager.LoadScene("TitleScene");
             }
             yield return new WaitForSeconds(speed);
