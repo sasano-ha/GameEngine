@@ -2,16 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy: MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     // Enemyの体力用変数
-    public int enemyHp;
+    public float enemyHp;
 
     // 狙いたい相手の変数。
     private Vector3 targetpos;
-
-    // gameManager呼び出し
-    public GameManager gameManager;
 
     // スコアクラスの呼び出し。
     //public Score scores;
@@ -21,8 +18,6 @@ public class Enemy: MonoBehaviour
 
     // カメラのフラグ
     private bool isInsideCamera = true;
-
-    public bool dedfalg = false;
 
     // Start is called before the first frame update
     void Start()
@@ -38,40 +33,16 @@ public class Enemy: MonoBehaviour
     void Update()
     {
         // 敵がカメラ内にいる時
-        if(isInsideCamera == true)
+        if (isInsideCamera == true)
         {
-            // スピードを与える
-            //targetpos.z -= 0.005f;
-
-            //if (targetpos.z <= 2)
-            //{
-            //    targetpos.x += 0.1f;
-            //    targetpos.z -= 0.1f;
-            //}
-
-            //targetpos.x -= 0.01f;
-
-            // 位置の更新
-            //transform.position = new Vector3(Mathf.Sin(Time.time) * 2.0f + targetpos.x, targetpos.y, targetpos.z);
-
             // もし体力が0以下になったら
             if (enemyHp == 0)
-            {
-                dedfalg = true;
-               
-            }
-
-            if (dedfalg == true)
             {
                 // 爆発パーティクル
                 Instantiate(explosionPrefab, transform.position, Quaternion.identity);
 
-                // enemyダウンスコア関数の呼び出し。
-                //gameManager.AddDownScore();
-
                 // enemyダウン数関数の呼び出し。
-                gameManager.AddCrushingCount();
-
+                GameManager.instance.AddCrushingCount();
 
                 // 自分で消える。
                 Destroy(this.gameObject);
@@ -84,19 +55,19 @@ public class Enemy: MonoBehaviour
             // enemyのオブジェクトを消す。
             Destroy(this.gameObject);
         }
-        
+
     }
 
     // 当たり判定
-    private void OnTriggerEnter(Collider other)
-    {
-        // "Player"のタグを探す。
-        if (other.gameObject.tag == "Player")
-        {
-            // playerダメージ関数の呼び出し。
-            other.GetComponent<PlayerHp>().Damage();
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    // "Player"のタグを探す。
+    //    if (other.gameObject.tag == "Player")
+    //    {
+    //        // playerダメージ関数の呼び出し。
+    //        other.GetComponent<PlayerHp>().Player_Damage();
+    //    }
+    //}
 
 
     // カメラフラグ関数
@@ -108,6 +79,11 @@ public class Enemy: MonoBehaviour
     // enemyダメージ関数
     public void Damage()
     {
-        enemyHp--;
+        enemyHp -= 1.0f;
+
+        if (enemyHp <= 0)
+        {
+            enemyHp = 0;
+        }
     }
 }

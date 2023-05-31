@@ -17,7 +17,10 @@ public class UiText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetComponent<PlayerHp>().Damage();
+        //自機のダメージ関数の呼び出し。
+        GetComponent<PlayerHp>().Player_Damage();
+
+        // テキスト描画
         textUi.text = string.Format("100", PlayerHp.instance.playerMaxHp);
     }
 }

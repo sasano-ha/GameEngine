@@ -86,9 +86,17 @@ public class PlayerMove : MonoBehaviour
     private void Update()
     {
         pos = transform.position;
-        //if (playerHp <= 0)
-        //{
-        //    Destroy(this.gameObject);
-        //}
+    }
+
+    // 当たり判定
+    private void OnTriggerEnter(Collider other)
+    {
+        // "Player"のタグを探す。
+        if (other.gameObject.tag == "Enemy")
+        {
+            // playerダメージ関数の呼び出し。
+            PlayerHp.instance.Player_Damage();
+            other.GetComponent<Enemy>().Damage();
+        }
     }
 }

@@ -51,7 +51,6 @@ public class Bullet : MonoBehaviour
         {
             other.GetComponent<Enemy>().Damage();
         }
-        //Destroy(this.gameObject);
     }
 
     public void SetVelocity(Vector3 target_)

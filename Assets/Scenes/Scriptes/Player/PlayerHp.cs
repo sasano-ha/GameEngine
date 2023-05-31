@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerHp : MonoBehaviour
 {
+    // シングルトン
     public static PlayerHp instance;
 
     // playerのHP
@@ -12,6 +13,7 @@ public class PlayerHp : MonoBehaviour
     // ダメージの変数
     public float damage;
 
+    // 爆破を入れるための変数
     public GameObject explosionPrefab;
 
     public void Awake()
@@ -23,11 +25,11 @@ public class PlayerHp : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
+
     void Start()
     {
         // 生成時に体力を指定しておく
-        playerMaxHp = 100;
+        playerMaxHp = 10;
         // ダメージの設定
         damage = 10;
     }
@@ -35,17 +37,29 @@ public class PlayerHp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 自機のHpが0になったら
         if (playerMaxHp <= 0)
         {
-            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-            Destroy(this.gameObject);
+            // 爆破パーティクルを生成させる。
+            //Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+
+            // フラグを立てる。
             GameManager.instance.isPlayerAlive = false;
+
+            // Hpが0以下になったら0より小さくしない
+            playerMaxHp = 0;
+
+            // 自機を消す。
+            Destroy(this.gameObject);
         }
     }
 
-    public void Damage()
+    public void Player_Damage()
     {
+        // ダメージを受けたら
         playerMaxHp -= damage;
+
+        // ダメージリソースのフラグを立てる。
         FlushController.instance.DamageFlag = true;
     }
 }
