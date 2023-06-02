@@ -1042,7 +1042,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHp: 0
   explosionPrefab: {fileID: 8387876621471258931, guid: 642b53a8da225de4c9ae6cc3d0cdbf49, type: 3}
-  dedflag: 1
 --- !u!65 &452192000
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17839,4 +17838,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameobject: {x: 0, y: 0, z: 0}
-  speed: 0.3
+  speed: 0
