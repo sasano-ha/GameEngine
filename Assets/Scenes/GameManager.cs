@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // “G‚ª‘S–Å‚µ‚Ä‚¢‚È‚¢ –”‚Í ©‹@‚ª¶‚«‚Ä‚¢‚é‚È‚ç
-        if (enemy.GetComponent<EnemyManager>().isEnemy_Die == false || PlayerManager.instance.player.Length <= 0)
+        if (enemy.GetComponent<EnemyManager>().isEnemy_Die == true || PlayerManager.instance.player.Length <= 0)
         {
             ScoreResults();
         }

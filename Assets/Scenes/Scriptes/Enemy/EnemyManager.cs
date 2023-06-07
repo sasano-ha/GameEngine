@@ -7,7 +7,7 @@ public class EnemyManager : MonoBehaviour
 {
     private GameObject[] enemies;
 
-    public bool isEnemy_Die = false;
+    public bool isEnemy_Die = true;
 
     // Update is called once per frame
     void Update()
@@ -19,7 +19,7 @@ public class EnemyManager : MonoBehaviour
         // “Gƒ^ƒO‚ª‚È‚­‚È‚Á‚½‚çÁ‚·B
         if (enemies.Length == 0)
         {
-            isEnemy_Die = true;
+            isEnemy_Die = false;
         }
     }
 }
