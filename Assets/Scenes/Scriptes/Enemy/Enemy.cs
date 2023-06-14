@@ -4,29 +4,20 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // Enemyの体力用変数
-    public float enemyHp;
-
-    // 狙いたい相手の変数。
-    private Vector3 targetpos;
-
-    // スコアクラスの呼び出し。
-    //public Score scores;
-
     // アタッチするためのもの
     [SerializeField] GameObject explosionPrefab;
 
+    // Enemyの体力用変数
+    public float enemyHp;
+
     // カメラのフラグ
-    private bool isInsideCamera = true;
+    public bool isInsideCamera = true;
 
     // Start is called before the first frame update
     void Start()
     {
         // 生成時に体力を指定しておく
         enemyHp = 1;
-
-        // 変数に格納する。
-        targetpos = transform.position;
     }
 
     // Update is called once per frame
@@ -35,18 +26,7 @@ public class Enemy : MonoBehaviour
         // 敵がカメラ内にいる時
         if (isInsideCamera == true)
         {
-            // もし体力が0以下になったら
-            if (enemyHp == 0)
-            {
-                // 爆発パーティクル
-                Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-
-                // enemyダウン数関数の呼び出し。
-                GameManager.instance.AddCrushingCount();
-
-                // 自分で消える。
-                Destroy(this.gameObject);
-            }
+            En_Die();
         }
 
         // enemyがカメラ外に行った時
@@ -58,20 +38,8 @@ public class Enemy : MonoBehaviour
 
     }
 
-    // 当たり判定
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    // "Player"のタグを探す。
-    //    if (other.gameObject.tag == "Player")
-    //    {
-    //        // playerダメージ関数の呼び出し。
-    //        other.GetComponent<PlayerHp>().Player_Damage();
-    //    }
-    //}
-
-
     // カメラフラグ関数
-    private void OnBecameInvisible()
+    public void OnBecameInvisible()
     {
         isInsideCamera = false;
     }
@@ -84,6 +52,22 @@ public class Enemy : MonoBehaviour
         if (enemyHp <= 0)
         {
             enemyHp = 0;
+        }
+    }
+
+    public void En_Die()
+    {
+        // もし体力が0以下になったら
+        if (enemyHp == 0)
+        {
+            // 爆発パーティクル
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+
+            // enemyダウン数関数の呼び出し。
+            GameManager.instance.AddCrushingCount();
+
+            // 自分で消える。
+            Destroy(this.gameObject);
         }
     }
 }

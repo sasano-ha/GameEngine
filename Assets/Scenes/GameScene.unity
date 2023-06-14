@@ -226,7 +226,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 8
   m_CollisionDetection: 0
 --- !u!65 &113467560
 BoxCollider:
@@ -236,7 +236,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 113467555}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 13.638825, y: 3.256053, z: 10.850526}
@@ -1040,8 +1040,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01556f1e768e4b943a1ba5cc68f7ec0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHp: 0
   explosionPrefab: {fileID: 8387876621471258931, guid: 642b53a8da225de4c9ae6cc3d0cdbf49, type: 3}
+  enemyHp: 0
+  isInsideCamera: 1
 --- !u!65 &452192000
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1071,6 +1072,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &452192005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452191997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e0d19a297253447807cd0faf10f81e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  en_bullet: {fileID: 768794161810983152, guid: 9a9a18429d78c47478d0ad51f1463fde, type: 3}
+  offence: 0
 --- !u!1 &485955648
 GameObject:
   m_ObjectHideFlags: 0
@@ -6640,7 +6656,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2111437470}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &923875973
 BoxCollider:
@@ -11651,7 +11667,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4433942057210488, guid: bb66bedec0a2f034cbad6158c65cd2a9, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4433942057210488, guid: bb66bedec0a2f034cbad6158c65cd2a9, type: 3}
       propertyPath: m_LocalScale.x
@@ -17815,8 +17831,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 923875972}
   - {fileID: 113467556}
+  - {fileID: 923875972}
   - {fileID: 647508}
   - {fileID: 1903871149}
   - {fileID: 379262130}

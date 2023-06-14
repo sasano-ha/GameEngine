@@ -13,8 +13,12 @@ public class NewBehaviourScript : MonoBehaviour
 
     private float timer = 60;
 
+    float lenght;
+
     // 速度
     [SerializeField] private Vector3 velocity;
+
+    private Vector3 bull_pos;
 
     // Start is called before the first frame update
     void Start()
@@ -46,17 +50,15 @@ public class NewBehaviourScript : MonoBehaviour
             q.w = -q.w;
         }
 
-        if(10 < timer)
+        // 制限内だったら
+        if(diff.magnitude > 10)
         {
             // 座標の更新
             var torque = new Vector3(q.x, q.y, q.z) * ratio;
-
+            
             // トルクを加える。
             GetComponent<Rigidbody>().AddTorque(torque);
         }
-
-       
-
         velocity = transform.forward * speed;
     }
 
