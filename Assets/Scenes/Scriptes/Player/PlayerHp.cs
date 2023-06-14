@@ -16,6 +16,8 @@ public class PlayerHp : MonoBehaviour
     // ”š”j‚ğ“ü‚ê‚é‚½‚ß‚Ì•Ï”
     public GameObject explosionPrefab;
 
+    public bool pl_ScoreFlag = false;
+
     public void Awake()
     {
         if(instance == null)
@@ -45,6 +47,8 @@ public class PlayerHp : MonoBehaviour
 
             // ƒtƒ‰ƒO‚ğ—§‚Ä‚éB
             GameManager.instance.isPlayerAlive = false;
+
+            pl_ScoreFlag = true;
 
             // Hp‚ª0ˆÈ‰º‚É‚È‚Á‚½‚ç0‚æ‚è¬‚³‚­‚µ‚È‚¢
             playerMaxHp = 0;

@@ -33,8 +33,6 @@ public class GameManager : MonoBehaviour
 
     public GameObject enemy;
 
-
-
     public void Awake()
     {
         if (instance == null)
@@ -56,11 +54,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        // 敵が全滅していない 又は 自機が生きているなら
-        if (enemy.GetComponent<EnemyManager>().isEnemy_Die == true || PlayerManager.instance.player.Length <= 0)
-        {
-            ScoreResults();
-        }
+        ScoreResults();
     }
 
     
@@ -88,12 +82,17 @@ public class GameManager : MonoBehaviour
         // タイマーを小数点以下切り捨てする。
         float timer = Time.deltaTime * 100;
 
-        // プレイヤーの生存時間
-        playerScore_ += (int)timer;
-
+        // 敵が全滅していない 又は 自機が生きているなら
+        if (enemy.GetComponent<EnemyManager>().isEnemy_Die == true && PlayerHp.instance.pl_ScoreFlag == false ||
+            enemy.GetComponent<EnemyManager>().isEnemy_Die == false && PlayerHp.instance.pl_ScoreFlag == true)
+        {
+            // プレイヤーの生存時間
+            playerScore_ += (int)timer;
+        }
 
         // スコアに生存時間とダウンスコアの加算。
         totalScore = playerScore_ + downScore * stopTimer;
+        
 
         // でた全てのスコアを文字で描画
         scoreCount.text = "" + totalScore.ToString("d7");
