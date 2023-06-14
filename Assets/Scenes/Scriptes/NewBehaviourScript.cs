@@ -11,25 +11,15 @@ public class NewBehaviourScript : MonoBehaviour
     // 自然消滅までのタイマー
     [SerializeField] private float time = 60;
 
-    private float timer = 60;
-
-    float lenght;
-
     // 速度
     [SerializeField] private Vector3 velocity;
 
-    private Vector3 bull_pos;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    // カメラ内判定のフラグ
+    private bool bull_camera = true;
 
     void FixedUpdate()
     {
-        timer -= 0.1f;
-
+        // 自機の座標を代入
         Vector3 target_position = PlayerMove.instance.pos;
 
         // ベクトルを取得
@@ -64,7 +54,18 @@ public class NewBehaviourScript : MonoBehaviour
 
     private void Update()
     {
-        EnemyBulletMove();
+        // カメラ内にいる時
+        if(bull_camera == true)
+        {
+            EnemyBulletMove();
+        }
+
+        // カメラ内にいない時
+        else if (bull_camera == false)
+        {
+            Destroy(this.gameObject);
+        }
+       
     }
 
     public void EnemyBulletMove()
@@ -78,6 +79,26 @@ public class NewBehaviourScript : MonoBehaviour
 
         // 一定時間経ったら消滅する
         if (time <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    // カメラフラグ関数
+    public void OnBecameInvisible()
+    {
+        bull_camera = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Player")
+        {
+            PlayerHp.instance.Player_Damage();
+            Destroy(this.gameObject);
+        }
+
+        else if (other.gameObject.tag == "PlayerBullet")
         {
             Destroy(this.gameObject);
         }

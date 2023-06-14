@@ -9,6 +9,7 @@ TagManager:
   - EnemyBullet
   - Target
   - Score
+  - EnemyHoming
   layers:
   - Default
   - TransparentFX

@@ -74,7 +74,8 @@ public class EnemyBullet : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            other.GetComponent<PlayerHp>().Player_Damage();
+            //other.GetComponent<PlayerHp>().Player_Damage();
+            PlayerHp.instance.Player_Damage();
             Destroy(this.gameObject);
         }
 
@@ -82,7 +83,11 @@ public class EnemyBullet : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        
+
+        else if (other.gameObject.tag == "EnemyHoming")
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     //private void homing()
