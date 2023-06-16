@@ -5,13 +5,6 @@ using UnityEngine;
 public class EnemyShot : MonoBehaviour
 {
 
-    public enum STATE_TYPE{
-        attack,
-        nothing,
-    }
-
-    public STATE_TYPE state;
-
     // ゲームオブジェクトをインスペクターから参照するための変数
     public GameObject en_bullet;
 
@@ -22,29 +15,23 @@ public class EnemyShot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        state = STATE_TYPE.nothing;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        timer++;
 
-
-
-        if(offence == false)
+        if (timer == 60)
         {
-            timer++;
+            GameObject en_bulletobject = Instantiate(en_bullet, transform.position, Quaternion.identity);
 
-            if (timer == 60)
-            {
-                GameObject en_bulletobject = Instantiate(en_bullet, transform.position, Quaternion.identity);
+            //NewBehaviourScript en_bulletclone = en_bulletobject.GetComponent<NewBehaviourScript>();
 
-                //NewBehaviourScript en_bulletclone = en_bulletobject.GetComponent<NewBehaviourScript>();
+            //en_bulletclone.SetEnemyVelocity(PlayerMove.instance.pos);
 
-                //en_bulletclone.SetEnemyVelocity(PlayerMove.instance.pos);
-
-                //timer = 60;
-            }
+            //timer = 60;
         }
     }
 }

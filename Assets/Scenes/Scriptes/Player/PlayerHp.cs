@@ -31,7 +31,7 @@ public class PlayerHp : MonoBehaviour
     void Start()
     {
         // 生成時に体力を指定しておく
-        playerMaxHp = 10;
+        playerMaxHp = 100;
         // ダメージの設定
         damage = 10;
     }

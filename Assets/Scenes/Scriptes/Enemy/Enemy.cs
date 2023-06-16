@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+
+    public enum State {
+        approach,
+        offence,
+        escape,
+    }
+
+    State state_;
+
     // アタッチするためのもの
     [SerializeField] GameObject explosionPrefab;
 
@@ -18,6 +27,24 @@ public class Enemy : MonoBehaviour
     {
         // 生成時に体力を指定しておく
         enemyHp = 1;
+
+        state_ = State.approach;
+    }
+
+    private void FixedUpdate()
+    {
+        switch (state_)
+        {
+            case State.approach:
+            default:
+                EnemyApproach();
+                break;
+
+            case State.escape:
+                EnmeyEscape();
+                break;
+
+        }
     }
 
     // Update is called once per frame
@@ -35,7 +62,6 @@ public class Enemy : MonoBehaviour
             // enemyのオブジェクトを消す。
             Destroy(this.gameObject);
         }
-
     }
 
     // カメラフラグ関数
@@ -69,5 +95,31 @@ public class Enemy : MonoBehaviour
             // 自分で消える。
             Destroy(this.gameObject);
         }
+    }
+
+    private void EnemyApproach()
+    {
+        Rigidbody rb = this.GetComponent<Rigidbody>();
+
+        Vector3 force = new Vector3(0, 0, -2.0f);
+        rb.AddForce(force, ForceMode.Force);
+
+        Vector3 en_pos = transform.position;
+
+        var diff = PlayerMove.instance.pos - en_pos;
+
+        if(diff.magnitude < 20)
+        {
+            state_ = State.escape;
+        }
+
+    }
+
+    private void EnmeyEscape()
+    {
+        Rigidbody rb = this.GetComponent<Rigidbody>();
+
+        Vector3 force = new Vector3(-2.0f, 1.0f, -1.0f);
+        rb.AddForce(force, ForceMode.Force);
     }
 }
