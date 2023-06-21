@@ -17,6 +17,8 @@ public class NewBehaviourScript : MonoBehaviour
     // カメラ内判定のフラグ
     private bool bull_camera = true;
 
+    //Enemy
+
     void FixedUpdate()
     {
         // 自機の座標を代入
@@ -41,15 +43,16 @@ public class NewBehaviourScript : MonoBehaviour
         }
 
         // 制限内だったら
-        if(diff.magnitude > 10)
+        if (diff.magnitude > 10)
         {
             // 座標の更新
             var torque = new Vector3(q.x, q.y, q.z) * ratio;
-            
+
             // トルクを加える。
             GetComponent<Rigidbody>().AddTorque(torque);
         }
         velocity = transform.forward * speed;
+
     }
 
     private void Update()

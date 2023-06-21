@@ -10,28 +10,34 @@ public class EnemyShot : MonoBehaviour
 
     int timer = 0;
 
-    public bool offence = false;
+    Enemy enemy_;
+   
 
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer++;
+        enemy_ = GetComponent<Enemy>();
 
-        if (timer == 60)
+        if(enemy_.en_ShotFag == true)
         {
-            GameObject en_bulletobject = Instantiate(en_bullet, transform.position, Quaternion.identity);
+            timer++;
 
-            //NewBehaviourScript en_bulletclone = en_bulletobject.GetComponent<NewBehaviourScript>();
+            if (timer == 60)
+            {
+                GameObject en_bulletobject = Instantiate(en_bullet, transform.position, Quaternion.identity);
 
-            //en_bulletclone.SetEnemyVelocity(PlayerMove.instance.pos);
+                //NewBehaviourScript en_bulletclone = en_bulletobject.GetComponent<NewBehaviourScript>();
 
-            //timer = 60;
+                //en_bulletclone.SetEnemyVelocity(PlayerMove.instance.pos);
+
+                //timer = 60;
+            }
         }
     }
 }

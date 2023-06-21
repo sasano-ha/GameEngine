@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-
+    // 敵機の行動遷移
     public enum State {
-        approach,
-        offence,
-        escape,
+        approach,   // 近づく
+        offence,    // 攻撃
+        escape,     //逃げる
     }
 
+    // 行動遷移変数
     State state_;
 
     // アタッチするためのもの
@@ -22,12 +23,19 @@ public class Enemy : MonoBehaviour
     // カメラのフラグ
     public bool isInsideCamera = true;
 
+    // 敵機関連の変数
+    private Vector3 en_pos, ap_force, es_force;
+
+    // 敵機が撃った時のフラグ
+    public bool en_ShotFag = false;
+
     // Start is called before the first frame update
     void Start()
     {
         // 生成時に体力を指定しておく
         enemyHp = 1;
 
+        // 最初の行動遷移
         state_ = State.approach;
     }
 
@@ -40,10 +48,13 @@ public class Enemy : MonoBehaviour
                 EnemyApproach();
                 break;
 
+            case State.offence:
+                EnemyOffence();
+                break;
+
             case State.escape:
                 EnmeyEscape();
                 break;
-
         }
     }
 
@@ -81,6 +92,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    // 敵機が死んだ関数
     public void En_Die()
     {
         // もし体力が0以下になったら
@@ -97,29 +109,60 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    // 敵機の近づく関数
     private void EnemyApproach()
     {
         Rigidbody rb = this.GetComponent<Rigidbody>();
 
-        Vector3 force = new Vector3(0, 0, -2.0f);
-        rb.AddForce(force, ForceMode.Force);
+        ap_force = new Vector3(0, 0, -3.0f);
+        rb.AddForce(ap_force, ForceMode.Force);
 
-        Vector3 en_pos = transform.position;
+        en_pos = transform.position;
 
         var diff = PlayerMove.instance.pos - en_pos;
 
-        if(diff.magnitude < 20)
+        if(diff.magnitude < 35)
+        {
+            state_ = State.offence;
+        }
+    }
+
+    // 敵機の攻撃関数
+    private void EnemyOffence()
+    {
+        en_ShotFag = true;
+
+        Rigidbody rb = this.GetComponent<Rigidbody>();
+
+        ap_force = new Vector3(0, 0, -3.0f);
+        rb.AddForce(ap_force, ForceMode.Force);
+
+        en_pos = transform.position;
+
+        var diff = PlayerMove.instance.pos - en_pos;
+
+        if (diff.magnitude < 20)
         {
             state_ = State.escape;
         }
-
     }
 
+    // 敵機の逃げる関数
     private void EnmeyEscape()
     {
         Rigidbody rb = this.GetComponent<Rigidbody>();
 
-        Vector3 force = new Vector3(-2.0f, 1.0f, -1.0f);
-        rb.AddForce(force, ForceMode.Force);
+        if(PlayerMove.instance.pos.x > en_pos.x)
+        {
+            int random = Random.Range(3, 7);
+            es_force = new Vector3(-3.0f, random, -3.0f);
+        }
+        else if(PlayerMove.instance.pos.x < en_pos.x)
+        {
+            int random = Random.Range(3, 7);
+            es_force = new Vector3(3.0f, random, -3.0f);
+        }
+
+        rb.AddForce(es_force, ForceMode.Force);
     }
 }

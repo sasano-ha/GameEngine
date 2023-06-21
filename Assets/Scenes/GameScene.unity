@@ -212,6 +212,7 @@ MonoBehaviour:
   playerMaxHp: 0
   damage: 0
   explosionPrefab: {fileID: 8387876621471258931, guid: 642b53a8da225de4c9ae6cc3d0cdbf49, type: 3}
+  pl_ScoreFlag: 0
 --- !u!54 &113467559
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -354,7 +355,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4331568703382362, guid: f0b7c5c6b5d01d24d9de91fb176a5685, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4331568703382362, guid: f0b7c5c6b5d01d24d9de91fb176a5685, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1043,6 +1044,7 @@ MonoBehaviour:
   explosionPrefab: {fileID: 8387876621471258931, guid: 642b53a8da225de4c9ae6cc3d0cdbf49, type: 3}
   enemyHp: 0
   isInsideCamera: 1
+  en_ShotFag: 0
 --- !u!65 &452192000
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1084,9 +1086,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e0d19a297253447807cd0faf10f81e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
   en_bullet: {fileID: 768794161810983152, guid: 9a9a18429d78c47478d0ad51f1463fde, type: 3}
-  offence: 0
 --- !u!1 &485955648
 GameObject:
   m_ObjectHideFlags: 0
