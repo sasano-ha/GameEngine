@@ -117,11 +117,7 @@ public class Enemy : MonoBehaviour
         ap_force = new Vector3(0, 0, -3.0f);
         rb.AddForce(ap_force, ForceMode.Force);
 
-        en_pos = transform.position;
-
-        var diff = PlayerMove.instance.pos - en_pos;
-
-        if(diff.magnitude < 35)
+        if (isInsideCamera == true)
         {
             state_ = State.offence;
         }
