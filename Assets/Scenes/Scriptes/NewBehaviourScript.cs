@@ -43,7 +43,7 @@ public class NewBehaviourScript : MonoBehaviour
         }
 
         // §ŒÀ“à‚¾‚Á‚½‚ç
-        if (diff.magnitude > 10)
+        if (diff.magnitude > 1)
         {
             // À•W‚ÌXV
             var torque = new Vector3(q.x, q.y, q.z) * ratio;

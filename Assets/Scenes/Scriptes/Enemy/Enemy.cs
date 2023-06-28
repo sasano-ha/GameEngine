@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
     public bool isInsideCamera = true;
 
     // 敵機関連の変数
-    private Vector3 en_pos, ap_force, es_force;
+    [SerializeField] private Vector3 en_pos, ap_force, es_force;
 
     // 敵機が撃った時のフラグ
     public bool en_ShotFag = false;
