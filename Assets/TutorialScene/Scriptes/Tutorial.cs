@@ -7,6 +7,7 @@ public class Tutorial : MonoBehaviour
 
     [SerializeField] GameObject image1;
     [SerializeField] GameObject image2;
+    [SerializeField] GameObject text;
 
 
     // Start is called before the first frame update
@@ -26,6 +27,7 @@ public class Tutorial : MonoBehaviour
         {
             image1.SetActive(false);
             image2.SetActive(true);
+            text.SetActive(true);
         }
 
     }
