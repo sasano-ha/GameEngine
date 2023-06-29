@@ -130,7 +130,7 @@ public class Enemy : MonoBehaviour
 
         Rigidbody rb = this.GetComponent<Rigidbody>();
 
-        ap_force = new Vector3(0, 0, -3.0f);
+        ap_force = new Vector3(0, 0, -1.0f);
         rb.AddForce(ap_force, ForceMode.Force);
 
         en_pos = transform.position;
@@ -151,12 +151,12 @@ public class Enemy : MonoBehaviour
         if(PlayerMove.instance.pos.x > en_pos.x)
         {
             int random = Random.Range(3, 7);
-            es_force = new Vector3(-3.0f, random, -3.0f);
+            es_force = new Vector3(-3.0f, random, -1.0f);
         }
         else if(PlayerMove.instance.pos.x < en_pos.x)
         {
             int random = Random.Range(3, 7);
-            es_force = new Vector3(3.0f, random, -3.0f);
+            es_force = new Vector3(3.0f, random, -1.0f);
         }
 
         rb.AddForce(es_force, ForceMode.Force);

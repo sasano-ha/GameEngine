@@ -104,6 +104,9 @@ MonoBehaviour:
   explosionPrefab: {fileID: 8387876621471258931, guid: 642b53a8da225de4c9ae6cc3d0cdbf49, type: 3}
   enemyHp: 0
   isInsideCamera: 1
+  en_pos: {x: 0, y: 0, z: 0}
+  ap_force: {x: 0, y: 0, z: 0}
+  es_force: {x: 0, y: 0, z: 0}
   en_ShotFag: 0
 --- !u!65 &6391409248724699085
 BoxCollider:

@@ -20,7 +20,7 @@ public class Shot : MonoBehaviour
         mouseflag = false;
 
         // タイマーを設定
-        timer = 15.0f;
+        timer = 10.0f;
     }
 
     // Update is called once per frame
@@ -58,7 +58,7 @@ public class Shot : MonoBehaviour
                 bulletclone.SetVelocity(Aim.instance.target);
 
                 // タイマー元に戻す
-                timer = 15.0f;
+                timer = 10.0f;
             }
         }
     }
