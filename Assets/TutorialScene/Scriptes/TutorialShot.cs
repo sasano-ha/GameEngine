@@ -75,11 +75,11 @@ public class TutorialShot : MonoBehaviour
                     timer = 15;
                 }
             }
+            if (shotTime > 300)
+            {
+                Tu_enemy = true;
+            }
         }
 
-        if(shotTime > 300)
-        {
-            Tu_enemy = true;
-        }
     }
 }

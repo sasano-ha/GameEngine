@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class TutorialActive : MonoBehaviour
 {
-    [SerializeField] GameObject enemy_;
+    public GameObject enemy_;
+
+    public bool flag = false;
 
     // Start is called before the first frame update
     void Start()
@@ -13,7 +15,7 @@ public class TutorialActive : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         TutorialShot shot;
 
@@ -26,6 +28,7 @@ public class TutorialActive : MonoBehaviour
             if(enemy_ != null)
             {
                 enemy_.SetActive(true);
+                flag = true;
             }
         }
     }

@@ -19,7 +19,7 @@ public class TutorialEnemy : MonoBehaviour
 
     public Enemy tutorialenemy;
 
-
+    public bool is_ene = false;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +38,8 @@ public class TutorialEnemy : MonoBehaviour
         {
             Tu_En_Die();
         }
+
+
     }
 
     // カメラフラグ関数
@@ -67,6 +69,8 @@ public class TutorialEnemy : MonoBehaviour
 
             // enemyダウン数関数の呼び出し。
             //GameManager.instance.AddCrushingCount();
+
+            is_ene = true;
 
             // 自分で消える。
             Destroy(this.gameObject);
