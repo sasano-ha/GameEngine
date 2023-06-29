@@ -9,7 +9,7 @@ public class TutorialEnemy : MonoBehaviour
     [SerializeField] GameObject explosionPrefab;
 
     // Enemyの体力用変数
-    public float enemyHp;
+    public float Tu_enemyHp;
 
     // カメラのフラグ
     public bool isInsideCamera = true;
@@ -25,7 +25,7 @@ public class TutorialEnemy : MonoBehaviour
     void Start()
     {
         // 生成時に体力を指定しておく
-        enemyHp = 1;
+        Tu_enemyHp = 1;
 
         tutorialenemy = GetComponent<Enemy>();
     }
@@ -36,7 +36,7 @@ public class TutorialEnemy : MonoBehaviour
         // 敵がカメラ内にいる時
         if (isInsideCamera == true)
         {
-           
+            Tu_En_Die();
         }
     }
 
@@ -44,5 +44,32 @@ public class TutorialEnemy : MonoBehaviour
     public void OnBecameInvisible()
     {
         isInsideCamera = false;
+    }
+
+    public void Tu_Damage()
+    {
+        Tu_enemyHp -= 1.0f;
+
+        if (Tu_enemyHp <= 0)
+        {
+            Tu_enemyHp = 0;
+        }
+    }
+
+    // 敵機が死んだ関数
+    public void Tu_En_Die()
+    {
+        // もし体力が0以下になったら
+        if (Tu_enemyHp == 0)
+        {
+            // 爆発パーティクル
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+
+            // enemyダウン数関数の呼び出し。
+            //GameManager.instance.AddCrushingCount();
+
+            // 自分で消える。
+            Destroy(this.gameObject);
+        }
     }
 }

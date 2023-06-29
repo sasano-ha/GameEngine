@@ -13,7 +13,9 @@ public class TutorialShot : MonoBehaviour
     // 間隔のタイマー
     public float timer;
 
-    TutorialPlayerMove shot;
+    float shotTime = 0;
+
+    public bool Tu_enemy = false;
 
     // Start is called before the first frame update
     void Start()
@@ -28,14 +30,16 @@ public class TutorialShot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TutorialPlayerMove shot;
+        TutorialPlayerMove move;
 
         GameObject barrel = GameObject.Find("StarSparrow1 1");
 
-        shot = barrel.GetComponent<TutorialPlayerMove>();
+        move = barrel.GetComponent<TutorialPlayerMove>();
 
-        if (shot.ShotFlag == true)
+        if (move.ShotFlag == true)
         {
+            shotTime += 1.0f;
+
             // 左クリックを押した瞬間
             if (Input.GetMouseButtonDown(0))
             {
@@ -71,6 +75,11 @@ public class TutorialShot : MonoBehaviour
                     timer = 15.0f;
                 }
             }
+        }
+
+        if(shotTime > 30)
+        {
+            Tu_enemy = true;
         }
     }
 }

@@ -59,6 +59,19 @@ public class TutorialPlayerMove : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        Tu_move();
+    }
+
+    private void Update()
+    {
+        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        {
+            MoveFlag = true;
+        }
+    }
+
+    private void Tu_move()
+    {
         if (MoveFlag == true)
         {
             MoveTimer += 1.0f;
@@ -86,17 +99,9 @@ public class TutorialPlayerMove : MonoBehaviour
             rigidbody.AddTorque(rotationTorque + restoringTorque);
         }
 
-        if(MoveTimer > 120)
+        if (MoveTimer > 30)
         {
             ShotFlag = true;
-        }
-    }
-
-    private void Update()
-    {
-        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
-        {
-            MoveFlag = true;
         }
     }
 }

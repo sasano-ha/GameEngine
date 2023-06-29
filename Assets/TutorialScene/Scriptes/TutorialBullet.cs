@@ -43,7 +43,7 @@ public class TutorialBullet : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            other.GetComponent<Enemy>().Damage();
+            other.GetComponent<TutorialEnemy>().Tu_Damage();
         }
     }
 
