@@ -99,7 +99,7 @@ public class TutorialPlayerMove : MonoBehaviour
             rigidbody.AddTorque(rotationTorque + restoringTorque);
         }
 
-        if (MoveTimer > 30)
+        if (MoveTimer > 300)
         {
             ShotFlag = true;
         }

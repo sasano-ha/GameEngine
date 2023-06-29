@@ -11,7 +11,7 @@ public class TutorialShot : MonoBehaviour
     private bool mouseflag;
 
     // 間隔のタイマー
-    public float timer;
+    public int timer;
 
     float shotTime = 0;
 
@@ -24,7 +24,7 @@ public class TutorialShot : MonoBehaviour
         mouseflag = false;
 
         // タイマーを設定
-        timer = 15.0f;
+        timer = 15;
     }
 
     // Update is called once per frame
@@ -72,12 +72,12 @@ public class TutorialShot : MonoBehaviour
                     bulletclone.SetVelocity(Aim.instance.target);
 
                     // タイマー元に戻す
-                    timer = 15.0f;
+                    timer = 15;
                 }
             }
         }
 
-        if(shotTime > 30)
+        if(shotTime > 300)
         {
             Tu_enemy = true;
         }

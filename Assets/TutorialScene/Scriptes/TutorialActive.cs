@@ -13,7 +13,7 @@ public class TutorialActive : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
         TutorialShot shot;
 
