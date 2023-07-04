@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
     public void AddCrushingCount()
     {
         crushingCount += 1;
+        AddDownScore();
         crashText.text = "CrushingCount : " + crushingCount;
         PlayerPrefs.SetInt("Enemy", crushingCount);
         PlayerPrefs.Save();
@@ -100,5 +101,10 @@ public class GameManager : MonoBehaviour
         // ゲームオーバーでスコアを使いたいので変数を保存
         PlayerPrefs.SetInt("Score", totalScore);
         PlayerPrefs.Save();
+    }
+
+    private void AddDownScore()
+    {
+        downScore += 100;
     }
 }
